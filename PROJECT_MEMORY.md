@@ -105,6 +105,16 @@
   Ventasym, Smart Caja, ADCC Cobranzas, DB Fácil. Quedan 14 sitios.
 - Evidencia: commit `ee55d8f`, `preview-pages2.png`, 0 errores, verificado en vivo.
 
+## 2026-09-23 — Skill subir-a-misapps corregida y probada
+- Pedido: corregir la skill y que la subida sea súper fácil para cualquier agente.
+- Cambios: paso 0 de clasificación (temporal vs permanente, preguntar si hay duda),
+  nombre/URL nuevos (Apps de Octa), ejemplo exacto copiable, drafts/sin-assets no se
+  muestran, repo nuevo → config.json (repos+categories) + push + deploy, verificación
+  contra `gh release view`, respuesta corta con link directo + página.
+- Prueba E2E siguiendo SOLO la skill: release `temp-skilltest-20260923` creado,
+  apareció en Temporales del vivo con link directo OK, borrado (release+tag) con el
+  paso 5. Sin errores.
+
 ## 2026-09-23 — Marca Apps de Octa
 - El usuario aportó `Logo.jpg` (pulpo verde/naranja 2048px, 2 MB): se optimizó a
   `logo.jpg` 512px/59 KB; el original quedó local e ignorado en git.
