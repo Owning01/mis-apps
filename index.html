@@ -37,9 +37,14 @@
     background:var(--bg); color:var(--txt); min-height:100vh;
     font-variant-numeric:tabular-nums;
   }
-  /* Halo superior: foco de marca sobre el header, 9% de opacidad, sin cubrir la pagina. */
+  /* Fondo: abismo generado con Qwen (bg-abisal.jpg, 28KB), motivo de marca (pulpo abisal).
+     Overlay en gradiente para mantener AA: el texto nunca pisa la imagen directa.
+     El halo verde del 9% se suma como foco sobre el header. */
   body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-    background:radial-gradient(900px 420px at 50% -8%, rgba(52,211,153,.09), transparent 65%)}
+    background:
+      radial-gradient(900px 420px at 50% -8%, rgba(52,211,153,.09), transparent 65%),
+      linear-gradient(180deg, rgba(11,20,17,.62), rgba(11,20,17,.88)),
+      url('./bg-abisal.jpg') center/cover no-repeat}
   main,.wrap{position:relative;z-index:1}
   a{color:inherit}
   .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
@@ -59,15 +64,16 @@
   .grow{flex:1}
   .search{position:relative;min-width:220px;max-width:380px;flex:1}
   .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--mut)}
-  .search input{width:100%;padding:12px 14px 12px 38px;border-radius:12px;border:1px solid var(--line);
-    background:var(--bg2);color:var(--txt);outline:none;font-size:14px;transition:border-color .2s}
+  .search input{width:100%;padding:10px 14px 10px 38px;border-radius:12px;border:1px solid var(--line);
+    background:var(--bg2);color:var(--txt);outline:none;font-size:14px;transition:border-color .2s;min-height:38px}
   .search input:focus{border-color:var(--acc)}
   .search input::placeholder{color:var(--mut)}
 
   /* ---------- Botones ---------- */
-  .btn{border:0;cursor:pointer;font-weight:600;font-size:14px;border-radius:12px;padding:12px 18px;
-    min-height:44px;transition:transform .18s var(--ease),filter .18s,background .18s;
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;color:var(--txt);
+  /* Escritorio: 36px (compacto). El target de 44px se restaure en el media mobile. */
+  .btn{border:0;cursor:pointer;font-weight:600;font-size:13.5px;border-radius:10px;padding:9px 16px;
+    min-height:36px;transition:transform .18s var(--ease),filter .18s,background .18s;
+    display:inline-flex;align-items:center;justify-content:center;gap:7px;color:var(--txt);
     text-decoration:none;font-family:inherit}
   .btn:active{transform:scale(.97)}
   .btn svg{width:16px;height:16px;flex-shrink:0}
@@ -77,14 +83,14 @@
   .btn-dl:hover{filter:brightness(1.07)}
   .btn-acc{background:var(--acc);color:var(--acc-ink)}
   .btn-acc:hover{filter:brightness(1.07)}
-  .btn-sm{padding:10px 14px;font-size:13px;border-radius:10px}
+  .btn-sm{padding:7px 12px;font-size:13px;border-radius:9px;min-height:32px}
 
   /* ---------- Tabs (en header) ---------- */
   .tabsbar{display:flex;gap:6px;background:var(--bg2);border:1px solid var(--line);
     border-radius:14px;padding:5px;margin:0 0 12px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
   .tabsbar::-webkit-scrollbar{display:none}
   .tabbtn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    padding:11px;border-radius:10px;font-size:14px;font-weight:600;min-height:44px;
+    padding:8px 12px;border-radius:9px;font-size:13.5px;font-weight:600;min-height:38px;
     color:var(--mut);cursor:pointer;border:0;background:transparent;font-family:inherit;
     transition:background .2s var(--ease),color .2s}
   .tabbtn svg{width:16px;height:16px}
@@ -96,7 +102,7 @@
   .catchips{display:flex;gap:8px;margin:16px 0 20px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;-ms-overflow-style:none}
   .catchips::-webkit-scrollbar{display:none}
   .catchip{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
-    background:var(--bg2);color:var(--mut);border-radius:999px;padding:9px 15px;min-height:44px;
+    background:var(--bg2);color:var(--mut);border-radius:999px;padding:7px 14px;min-height:34px;
     font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .18s,color .18s}
   .catchip .cdot{width:8px;height:8px;border-radius:50%;background:var(--mut)}
   .catchip[aria-pressed="true"]{border-color:var(--acc);color:var(--txt)}
@@ -177,7 +183,7 @@
   .modal .mhead{display:flex;gap:14px;align-items:flex-start;margin-bottom:6px}
   .modal h3{font-size:22px}
   .close{margin-left:auto;background:transparent;border:1px solid var(--line);color:var(--mut);
-    width:44px;height:44px;border-radius:12px;cursor:pointer;font-size:18px;line-height:1;flex-shrink:0;
+    width:38px;height:38px;border-radius:11px;cursor:pointer;font-size:18px;line-height:1;flex-shrink:0;
     display:grid;place-items:center}
   .close:hover{color:var(--txt);border-color:var(--acc)}
   .close svg{width:18px;height:18px}
@@ -198,12 +204,19 @@
 
   footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:13px;text-align:center}
   @media(max-width:640px){
+    /* Targets de 44px solo donde hay dedo de por medio. */
+    .btn{min-height:44px;padding:11px 16px;font-size:14px}
+    .tabbtn{min-height:44px;padding:11px 14px}
+    .catchip{min-height:44px;padding:9px 15px}
+    .search input{min-height:44px;padding:12px 14px 12px 38px}
+    .btn-sm{min-height:40px}
+    .close{width:44px;height:44px}
     .hd{flex-wrap:wrap;gap:10px;padding:12px 0 10px}
     .logo{font-size:17px}
     .logo img.mark{width:36px;height:36px;border-radius:10px}
     .search{order:3;min-width:100%}
     .tabsbar{margin-bottom:10px}
-    .tabbtn{flex:1 0 auto;white-space:nowrap;font-size:13px;padding:11px 14px}
+    .tabbtn{flex:1 0 auto;white-space:nowrap}
     .sect{padding:6px 0 56px}
     .sect-hd h2{font-size:18px}
     .card{padding:16px}

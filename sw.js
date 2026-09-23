@@ -1,5 +1,5 @@
 /* Apps de Octa - service worker. App shell en cache, API de GitHub con red primero. */
-const CACHE = 'appsdeocta-v1';
+const CACHE = 'appsdeocta-v2';
 const SHELL = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const SHELL = [
   './config.json',
   './pages.json',
   './logo.jpg',
+  './bg-abisal.jpg',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/maskable-512.png',
