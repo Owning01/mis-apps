@@ -16,8 +16,9 @@ App web estática (sin build, sin backend) que arma sola su catálogo desde los
 ```
 mi-tienda-apps/  (repo git → Owning01/mis-apps, branch main)
 ├── index.html                  # UI + lógica (fetch multi-repo, secciones Apps/Temporales)
-├── config.json                 # {repos:[...], siteName} de producción
+├── config.json                 # {repos:[...], siteName, categories} de producción
 ├── apps.json                   # entradas curadas/manual (extra, opcional)
+├── pages.json                  # sitios Firebase (sección Páginas: nombre, url, icon)
 ├── firebase.json               # config de Firebase Hosting (public: .)
 ├── .firebaserc                 # IGNORADO en git (tiene placeholder local)
 ├── .gitignore                  # preview*.png + .firebaserc
@@ -44,6 +45,7 @@ mi-tienda-apps/  (repo git → Owning01/mis-apps, branch main)
 
 ## Funciones vivas
 - Tabs Aplicaciones / Temporales con conteos; sin botones de dueño/ajustes en la UI.
+- Tab Páginas: `pages.json` con sitios Firebase (favicon a la izquierda, abrir en pestaña nueva).
 - Agrupación por app (última versión en card; modal Historial con versiones anteriores).
 - Categorías configurables (`config.json: categories`, primera coincidencia gana).
 - Avatares-letra deterministas, iconos SVG (cero emojis UI), tabs con teclado.

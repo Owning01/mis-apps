@@ -82,7 +82,7 @@
 
   /* ---------- Tabs ---------- */
   .tabsbar{display:flex;gap:6px;background:var(--bg2);border:1px solid var(--line);
-    border-radius:14px;padding:5px;margin:30px 0 6px;max-width:520px}
+    border-radius:14px;padding:5px;margin:30px 0 6px;max-width:720px}
   .tabbtn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
     padding:11px;border-radius:10px;font-size:14px;font-weight:600;min-height:44px;
     color:var(--mut);cursor:pointer;border:0;background:transparent;font-family:inherit;
@@ -207,6 +207,7 @@
   <div class="tabsbar" role="tablist" aria-label="Secciones">
     <button class="tabbtn" role="tab" id="tabApps" aria-selected="true" aria-controls="paneApps" data-view="apps"><span data-ico="box"></span>Aplicaciones <span class="n" id="nApps">0</span></button>
     <button class="tabbtn" role="tab" id="tabTemp" aria-selected="false" aria-controls="paneTemp" data-view="temp" tabindex="-1"><span data-ico="folder"></span>Temporales <span class="n" id="nTemp">0</span></button>
+    <button class="tabbtn" role="tab" id="tabPages" aria-selected="false" aria-controls="panePages" data-view="pages" tabindex="-1"><span data-ico="globe"></span>Páginas <span class="n" id="nPages">0</span></button>
   </div>
   <div class="catchips" id="catChips" role="group" aria-label="Filtrar por categoría"></div>
 </div>
@@ -227,6 +228,15 @@
     <span class="badge">se borran a los 7 días</span>
   </div>
   <div class="grid" id="gridTemp"></div>
+</section>
+
+<section class="sect wrap" id="panePages" role="tabpanel" aria-labelledby="tabPages" tabindex="0" hidden>
+  <div class="sect-hd">
+    <h2>Sitios publicados</h2>
+    <span class="badge" id="pagesBadge"></span>
+    <span class="badge">Firebase Hosting</span>
+  </div>
+  <div class="grid" id="gridPages"></div>
 </section>
 </main>
 
@@ -260,7 +270,8 @@ const ICO = {
   clock:'<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 13.5"/>',
   ext:'<path d="M7 17 17 7"/><path d="M7 7h10v10"/>',
   file:'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>',
-  inbox:'<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>'
+  inbox:'<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'
 };
 const ico = (n,s=16)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[n]||''}</svg>`;
 const $ = s => document.querySelector(s);
@@ -395,6 +406,8 @@ async function loadReleases(rr){
 
 /* ================= UI: tabs + filtros ================= */
 let view = 'apps', fcat = 'Todas';
+let pages = [];
+const PANES = {apps:'paneApps', temp:'paneTemp', pages:'panePages'};
 function setView(v){
   view = v;
   for(const b of document.querySelectorAll('.tabbtn')){
@@ -402,8 +415,7 @@ function setView(v){
     b.setAttribute('aria-selected', on);
     if(on) b.removeAttribute('tabindex'); else b.tabIndex = -1;
   }
-  $('#paneApps').hidden = v!=='apps';
-  $('#paneTemp').hidden = v!=='temp';
+  for(const [k,id] of Object.entries(PANES)) $('#'+id).hidden = v!==k;
   render();
 }
 document.querySelectorAll('.tabbtn').forEach(b => b.addEventListener('click', ()=>setView(b.dataset.view)));
@@ -485,12 +497,15 @@ function render(){
   const q = $('#q').value.trim().toLowerCase();
   const apps = groups.filter(g => !g.isTemp && matches(g,q));
   const temps = groups.filter(g => g.isTemp && matches(g,q));
+  const pgs = pages.filter(p => !q || (p.name+' '+p.url).toLowerCase().includes(q));
   $('#stApps').textContent = groups.filter(g=>!g.isTemp).length;
   $('#stTemp').textContent = groups.filter(g=>g.isTemp).length;
   const dates = groups.map(g=>g.date).filter(Boolean).sort().reverse();
   $('#stUpd').textContent = dates.length ? fmtDate(dates[0]) : '—';
   $('#nApps').textContent = groups.filter(g=>!g.isTemp).length;
   $('#nTemp').textContent = groups.filter(g=>g.isTemp).length;
+  $('#nPages').textContent = pages.length;
+  $('#pagesBadge').textContent = pgs.length + (pgs.length===1?' sitio':' sitios');
   $('#countBadge').textContent = apps.length + (apps.length===1?' resultado':' resultados');
   $('#tempBadge').textContent = temps.length + (temps.length===1?' archivo':' archivos');
   $('#appsTitle').textContent = fcat==='Todas' ? 'Aplicaciones' : fcat;
@@ -500,7 +515,37 @@ function render(){
   $('#gridTemp').innerHTML = temps.length ? temps.map(groupCard).join('')
     : `<div class="empty">${ico('inbox',40)}<b>Sin archivos temporales</b>
        <span>Pedile a la IA “subime este archivo como temporal” y aparece acá.</span></div>`;
+  $('#gridPages').innerHTML = pgs.length ? pgs.map(pageCard).join('')
+    : `<div class="empty">${ico('globe',40)}<b>Sin páginas</b>
+       <span>Todavía no hay sitios publicados en esta lista.</span></div>`;
   buildCatChips();
+}
+
+function pageCard(p){
+  const href = safeUrl(p.url);
+  const img = safeImg(p.icon);
+  const [bg, fg] = avc(p.name);
+  const host = (()=>{ try{ return new URL(p.url).hostname }catch{ return '' } })();
+  return `<article class="card">
+    <div class="top">
+      <div class="avatar" style="background:${bg};color:${fg};position:relative;overflow:hidden" aria-hidden="true">${esc(aLetter(p.name))}${img?`<img src="${esc(img)}" alt="" width="52" height="52" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.remove()">`:''}</div>
+      <div style="min-width:0">
+        <h3>${esc(p.name)}</h3>
+        <div class="meta">${host?`<span class="chip">${esc(host)}</span>`:''}</div>
+      </div>
+    </div>
+    <div class="row">
+      ${href!=='#'?`<a class="btn btn-dl" href="${esc(href)}" target="_blank" rel="noopener" aria-label="Abrir ${esc(p.name)}">${ico('ext')}<span>Abrir sitio</span></a>`
+        :`<span class="btn btn-ghost" style="flex:1;justify-content:center;opacity:.55;cursor:default">Sin URL</span>`}
+    </div>
+  </article>`;
+}
+
+async function loadPages(){
+  try{
+    const r = await fetch('./pages.json?t='+Date.now(), {cache:'no-store'});
+    if(r.ok){ const j = await r.json(); if(Array.isArray(j.pages)) pages = j.pages; }
+  }catch{}
 }
 
 document.addEventListener('click', e => {
@@ -548,7 +593,8 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && $('#ov').clas
 
 (async function init(){
   await loadSiteConfig();
-  await loadCatalog();
+  await Promise.all([loadCatalog(), loadPages()]);
+  render();
 })();
 </script>
 </body>

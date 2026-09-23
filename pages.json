@@ -1,0 +1,28 @@
+{
+  "_comment": "Sitios en Firebase Hosting. Se genera/actualiza buscando .firebaserc en la PC y verificando https://<id>.web.app. Excluidos (no responden): biblia1960valera, instrumenfull, vallesito.",
+  "updated": "2026-09-23",
+  "pages": [
+    { "name": "Gatt Indumentaria", "url": "https://gatt-indumentaria.web.app/", "icon": "https://gatt-indumentaria.web.app/favicon.ico" },
+    { "name": "FamilySafety", "url": "https://seguridad-family.web.app/", "icon": "https://seguridad-family.web.app/favicon.ico" },
+    { "name": "Punto de Venta", "url": "https://ventasym.web.app/", "icon": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>" },
+    { "name": "SIGA 2026", "url": "https://siga-unt.web.app/", "icon": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>" },
+    { "name": "CuentasOC", "url": "https://cuentasoc.web.app/", "icon": "https://cuentasoc.web.app/apple-touch-icon.png" },
+    { "name": "ADCC Privacidad", "url": "https://adccprivacity.web.app/", "icon": "https://adccprivacity.web.app/assets/logo-Bj1xiY0t.webp" },
+    { "name": "ADCC Biometría", "url": "https://biometriadcc.web.app/", "icon": "https://biometriadcc.web.app/assets/logo-Bj1xiY0t.webp" },
+    { "name": "MásFuerte", "url": "https://masfuerte.web.app/", "icon": "https://masfuerte.web.app/icons/Icon-192.png" },
+    { "name": "Dra. Laura Gonzalez", "url": "https://drgonzalezlaura.web.app/", "icon": "https://drgonzalezlaura.web.app/favicon.png" },
+    { "name": "Estudio Quintana", "url": "https://estudio-quintana.web.app/", "icon": "https://estudio-quintana.web.app/favicon.png" },
+    { "name": "Progavio", "url": "https://progravio.web.app/", "icon": "https://progravio.web.app/favicon.ico" },
+    { "name": "Botvent", "url": "https://botvent.web.app/", "icon": "https://botvent.web.app/logo.png" },
+    { "name": "anim-lab", "url": "https://anim-lab.web.app/", "icon": "https://anim-lab.web.app/favicon.svg" },
+    { "name": "Fiestas Isaura", "url": "https://isaurayelangel.web.app/", "icon": "https://isaurayelangel.web.app/favicon.svg" },
+    { "name": "VistaMD Web", "url": "https://vistademd.web.app/", "icon": "https://vistademd.web.app/favicon.ico" },
+    { "name": "EconoEye", "url": "https://econotuar.web.app/", "icon": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" },
+    { "name": "OpenHer Chat", "url": "https://chatopenher.web.app/", "icon": "https://chatopenher.web.app/icons/icon.svg" },
+    { "name": "Smart Caja", "url": "https://smart-caja.web.app/", "icon": "https://smart-caja.web.app/favicon.ico" },
+    { "name": "BanKey", "url": "https://ban-key.web.app/", "icon": "https://ban-key.web.app/favicon.ico" },
+    { "name": "DB Fácil", "url": "https://db-facil.web.app/", "icon": "https://db-facil.web.app/favicon.ico" },
+    { "name": "ADCC Cobranzas", "url": "https://adccbot.web.app/", "icon": "https://adccbot.web.app/favicon.ico" },
+    { "name": "GeoZeiza", "url": "https://geozeiza.web.app/", "icon": "https://geozeiza.web.app/icon.png" }
+  ]
+}
