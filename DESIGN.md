@@ -24,6 +24,16 @@ Catalogo utilitario para el dueño y su familia, en lenguaje oscuro verdoso con 
 ## Motivo
 Avatar-letra determinista + chips de estado (categoria, version, repo, TEMPORAL, BETA, NUEVA). El naranja aparece solo en el momento de descargar.
 
+## Fondo
+Imagen abisal generada con Qwen (`bg-abisal.jpg`, 1920x1080, 28KB): abismo verde casi
+negro con tentaculos sutiles en las esquinas y particulas bioluminiscentes. El centro
+queda limpio para la UI. Va bajo un overlay en gradiente (0.62 a 0.88) para que el
+texto mantenga AA; el halo verde al 9% se suma encima. Motivo de marca: el pulpo.
+
+## Botones
+Escritorio compacto (36px acciones, 38px tabs, 34px chips); 44px solo en mobile
+(<=640px) donde el target es el dedo.
+
 ## Decisiones (una linea cada una)
 - Color: verde para accion y marca, naranja reservado a descargar y temporal.
 - Layout: header fijo con buscador y tabs; grillas para apps, listado para paginas (enlaces externos, no descargas).

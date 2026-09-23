@@ -173,3 +173,9 @@
 - Hecho: manifest.json (standalone, theme #0B1411), iconos generados del logo.jpg (192, 512, maskable con fondo de marca, apple 180), sw.js (shell en cache, GitHub API con red primero, navegacion con respaldo offline), registro en index.html, no-cache para manifest y sw en firebase.json.
 - Verificado: local (dimensiones reales de iconos, SW registrado con scope) y vivo (manifest + SW + 4 cards). 0 errores. Commit a7cf015 + deploy.
 - Evidencia: preview-pwa.png.\
+\
+## 2026-09-23 - Botones compactos + fondo abisal (Qwen)
+- Pedido: botones muy grandes + mejor fondo, imagen o generada con qwen image.
+- Botones: 44px era el target tactil usado tambien en escritorio. Ahora escritorio = 36px acciones / 38px tabs / 34px chips / 38px buscador; 44px solo en <=640px. Verificado medido en local y vivo.
+- Fondo: ComfyUI estaba caido (lo levante con comfy-qwen), generado 2048x1152 con Qwen (seed 5610500635871981), a bg-abisal.jpg 1920x1080 28KB. Overlay 0.62-0.88 mantiene AA (medido 8-17:1). SW cache v1 -> v2 para refrescar shell.
+- Evidencia: preview-bg-desktop/mobile.png, preview-final-bg.png, 0 errores. Commit 3eea4e0 + deploy.\

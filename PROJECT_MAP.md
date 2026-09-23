@@ -19,6 +19,7 @@ mi-tienda-apps/  (repo git → Owning01/mis-apps, branch main)
 ├── manifest.json               # PWA (nombre, iconos, standalone, theme)
 ├── sw.js                       # service worker (shell en cache, API con red primero)
 ├── icons/                      # icon-192/512, maskable-512, apple-touch-icon (del logo.jpg)
+├── bg-abisal.jpg               # fondo abisal generado con Qwen (1920x1080, 28KB)
 ├── config.json                 # {repos:[...], siteName, categories} de producción
 ├── apps.json                   # entradas curadas/manual (extra, opcional)
 ├── pages.json                  # sitios Firebase (sección Páginas: nombre, url, icon)
