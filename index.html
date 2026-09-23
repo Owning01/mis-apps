@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mis Apps — Tienda personal</title>
+<title>Apps de Octa — Tienda personal</title>
 <meta name="description" content="Tus aplicaciones y archivos, listos para descargar. Directo desde GitHub Releases, sin cuentas.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2310B981'/><text x='50' y='70' font-size='52' text-anchor='middle'>M</text></svg>">
+<link rel="icon" href="./logo.jpg" type="image/jpeg">
+<link rel="apple-touch-icon" href="./logo.jpg">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,9 +41,10 @@
     background:rgba(11,20,17,.85);border-bottom:1px solid var(--line)}
   .hd{display:flex;align-items:center;gap:14px;padding:14px 0}
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
-  .logo .mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;
-    background:var(--acc);color:var(--acc-ink)}
-  .logo .mark svg{width:20px;height:20px}
+  .logo img.mark{width:42px;height:42px;border-radius:12px;object-fit:cover;
+    border:1px solid var(--line);flex-shrink:0}
+  .hero-logo{width:120px;height:120px;border-radius:30px;object-fit:cover;
+    border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.45);margin-bottom:20px}
   .grow{flex:1}
   .search{position:relative;min-width:220px;max-width:380px;flex:1}
   .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--mut)}
@@ -186,7 +188,7 @@
 
 <header>
   <div class="wrap hd">
-    <div class="logo"><span class="mark" id="logoMark"></span> <span id="brandName">MisApps</span></div>
+    <div class="logo"><img class="mark" src="./logo.jpg" alt="Logo Apps de Octa" width="42" height="42" fetchpriority="high"> <span id="brandName">Apps de Octa</span></div>
     <div class="search">
       <span id="searchIco"></span>
       <input id="q" type="search" placeholder="Buscar aplicación o archivo..." autocomplete="off" aria-label="Buscar aplicación o archivo">
@@ -196,7 +198,8 @@
 
 <main>
 <section class="hero wrap">
-  <span class="kicker"><span class="dot"></span><span id="kickTxt">Catálogo en vivo</span></span>
+  <img class="hero-logo" src="./logo.jpg" alt="Logo Apps de Octa" width="120" height="120" fetchpriority="high">
+  <br><span class="kicker"><span class="dot"></span><span id="kickTxt">Catálogo en vivo</span></span>
   <h1>Tus apps y tus archivos,<br><em>listos para descargar.</em></h1>
   <p>Tocá una aplicación para ver su historial de versiones, o descargá la última con un clic. Sin cuentas, sin esperas.</p>
   <div class="stats">
@@ -244,7 +247,7 @@
 </main>
 
 <footer>
-  <div class="wrap" id="footTxt">MisApps · Archivos en GitHub Releases · Descargas directas sin iniciar sesión</div>
+  <div class="wrap" id="footTxt">Apps de Octa · Archivos en GitHub Releases · Descargas directas sin iniciar sesión</div>
 </footer>
 
 <!-- ============ MODAL HISTORIAL ============ -->
@@ -279,7 +282,6 @@ const ICO = {
 const ico = (n,s=16)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[n]||''}</svg>`;
 const $ = s => document.querySelector(s);
 document.querySelectorAll('[data-ico]').forEach(el=>{ el.innerHTML = ico(el.dataset.ico, el.closest('.tabbtn')?16:18) });
-$('#logoMark').innerHTML = ico('box',20);
 $('#searchIco').innerHTML = ico('search',16);
 
 /* ================= CONFIG =================

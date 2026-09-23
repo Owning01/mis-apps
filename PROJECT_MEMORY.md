@@ -104,3 +104,10 @@
 - Quitados de `pages.json`: FamilySafety, ADCC Privacidad, ADCC Biometría, Botvent,
   Ventasym, Smart Caja, ADCC Cobranzas, DB Fácil. Quedan 14 sitios.
 - Evidencia: commit `ee55d8f`, `preview-pages2.png`, 0 errores, verificado en vivo.
+
+## 2026-09-23 — Marca Apps de Octa
+- El usuario aportó `Logo.jpg` (pulpo verde/naranja 2048px, 2 MB): se optimizó a
+  `logo.jpg` 512px/59 KB; el original quedó local e ignorado en git.
+- Aplicado en header (44px), hero (120px) y favicon; sitio renombrado a "Apps de Octa"
+  (`config.json`, título, marca, footer).
+- Evidencia: `preview-logo.png`, 0 errores de consola.

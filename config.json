@@ -4,7 +4,7 @@
     "Owning01/mis-apps",
     "Owning01/Openher"
   ],
-  "siteName": "MisApps",
+  "siteName": "Apps de Octa",
   "categories": {
     "OpenHer": ["openher/*"],
     "VistaMD": ["mis-apps/vistamd-*"],
