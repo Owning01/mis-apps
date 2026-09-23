@@ -76,3 +76,13 @@
   sesión `gh` existente (Owning01).
 - Deploy manual a Firebase hecho: https://appsdeocta.web.app (proyecto `appsdeocta`).
 - Pendiente: secrets del workflow para deploy automático.
+
+## 2026-09-23 — Deploy v2 en vivo + seguridad endurecida
+- Push `6d366f9` (v2: sin admin, tabs, categorías, historial, verde/naranja) y `ec7ffb9`
+  (ignorar `.firebase/`) a Owning01/mis-apps; deploy a https://appsdeocta.web.app.
+- Verificado en vivo: 4 cards agrupadas, categorías, tabs, modal historial, 0 errores
+  de consola. Screenshot `preview-live-v2.png`.
+- Seguridad (turno previo): CSP meta, `safeUrl`/`safeImg`, headers (nosniff, DENY,
+  Referrer-Policy, Permissions-Policy, HSTS), fix XSS reflejado en toast vía `?repos=`,
+  repo limpio de secretos, prueba de ataque con payload inerte. Commit `de2644c`.
+- Resta: secrets del workflow para deploy automático.
