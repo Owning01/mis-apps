@@ -6,6 +6,8 @@
 <title>Mis Apps — Tienda personal</title>
 <meta name="description" content="Catálogo personal de aplicaciones y archivos. Descarga directa desde GitHub Releases, sin iniciar sesión.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%236d5df6'/><text x='50' y='68' font-size='52' text-anchor='middle'>📦</text></svg>">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <style>
   :root{
     --bg:#0b0d14; --bg2:#12151f; --card:#161a27; --card2:#1c2133;
@@ -294,6 +296,17 @@ const guessIcon = n => /\.apk$/i.test(n)?'🤖' : /\.(exe|msi)$/i.test(n)?'🪟'
   : /\.(zip|rar|7z|tar|gz)$/i.test(n)?'🗜️' : /\.(dmg|pkg)$/i.test(n)?'🍎'
   : /\.iso$/i.test(n)?'💿' : '📦';
 
+/* Solo http(s). Bloquea javascript:, data: y otros esquemas en enlaces. */
+const safeUrl = u => {
+  if(!u || u[0]==='#') return '#';
+  try{
+    const p = new URL(u, location.href);
+    return (p.protocol==='http:'||p.protocol==='https:') ? p.href : '#';
+  }catch{ return '#' }
+};
+/* Solo https: o data:image/ para <img>. */
+const safeImg = u => (typeof u==='string' && (/^https:\/\//.test(u)||/^data:image\//.test(u))) ? u : '';
+
 function toast(msg, type='ok'){
   const t=document.createElement('div'); t.className='toast '+type; t.innerHTML=msg;
   $('#toasts').append(t); setTimeout(()=>{t.style.opacity=0;t.style.transition='.4s';setTimeout(()=>t.remove(),400)},4200);
@@ -328,7 +341,7 @@ async function loadCatalog(){
     else failRepos.push(site.repos[i]);
   });
   ghApps.sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
-  failRepos.forEach(rr => toast(`GitHub (${rr}): no se pudo leer`, 'err'));
+  failRepos.forEach(rr => toast(`GitHub (${esc(rr)}): no se pudo leer`, 'err'));
   const src = [];
   if(okRepos.length) src.push(okRepos.join(' + '));
   if(!site.repos.length) src.push('sin repos configurados');
@@ -389,18 +402,20 @@ function cardHTML(a){
     ? `<div class="assets">${assets.map(x=>`
         <div class="asset"><span class="nm" title="${esc(x.name)}">📄 ${esc(x.name)}</span>
         <span class="sz">${esc(x.size)}</span>${x.count?`<span class="cnt">⬇ ${x.count}</span>`:''}
-        <a class="btn btn-dl btn-sm" href="${esc(x.url)}">⬇️</a></div>`).join('')}</div>`
+        <a class="btn btn-dl btn-sm" href="${esc(safeUrl(x.url))}">⬇️</a></div>`).join('')}</div>`
     : '';
   const multi = assets.length>1;
-  const href = single ? single.url : (multi ? (a.htmlUrl||'#') : (a.url||'#'));
-  const canDl = href && href !== '#';
+  const raw = single ? single.url : (multi ? (a.htmlUrl||'') : (a.url||''));
+  const href = safeUrl(raw);
+  const canDl = href !== '#';
+  const img = safeImg(a.icon);
   const mainBtn = !canDl
     ? `<span class="btn btn-ghost" style="flex:1;justify-content:center;opacity:.55;cursor:default">Sin archivo adjunto</span>`
     : multi
       ? `<a class="btn btn-dl" href="${esc(href)}" target="_blank" rel="noopener">📦 Ver archivos</a>`
       : `<a class="btn btn-dl" href="${esc(href)}" data-dl="${esc(a.id)}">⬇️ Descargar</a>`;
   return `<article class="card${a.isTemp?' temp':''}">
-    <div class="ico">${a.icon && String(a.icon).startsWith('http')?`<img src="${esc(a.icon)}" alt="">`:esc(a.icon||'📦')}</div>
+    <div class="ico">${img?`<img src="${esc(img)}" alt="">`:esc(a.icon||'📦')}</div>
     <div>
       <h3>${esc(a.name)}</h3>
       <div class="meta" style="margin-top:8px">
@@ -419,7 +434,7 @@ function cardHTML(a){
     ${assetRows}
     <div class="row">
       ${mainBtn}
-      ${!multi && a.gh && a.htmlUrl ? `<a class="gh-link" href="${esc(a.htmlUrl)}" target="_blank" rel="noopener" title="Ver release en GitHub">GitHub ↗</a>` : ''}
+      ${!multi && a.gh && a.htmlUrl ? `<a class="gh-link" href="${esc(safeUrl(a.htmlUrl))}" target="_blank" rel="noopener" title="Ver release en GitHub">GitHub ↗</a>` : ''}
       ${a.local ? `<button class="del" data-del="${esc(a.id)}" title="Quitar del catálogo">🗑️</button>` : ''}
     </div>
   </article>`;
