@@ -16,6 +16,9 @@ App web estática (sin build, sin backend) que arma sola su catálogo desde los
 ```
 mi-tienda-apps/  (repo git → Owning01/mis-apps, branch main)
 ├── index.html                  # UI + lógica (fetch multi-repo, secciones Apps/Temporales)
+├── manifest.json               # PWA (nombre, iconos, standalone, theme)
+├── sw.js                       # service worker (shell en cache, API con red primero)
+├── icons/                      # icon-192/512, maskable-512, apple-touch-icon (del logo.jpg)
 ├── config.json                 # {repos:[...], siteName, categories} de producción
 ├── apps.json                   # entradas curadas/manual (extra, opcional)
 ├── pages.json                  # sitios Firebase (sección Páginas: nombre, url, icon)
@@ -49,6 +52,7 @@ mi-tienda-apps/  (repo git → Owning01/mis-apps, branch main)
 - Agrupación por app (última versión en card; modal Historial con versiones anteriores).
 - Categorías configurables (`config.json: categories`, primera coincidencia gana).
 - Avatares-letra deterministas, iconos SVG (cero emojis UI), tabs con teclado.
+- PWA instalable: `manifest.json` + `sw.js` + iconos del logo (verificado live 2026-09-23).
 - Fetch a la API con `cache:'no-store'` (la API cachea 60s y mostraba datos viejos).
 - Múltiples assets por release: filas individuales; 1 asset = botón Descargar grande;
   sin assets descargables = etiqueta, nunca botón muerto.

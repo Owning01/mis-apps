@@ -167,3 +167,9 @@
 - Fixes: sin em dash, estados de carga/error con reintento, propositos escritos en codigo, avatares a 3 pares, DESIGN.md con dials ENERGY 1 / RHYTHM 2 / MOTION 1.
 - Verificado con Playwright (carga, error simulado, click-through, movil 375 sin scroll-X). 0 errores. Delivery Gate PASS.
 - Evidencia: anti-slop/fix-001-2026-09-23.md, preview-antislop-desktop/mobile.png.
+\
+## 2026-09-23 - PWA con logo
+- Pedido: hacerla PWA con logo y todo.
+- Hecho: manifest.json (standalone, theme #0B1411), iconos generados del logo.jpg (192, 512, maskable con fondo de marca, apple 180), sw.js (shell en cache, GitHub API con red primero, navegacion con respaldo offline), registro en index.html, no-cache para manifest y sw en firebase.json.
+- Verificado: local (dimensiones reales de iconos, SW registrado con scope) y vivo (manifest + SW + 4 cards). 0 errores. Commit a7cf015 + deploy.
+- Evidencia: preview-pwa.png.\
