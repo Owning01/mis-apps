@@ -1,8 +1,15 @@
 {
-  "_comment": "Repos que alimentan la página (Releases con archivos). Tags temp-* van a Temporales. Cambiar y redeployar.",
+  "_comment": "Repos fuente. categories: primera coincidencia gana (orden importa). Cada patrón se prueba contra: repo-corto/tag, nombre del grupo y nombre de cada archivo (* = comodín).",
   "repos": [
     "Owning01/mis-apps",
     "Owning01/Openher"
   ],
-  "siteName": "MisApps"
+  "siteName": "MisApps",
+  "categories": {
+    "OpenHer": ["openher/*"],
+    "VistaMD": ["mis-apps/vistamd-*"],
+    "Bloqueador": ["mis-apps/bloqueador-*"],
+    "Móviles": ["*.apk"],
+    "Escritorio": ["*.exe", "*.msi", "*.dmg", "*.pkg"]
+  }
 }

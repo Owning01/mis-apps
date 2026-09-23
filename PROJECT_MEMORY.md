@@ -41,7 +41,20 @@
   (a la página del release); sin assets → etiqueta "Sin archivo adjunto". Verificado que
   no queda ningún `href="#"` en el grid. Caso 1-asset probado con entrada inyectada.
 - Evidencia: `preview-gh.png` (página completa con datos reales de cli/cli).
-- Pendiente: proyecto Firebase, login, deploy, secrets del workflow.
+- Pendiente: ID proyecto Firebase + login + deploy + secrets workflow.
+
+## 2026-09-23 — Rediseño v2: sin admin, tabs, categorías, historial, paleta verde/naranja
+- Pedido: quitar "Soy el dueño"/Ajustes, separar secciones, categorizar, ver versiones
+  viejas solo al hacer click, aplicar skill taste-impecable, paleta verdes+naranjas.
+- Hecho: modal del dueño eliminado; tabs Aplicaciones/Temporales (con conteos y
+  flechas de teclado); agrupación por app (28 releases → 4 cards) con modal Historial
+  (25 versiones de OpenHer verificadas, descarga por versión); categorías por patrones
+  en `config.json` + chips filtro; paleta `#0B1411/#34D399/#F97316`, Space Grotesk+Inter,
+  iconos SVG, avatares-letra, focus-visible, reduced-motion, targets 44px.
+- Bugs: `$` usado antes de definir (ReferenceError, fixeado); categorías no matcheaban
+  por prefijo de owner (fix: match contra repo-corto/tag, nombre y archivos); chip de
+  versión mostraba el tag crudo (fix: extrae `1.0.0` de `vistamd-v1.0.0`).
+- Evidencia: `preview-v2.png`; 0 errores de consola.
 
 ## 2026-09-23 — Repo mis-apps + releases reales + skill + Temporales
 - Modelo corregido con el usuario: Openher NO es el repo de la página. Se creó
@@ -61,4 +74,5 @@
 - Evidencia: commits e540f67 + c0fb94c en Owning01/mis-apps (branch main).
 - Token pegado por el usuario en el chat: NO se guardó en ningún archivo; se usó la
   sesión `gh` existente (Owning01).
-- Pendiente: ID proyecto Firebase + login + deploy + secrets workflow.
+- Deploy manual a Firebase hecho: https://appsdeocta.web.app (proyecto `appsdeocta`).
+- Pendiente: secrets del workflow para deploy automático.

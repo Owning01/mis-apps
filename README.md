@@ -32,11 +32,16 @@ Vista previa con otros repos (útil para probar sin configurar nada):
 http://localhost:8010/?repos=cli/cli,octocat/Hello-World
 ```
 
-## Conectar repos (2 lugares)
+## La página (qué ve el visitante)
 
-1. **`config.json`** → lista `repos` + `siteName`. Es lo que ven todos los visitantes
-   (producción). Cambiar + commit + push (deploy a Firebase automático).
-2. **⚙️ Ajustes en la página** → vista previa solo en tu navegador.
+- **Tabs**: Aplicaciones (permanentes) y Temporales (`temp-*`, se borran a los 7 días).
+- **Agrupada por app**: cada card muestra la ÚLTIMA versión; el botón **Historial**
+  abre el modal con todas las versiones anteriores, cada una descargable.
+- **Categorías**: chips de filtro configurados en `config.json` → `categories`
+  (primera coincidencia gana; el orden importa). Se matchea contra repo-corto/tag,
+  nombre y archivos. Lo que no matchea va a "Otras".
+- **Sin panel de dueño**: no hay login ni botones de admin en la página.
+  Todo se configura en `config.json` + Releases de GitHub.
 
 ## Cómo publicar
 
@@ -69,7 +74,7 @@ Deploy automático en cada push a `main` (opcional, recomendado):
 ## Notas y límites
 
 - API de GitHub sin autenticar: **60 consultas/hora por IP** (la página usa `no-store`;
-  si se agota, muestra error y usa el caché). Con token en ⚙️ Ajustes: 5000/h.
+  si se agota, muestra error y usa el caché).
 - Releases **draft** o sin archivos adjuntos no aparecen.
 - "NUEVA" = publicado en los últimos 14 días; "BETA" = prerelease no-temporal.
 - Los links `releases/download/...` descargan directo, **sin cuenta**.

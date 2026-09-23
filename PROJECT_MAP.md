@@ -3,7 +3,7 @@
 ## Qué es
 App web estática (sin build, sin backend) que arma sola su catálogo desde los
 **Releases de N repos GitHub**. Visitantes descargan **sin login** vía links directos
-`releases/download/...`. Hosting de la página: **Firebase Hosting** (pendiente proyecto).
+`releases/download/...`. Hosting: **Firebase Hosting → https://appsdeocta.web.app**.
 
 ## Repos (modelo corregido 2026-09-23)
 - **`Owning01/mis-apps`** (nuevo, creado por el agente): código de la página + releases
@@ -43,9 +43,10 @@ mi-tienda-apps/  (repo git → Owning01/mis-apps, branch main)
 - Screenshots: `preview.png` (vista anterior), `preview-gh.png` (catálogo real).
 
 ## Funciones vivas
-- Catálogo multi-repo (`config.json: repos[]`, query `?repos=a/b,c/d`), ordenado por fecha.
-- Sección 📁 **Temporales**: releases con tag `temp-*` (chip TEMPORAL), se oculta si está vacía.
-- Chip de repo origen en cada card (multi-repo).
+- Tabs Aplicaciones / Temporales con conteos; sin botones de dueño/ajustes en la UI.
+- Agrupación por app (última versión en card; modal Historial con versiones anteriores).
+- Categorías configurables (`config.json: categories`, primera coincidencia gana).
+- Avatares-letra deterministas, iconos SVG (cero emojis UI), tabs con teclado.
 - Fetch a la API con `cache:'no-store'` (la API cachea 60s y mostraba datos viejos).
 - Múltiples assets por release: filas individuales; 1 asset = botón Descargar grande;
   sin assets descargables = etiqueta, nunca botón muerto.
@@ -62,5 +63,4 @@ mi-tienda-apps/  (repo git → Owning01/mis-apps, branch main)
 - Puerto 8000 ocupado en esta máquina por otro servidor (APKs); usar 8010.
 
 ## Pendiente
-- ID del proyecto Firebase + `firebase login` + primer deploy.
-- Secrets del workflow (`FIREBASE_SERVICE_ACCOUNT`, var `FIREBASE_PROJECT_ID`).
+- Secrets del workflow (`FIREBASE_SERVICE_ACCOUNT`, var `FIREBASE_PROJECT_ID`) para deploy automático.
