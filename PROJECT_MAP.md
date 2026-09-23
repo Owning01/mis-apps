@@ -1,21 +1,29 @@
-# PROJECT_MAP — MisApps (catálogo sobre GitHub Releases + Firebase Hosting)
+# PROJECT_MAP — MisApps (catálogo multi-repo + Temporales, Firebase Hosting)
 
 ## Qué es
 App web estática (sin build, sin backend) que arma sola su catálogo desde los
-**Releases de un repo GitHub**. Visitantes descargan **sin login** vía links directos
-`releases/download/...`. Hosting de la página: **Firebase Hosting**.
+**Releases de N repos GitHub**. Visitantes descargan **sin login** vía links directos
+`releases/download/...`. Hosting de la página: **Firebase Hosting** (pendiente proyecto).
+
+## Repos (modelo corregido 2026-09-23)
+- **`Owning01/mis-apps`** (nuevo, creado por el agente): código de la página + releases
+  de apps SIN repo propio (vistamd, bloqueador, temporales `temp-*`).
+- **`Owning01/Openher`** (existente, solo lectura): sus releases también salen en la página.
+- Regla: app con repo propio → release en SU repo (+ agregarlo a `config.json`);
+  app suelta → release en `mis-apps`.
 
 ## Estructura
 ```
-mi-tienda-apps/
-├── index.html                  # UI + lógica completa (fetch a API de GitHub)
-├── config.json                 # {owner, repo, siteName} de producción
+mi-tienda-apps/  (repo git → Owning01/mis-apps, branch main)
+├── index.html                  # UI + lógica (fetch multi-repo, secciones Apps/Temporales)
+├── config.json                 # {repos:[...], siteName} de producción
 ├── apps.json                   # entradas curadas/manual (extra, opcional)
 ├── firebase.json               # config de Firebase Hosting (public: .)
-├── .firebaserc                 # proyecto Firebase (PENDIENTE: poner ID real)
+├── .firebaserc                 # IGNORADO en git (tiene placeholder local)
+├── .gitignore                  # preview*.png + .firebaserc
 ├── .github/workflows/firebase-hosting.yml  # deploy auto en push a main
 ├── README.md                   # setup, publicación, deploy
-├── preview.png / preview-gh.png # screenshots de referencia
+├── preview*.png                # screenshots (no van al repo)
 ├── PROJECT_MAP.md              # este archivo
 └── PROJECT_MEMORY.md
 ```
@@ -35,9 +43,12 @@ mi-tienda-apps/
 - Screenshots: `preview.png` (vista anterior), `preview-gh.png` (catálogo real).
 
 ## Funciones vivas
-- Catálogo automático desde Releases (filtra drafts y releases sin assets).
-- Múltiples assets por release: filas individuales con tamaño y contador de descargas;
-  1 asset = botón Descargar grande.
+- Catálogo multi-repo (`config.json: repos[]`, query `?repos=a/b,c/d`), ordenado por fecha.
+- Sección 📁 **Temporales**: releases con tag `temp-*` (chip TEMPORAL), se oculta si está vacía.
+- Chip de repo origen en cada card (multi-repo).
+- Fetch a la API con `cache:'no-store'` (la API cachea 60s y mostraba datos viejos).
+- Múltiples assets por release: filas individuales; 1 asset = botón Descargar grande;
+  sin assets descargables = etiqueta, nunca botón muerto.
 - Búsqueda, stats (apps / nuevas 14d / última fecha), chips versión/fecha/BETA/NUEVA.
 - Fallback: `apps.json` curado + caché localStorage si GitHub falla o no hay repo.
 - Prioridad de config: `?owner=&repo=` > localStorage (Ajustes) > `config.json`.
@@ -51,7 +62,5 @@ mi-tienda-apps/
 - Puerto 8000 ocupado en esta máquina por otro servidor (APKs); usar 8010.
 
 ## Pendiente
-- Nombre del repo GitHub (owner/repo) + crearlo y subir este código.
 - ID del proyecto Firebase + `firebase login` + primer deploy.
 - Secrets del workflow (`FIREBASE_SERVICE_ACCOUNT`, var `FIREBASE_PROJECT_ID`).
-- Quitar Drive de la historia (ya eliminado del código; queda mención en memoria vieja).

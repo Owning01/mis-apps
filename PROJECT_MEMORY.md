@@ -41,4 +41,24 @@
   (a la página del release); sin assets → etiqueta "Sin archivo adjunto". Verificado que
   no queda ningún `href="#"` en el grid. Caso 1-asset probado con entrada inyectada.
 - Evidencia: `preview-gh.png` (página completa con datos reales de cli/cli).
-- Pendiente: owner/repo reales, proyecto Firebase, login, deploy, secrets del workflow.
+- Pendiente: proyecto Firebase, login, deploy, secrets del workflow.
+
+## 2026-09-23 — Repo mis-apps + releases reales + skill + Temporales
+- Modelo corregido con el usuario: Openher NO es el repo de la página. Se creó
+  **`Owning01/mis-apps`** (público): código + releases de apps sin repo. Openher aporta
+  sus releases como fuente de solo lectura.
+- 422 "Repository is empty" al crear releases → causa: repo recién creado sin commits.
+  Fix: push inicial primero, releases después.
+- Releases creados: `vistamd-v1.0.0` (vistamd.exe 11.6 MB) y `bloqueador-v1.0.0`
+  (app-release.apk 44.7 MB, build release, no el debug de 157 MB).
+- Página: multi-repo (`repos[]`, chip de origen, orden por fecha), sección 📁 Temporales
+  (tags `temp-*`), `cache:'no-store'` (la API cachea 60s y ocultaba releases nuevos).
+- Skill **`subir-a-misapps`** creado en `C:/Users/perca/.agents/skills/` + fila en INDEX.md:
+  cualquier agente puede subir permanente/temporal + limpieza + verificación.
+- Verificación E2E: página muestra 28 apps (mis-apps + Openher), links directos OK,
+  release `temp-prueba-20260923` apareció en Temporales con chip TEMPORAL y se borró
+  (release + tag) con el procedimiento del skill. 0 errores de consola.
+- Evidencia: commits e540f67 + c0fb94c en Owning01/mis-apps (branch main).
+- Token pegado por el usuario en el chat: NO se guardó en ningún archivo; se usó la
+  sesión `gh` existente (Owning01).
+- Pendiente: ID proyecto Firebase + login + deploy + secrets workflow.
