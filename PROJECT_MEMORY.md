@@ -132,3 +132,8 @@
 - Verificado: desktop 1280 (3 cards, tabs en header) y móvil 375 (sin scroll-X,
   header 187px, cards 1 columna). 0 errores. Commit `b791a43` + deploy.
 - Evidencia: `preview-desktop-v3.png`, `preview-mobile-v4.png`.
+
+## 2026-09-23 — Páginas en listado
+- Pedido: ver páginas en listado, no en columnas.
+- Hecho: filas de ancho completo (logo 44px + nombre + dominio + flecha), toda la fila es el enlace (elemento <a>, sin stretched-link).
+- Evidencia: commit 82c40a0, preview-pages-list.png, 0 errores, 14 filas verificadas en local; deploy hecho, falta verificación en vivo.
