@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apps de Octa — Tienda personal</title>
+<title>Apps de Octa - Tienda personal</title>
 <meta name="description" content="Tus aplicaciones y archivos, listos para descargar. Directo desde GitHub Releases, sin cuentas.">
 <link rel="icon" href="./logo.jpg" type="image/jpeg">
 <link rel="apple-touch-icon" href="./logo.jpg">
@@ -13,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Marca: verde #34D399 como accion, naranja #F97316 solo para descargar y temporal.
+     Fondos verdes oscuros para contraste AA con texto claro. */
   :root{
     --bg:#0B1411; --bg2:#101D17; --card:#132019; --card2:#17271F;
     --line:#233D31; --txt:#EFF6F0; --mut:#A3B8AB;
@@ -28,15 +30,19 @@
     background:var(--bg); color:var(--txt); min-height:100vh;
     font-variant-numeric:tabular-nums;
   }
+  /* Halo superior: foco de marca sobre el header, 9% de opacidad, sin cubrir la pagina. */
   body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     background:radial-gradient(900px 420px at 50% -8%, rgba(52,211,153,.09), transparent 65%)}
   main,.wrap{position:relative;z-index:1}
   a{color:inherit}
   .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
   :focus-visible{outline:2px solid var(--warm);outline-offset:2px;border-radius:6px}
+  /* Tipo: Space Grotesk en titulos por caracter geometrico que acompana al logo;
+     Inter en cuerpo por legibilidad en listas densas. */
   h1,h2,h3,.disp{font-family:"Space Grotesk","Inter",system-ui,sans-serif;letter-spacing:-.02em}
 
   /* ---------- Header ---------- */
+  /* Header y modal con blur: maximo 2 superficies, para separar fijo vs contenido al hacer scroll. */
   header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
     background:rgba(11,20,17,.85);border-bottom:1px solid var(--line)}
   .hd{display:flex;align-items:center;gap:14px;padding:14px 0}
@@ -96,6 +102,8 @@
   .sect-hd h2{font-size:20px}
   .badge{font-size:12px;color:var(--mut);background:var(--bg2);border:1px solid var(--line);
     padding:4px 10px;border-radius:999px}
+  /* Cards uniformes a proposito: catalogo de igual peso, la jerarquia va en chips y version.
+     Paginas rompe el ritmo como listado porque son enlaces externos, no descargas. */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr));gap:16px}
   .plist{display:flex;flex-direction:column;gap:10px}
   .prow{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);
@@ -140,6 +148,17 @@
     border-radius:var(--r);grid-column:1/-1;display:flex;flex-direction:column;gap:8px;align-items:center}
   .empty svg{width:40px;height:40px;color:var(--acc);opacity:.7}
   .empty b{color:var(--txt);font-size:17px}
+  /* Carga: esqueletos pulsantes con el mismo ancho de card para no mover el layout.
+     Error: caja con mensaje concreto (que repos fallaron) y boton Reintentar. */
+  .loading{display:grid;gap:16px;grid-column:1/-1}
+  .skel{height:150px;border-radius:var(--r);border:1px solid var(--line);
+    background:linear-gradient(100deg,var(--card) 40%,var(--card2) 50%,var(--card) 60%);
+    background-size:200% 100%;animation:shim 1.4s linear infinite}
+  @keyframes shim{to{background-position:-200% 0}}
+  .errbox{text-align:center;color:var(--mut);padding:56px 20px;border:1px solid var(--warm);
+    border-radius:var(--r);grid-column:1/-1;display:flex;flex-direction:column;gap:10px;align-items:center}
+  .errbox b{color:var(--txt);font-size:17px}
+  .errbox code{font-size:12px;color:var(--warm);overflow-wrap:anywhere}
 
   /* ---------- Modal versiones ---------- */
   .ov{position:fixed;inset:0;background:rgba(4,10,7,.72);backdrop-filter:blur(6px);
@@ -223,7 +242,7 @@
     <span class="badge" id="srcBadge">cargando…</span>
     <span class="badge" id="countBadge"></span>
   </div>
-  <div class="grid" id="grid"></div>
+  <div class="grid" id="grid"><div class="loading" role="status" aria-label="Cargando aplicaciones"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></div>
 </section>
 
 <section class="sect wrap" id="paneTemp" role="tabpanel" aria-labelledby="tabTemp" tabindex="0" hidden>
@@ -232,7 +251,7 @@
     <span class="badge" id="tempBadge"></span>
     <span class="badge">se borran a los 7 días</span>
   </div>
-  <div class="grid" id="gridTemp"></div>
+  <div class="grid" id="gridTemp"><div class="loading" role="status" aria-label="Cargando temporales"><div class="skel"></div></div></div>
 </section>
 
 <section class="sect wrap" id="panePages" role="tabpanel" aria-labelledby="tabPages" tabindex="0" hidden>
@@ -241,7 +260,7 @@
     <span class="badge" id="pagesBadge"></span>
     <span class="badge">Firebase Hosting</span>
   </div>
-  <div class="plist" id="gridPages"></div>
+  <div class="plist" id="gridPages"><div class="loading" role="status" aria-label="Cargando paginas"><div class="skel" style="height:68px"></div><div class="skel" style="height:68px"></div></div></div>
 </section>
 </main>
 
@@ -266,6 +285,8 @@
 
 <script>
 /* ================= ICONOS SVG ================= */
+/* Iconos: trazo fino 2px elegido por legibilidad en 16px; cada glifo mapea su seccion
+   (caja=apps, carpeta=temporales, globo=paginas, dl=descarga, reloj=historial, ext=salir, archivo=fila, inbox=vacio). */
 const ICO = {
   box:'<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
   folder:'<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
@@ -290,10 +311,11 @@ const LS_CAT='misapps_cat';
 const qs = new URLSearchParams(location.search);
 const site = { repos: [], siteName:'MisApps', categories:{} };
 let groups = [];   // apps agrupadas: {key,name,repo,category,isTemp,versions:[...]}
+let catalogError = ''; // repos que GitHub no devolvio (para el estado de error)
 
 /* ================= HELPERS ================= */
 const esc = s => String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmtDate = d => { try{ return new Date(d).toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'}) }catch{ return '—' } };
+const fmtDate = d => { try{ return new Date(d).toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'}) }catch{ return '-' } };
 const fmtBytes = n => n>1073741824 ? (n/1073741824).toFixed(2)+' GB' : n>1048576 ? (n/1048576).toFixed(1)+' MB' : Math.max(1,Math.round(n/1024))+' KB';
 const isFresh = d => { try{ return (Date.now()-new Date(d).getTime()) < 14*864e5 }catch{ return false } };
 const safeUrl = u => {
@@ -303,7 +325,8 @@ const safeUrl = u => {
 };
 const safeImg = u => (typeof u==='string' && (/^https:\/\//.test(u)||/^data:image\//.test(u))) ? u : '';
 /* Colores de avatar deterministas por nombre (paleta verde/naranja). */
-const AVC = [['#123B2C','#5EEAB0'],['#3A2A10','#FBBF24'],['#0F2E3D','#67E8F9'],['#3B1D0E','#FB923C'],['#1E3A12','#A3E635'],['#2C1A3E','#C4B5FD']];
+/* Avatares: 3 pares dentro del sistema verde/naranja (R-29: sin cian, lima ni lavanda). */
+const AVC = [['#123B2C','#5EEAB0'],['#3A2A10','#FBBF24'],['#3B1D0E','#FB923C']];
 const avc = n => { let h=0; const s=String(n||'?'); for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0} return AVC[Math.abs(h)%AVC.length] };
 const aLetter = n => (String(n||'M').trim().match(/[A-Za-z0-9]/)||['M'])[0].toUpperCase();
 /* Normaliza "OpenHer v1.0.45" -> "openher" para agrupar versiones. */
@@ -336,7 +359,7 @@ async function loadSiteConfig(){
   }catch{}
   if(qs.get('repos')) site.repos = qs.get('repos').split(',').map(s=>s.trim()).filter(Boolean);
   else if(qs.get('owner') && qs.get('repo')) site.repos = [`${qs.get('owner')}/${qs.get('repo')}`];
-  document.title = site.siteName + ' — Tienda personal';
+  document.title = site.siteName + ' - Tienda personal';
   $('#brandName').textContent = site.siteName;
   $('#footTxt').textContent = `${site.siteName} · Archivos en GitHub Releases · Descargas directas sin iniciar sesión`;
 }
@@ -351,6 +374,7 @@ async function loadCatalog(){
   const results = await Promise.allSettled(site.repos.map(rr => loadReleases(rr)));
   results.forEach((res, i) => { if(res.status==='fulfilled'){ items.push(...res.value); okRepos.push(site.repos[i]) } });
   const failed = site.repos.filter(r => !okRepos.includes(r));
+  catalogError = failed.length ? failed.join(', ') : '';
   items.push(...curated.map(a => ({
     id:'local-'+(a.id||a.name), gh:false, repo:'', tag:'', name:a.name, ver:a.ver||'',
     desc:a.desc||'', date:a.date||'', htmlUrl:'', isNew:!!a.isNew, beta:false, isTemp:false,
@@ -496,8 +520,16 @@ function groupCard(g){
   </article>`;
 }
 
+/* Estado de error: nombra los repos que fallaron y ofrece reintento con reload. */
+function errBox(){
+  return `<div class="errbox" role="alert">${ico('inbox',40)}<b>No se pudo cargar el catálogo</b>
+    <span>GitHub no respondió para:</span><code>${esc(catalogError)}</code>
+    <button class="btn btn-acc" data-retry="1" type="button">Reintentar</button></div>`;
+}
+
 function render(){
   const q = $('#q').value.trim().toLowerCase();
+  const dead = catalogError && !groups.length && !q; // error real: sin datos y con repos fallidos
   const apps = groups.filter(g => !g.isTemp && matches(g,q));
   const temps = groups.filter(g => g.isTemp && matches(g,q));
   const pgs = pages.filter(p => !q || (p.name+' '+p.url).toLowerCase().includes(q));
@@ -509,9 +541,11 @@ function render(){
   $('#tempBadge').textContent = temps.length + (temps.length===1?' archivo':' archivos');
   $('#appsTitle').textContent = fcat==='Todas' ? 'Aplicaciones' : fcat;
   $('#grid').innerHTML = apps.length ? apps.map(groupCard).join('')
+    : dead ? errBox()
     : `<div class="empty">${ico('inbox',40)}<b>${!site.repos.length?'Falta conectar los repos':'Nada por aquí'}</b>
        <span>${!site.repos.length?'El dueño configura los repos en config.json y redeploya.':'Probá con otro término o categoría.'}</span></div>`;
   $('#gridTemp').innerHTML = temps.length ? temps.map(groupCard).join('')
+    : dead ? errBox()
     : `<div class="empty">${ico('inbox',40)}<b>Sin archivos temporales</b>
        <span>Pedile a la IA “subime este archivo como temporal” y aparece acá.</span></div>`;
   $('#gridPages').innerHTML = pgs.length ? pgs.map(pageCard).join('')
@@ -541,6 +575,8 @@ async function loadPages(){
 }
 
 document.addEventListener('click', e => {
+  const rt = e.target.closest('[data-retry]');
+  if(rt){ location.reload(); return; }
   const o = e.target.closest('[data-open]');
   if(o){ openHist(o.dataset.open, o); }
 });

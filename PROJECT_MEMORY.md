@@ -161,3 +161,9 @@
 - Trampa: el asset anterior se llamaba `app-release.apk` (nombre genérico); ahora se
   copia a un nombre versionado antes de subir para que el link de descarga sea claro.
 - Evidencia: `gh release view cinegbro-v1.0.0`, `flutter analyze` limpio, test OK.
+
+## 2026-09-23 - Auditoria antislop AFTER + 9 fixes
+- Modo AFTER: auditoria en anti-slop/audit-001-2026-09-23.md (2 HIGH, 4 MEDIUM, 3 LOW). Usuario aprobo todos.
+- Fixes: sin em dash, estados de carga/error con reintento, propositos escritos en codigo, avatares a 3 pares, DESIGN.md con dials ENERGY 1 / RHYTHM 2 / MOTION 1.
+- Verificado con Playwright (carga, error simulado, click-through, movil 375 sin scroll-X). 0 errores. Delivery Gate PASS.
+- Evidencia: anti-slop/fix-001-2026-09-23.md, preview-antislop-desktop/mobile.png.
