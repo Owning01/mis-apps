@@ -111,3 +111,14 @@
 - Aplicado en header (44px), hero (120px) y favicon; sitio renombrado a "Apps de Octa"
   (`config.json`, título, marca, footer).
 - Evidencia: `preview-logo.png`, 0 errores de consola.
+
+## 2026-09-23 — Header con tabs, sin hero, responsive móvil
+- Pedido sobre captura del hero: eliminar kicker/título/texto/stats; los 3 tabs al
+  header fijo; responsive para celulares.
+- Hecho: hero eliminado (JS refs `kickTxt/stApps/stTemp/stUpd` removidas, CSS muerto
+  fuera); tabsbar dentro del `<header>` sticky a ancho completo; grid con
+  `minmax(min(310px,100%),1fr)` (evita overflow en 320px); modal como bottom-sheet
+  en móvil; scrollbars horizontales ocultas en tabs/chips; botones 44px.
+- Verificado: desktop 1280 (3 cards, tabs en header) y móvil 375 (sin scroll-X,
+  header 187px, cards 1 columna). 0 errores. Commit `b791a43` + deploy.
+- Evidencia: `preview-desktop-v3.png`, `preview-mobile-v4.png`.
