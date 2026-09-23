@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis Apps — Tienda personal</title>
+<meta name="description" content="Catálogo personal de aplicaciones y archivos. Descarga directa desde GitHub Releases, sin iniciar sesión.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%236d5df6'/><text x='50' y='68' font-size='52' text-anchor='middle'>📦</text></svg>">
+<style>
+  :root{
+    --bg:#0b0d14; --bg2:#12151f; --card:#161a27; --card2:#1c2133;
+    --line:#262c40; --txt:#e8eaf2; --mut:#9aa1bb;
+    --acc:#6d5df6; --acc2:#22d3ee; --ok:#34d399; --warn:#fbbf24; --err:#f87171;
+    --r:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(1200px 600px at 80% -10%, #1b1740 0%, transparent 60%),
+               radial-gradient(900px 500px at -10% 20%, #0e2a3a 0%, transparent 55%),
+               var(--bg);
+    color:var(--txt); min-height:100vh;
+  }
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+  /* ---------- Header ---------- */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+    background:rgba(11,13,20,.78);border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;gap:14px;padding:14px 0}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.3px}
+  .logo .mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:17px;
+    background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 6px 20px rgba(109,93,246,.4)}
+  .grow{flex:1}
+  .search{position:relative;min-width:220px;max-width:360px;flex:1}
+  .search input{width:100%;padding:10px 14px 10px 38px;border-radius:12px;border:1px solid var(--line);
+    background:var(--bg2);color:var(--txt);outline:none;font-size:14px;transition:.2s}
+  .search input:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(109,93,246,.2)}
+  .search span{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.55;font-size:14px}
+  .btn{border:0;cursor:pointer;font-weight:600;font-size:14px;border-radius:12px;padding:10px 16px;
+    transition:.18s;display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none}
+  .btn:active{transform:scale(.97)}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--mut)}
+  .btn-ghost:hover{color:var(--txt);border-color:var(--acc)}
+  .btn-acc{background:linear-gradient(135deg,var(--acc),#5646e8);box-shadow:0 6px 18px rgba(109,93,246,.35)}
+  .btn-acc:hover{filter:brightness(1.1)}
+  .btn-dl{background:linear-gradient(135deg,var(--acc2),#0ea5e9);color:#04121b}
+  .btn-dl:hover{filter:brightness(1.08)}
+  .btn-sm{padding:7px 12px;font-size:13px;border-radius:10px}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:54px 0 26px;text-align:center}
+  .hero h1{font-size:clamp(28px,5vw,46px);line-height:1.1;letter-spacing:-.5px}
+  .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--acc2),var(--acc));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--mut);margin-top:14px;font-size:16px;max-width:640px;margin-inline:auto}
+  .stats{display:flex;gap:14px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 20px;min-width:130px}
+  .stat b{display:block;font-size:22px;background:linear-gradient(90deg,var(--acc2),var(--acc));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat small{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+
+  /* ---------- Grid ---------- */
+  .sect{padding:26px 0 70px}
+  .sect-hd{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .sect-hd h2{font-size:20px}
+  .badge{font-size:12px;color:var(--mut);background:var(--bg2);border:1px solid var(--line);
+    padding:4px 10px;border-radius:999px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
+    border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px;
+    transition:.2s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-4px);border-color:#3a4270;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+  .card.temp{border-color:rgba(251,191,36,.35)}
+  .card .ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:26px;
+    background:linear-gradient(135deg,rgba(109,93,246,.25),rgba(34,211,238,.18));
+    border:1px solid rgba(109,93,246,.35)}
+  .card .ico img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+  .card h3{font-size:17px;overflow-wrap:anywhere}
+  .card .desc{color:var(--mut);font-size:13.5px;line-height:1.55;flex:1;white-space:pre-line;
+    display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .meta{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-size:11.5px;color:#c3c8de;background:var(--bg2);border:1px solid var(--line);
+    padding:3px 9px;border-radius:999px}
+  .chip.new{color:#04121b;background:linear-gradient(135deg,var(--acc2),var(--ok));border:0;font-weight:700}
+  .chip.beta{color:#1a1000;background:linear-gradient(135deg,var(--warn),#f97316);border:0;font-weight:700}
+  .chip.temp{color:#1a1000;background:linear-gradient(135deg,var(--warn),#fbbf24);border:0;font-weight:700}
+  .chip.repo{color:var(--acc2);border-color:rgba(34,211,238,.4)}
+  .card .row{display:flex;gap:10px;align-items:center;margin-top:4px}
+  .card .row .btn{flex:1;justify-content:center}
+  .assets{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+  .asset{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);
+    border-radius:11px;padding:8px 10px;font-size:13px}
+  .asset .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#d5d9ec}
+  .asset .sz{color:var(--mut);font-size:11.5px;white-space:nowrap}
+  .asset .cnt{color:var(--mut);font-size:11.5px;white-space:nowrap}
+  .asset a{flex-shrink:0}
+  .gh-link{font-size:12px;color:var(--mut);text-decoration:none}
+  .gh-link:hover{color:var(--acc2)}
+  .del{background:transparent;border:1px solid var(--line);color:var(--err);border-radius:10px;
+    padding:8px 11px;cursor:pointer;font-size:14px}
+  .del:hover{background:rgba(248,113,113,.12);border-color:var(--err)}
+
+  .empty{text-align:center;color:var(--mut);padding:60px 20px;border:1px dashed var(--line);
+    border-radius:var(--r);grid-column:1/-1}
+  .empty b{color:var(--txt);display:block;font-size:17px;margin-bottom:6px}
+
+  /* ---------- Modal ---------- */
+  .ov{position:fixed;inset:0;background:rgba(4,6,12,.7);backdrop-filter:blur(6px);
+    display:none;place-items:center;z-index:100;padding:18px}
+  .ov.on{display:grid}
+  .modal{background:var(--bg2);border:1px solid var(--line);border-radius:20px;width:100%;
+    max-width:560px;max-height:90vh;overflow:auto;padding:26px}
+  .modal h3{font-size:20px;margin-bottom:6px}
+  .modal .sub{color:var(--mut);font-size:13.5px;margin-bottom:20px;line-height:1.5}
+  .tabs{display:flex;gap:6px;background:var(--bg);border:1px solid var(--line);
+    border-radius:12px;padding:5px;margin-bottom:20px}
+  .tab{flex:1;text-align:center;padding:9px;border-radius:9px;font-size:13.5px;font-weight:600;
+    color:var(--mut);cursor:pointer;border:0;background:transparent;transition:.15s}
+  .tab.on{background:var(--acc);color:#fff}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:12.5px;color:var(--mut);margin-bottom:6px;font-weight:600}
+  .field input,.field textarea{width:100%;padding:11px 13px;border-radius:11px;border:1px solid var(--line);
+    background:var(--bg);color:var(--txt);outline:none;font-size:14px;font-family:inherit}
+  .field input:focus,.field textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(109,93,246,.18)}
+  .hint{font-size:12px;color:var(--mut);line-height:1.6;background:rgba(109,93,246,.08);
+    border:1px solid rgba(109,93,246,.25);border-radius:11px;padding:11px 13px;margin-bottom:16px}
+  .hint code{background:var(--bg);padding:1px 6px;border-radius:6px;color:var(--acc2);font-size:11.5px}
+  .hint ol{margin:6px 0 0 18px}
+  .hint li{margin-bottom:4px}
+  .hint a{color:var(--acc2)}
+  .close{float:right;background:transparent;border:0;color:var(--mut);font-size:22px;cursor:pointer;line-height:1}
+  .close:hover{color:var(--txt)}
+  .pub-repo{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);
+    border-radius:11px;padding:9px 12px;margin-bottom:8px;font-size:13.5px}
+  .pub-repo code{color:var(--acc2);font-size:12.5px}
+  .pub-repo .grow{flex:1}
+
+  /* ---------- Toast ---------- */
+  #toasts{position:fixed;bottom:22px;right:22px;display:flex;flex-direction:column;gap:10px;z-index:200}
+  .toast{background:var(--card2);border:1px solid var(--line);border-left:4px solid var(--acc);
+    padding:13px 17px;border-radius:12px;font-size:14px;max-width:340px;
+    box-shadow:0 12px 34px rgba(0,0,0,.5);animation:in .25s ease}
+  .toast.ok{border-left-color:var(--ok)} .toast.err{border-left-color:var(--err)}
+  .toast.warn{border-left-color:var(--warn)}
+  @keyframes in{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:13px;text-align:center}
+  @media(max-width:640px){
+    .hd{flex-wrap:wrap}
+    .search{order:3;max-width:none;min-width:100%}
+    .hero{padding:36px 0 18px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <div class="logo"><span class="mark">📦</span> <span id="brandName">MisApps</span></div>
+    <div class="search">
+      <span>🔎</span>
+      <input id="q" type="search" placeholder="Buscar aplicación o archivo..." autocomplete="off">
+    </div>
+    <button class="btn btn-ghost" id="btnCfg">⚙️ Ajustes</button>
+    <button class="btn btn-acc" id="btnOwner">👤 Soy el dueño</button>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <h1>Tus aplicaciones y archivos<br><em>en un solo lugar</em></h1>
+  <p>Entra, mirá el catálogo y descargá lo que quieras con un clic. Sin registros, sin cuentas, sin esperar: la descarga empieza automáticamente.</p>
+  <div class="stats">
+    <div class="stat"><b id="stApps">0</b><small>Aplicaciones</small></div>
+    <div class="stat"><b id="stNew">0</b><small>Nuevas</small></div>
+    <div class="stat"><b id="stUpd">—</b><small>Actualizado</small></div>
+  </div>
+</section>
+
+<section class="sect wrap" style="padding-bottom:30px">
+  <div class="sect-hd">
+    <h2>📥 Aplicaciones</h2>
+    <span class="badge" id="srcBadge">cargando…</span>
+    <span class="badge" id="countBadge"></span>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="sect wrap" id="tempSect" hidden>
+  <div class="sect-hd">
+    <h2>📁 Archivos temporales</h2>
+    <span class="badge" id="tempBadge"></span>
+    <span class="badge">se borran a los 7 días</span>
+  </div>
+  <div class="grid" id="gridTemp"></div>
+</section>
+
+<footer>
+  <div class="wrap" id="footTxt">MisApps · Archivos en GitHub Releases · Descargas directas sin iniciar sesión</div>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<div class="ov" id="ov">
+  <div class="modal">
+    <button class="close" id="ovX">×</button>
+    <h3 id="mTitle">Panel del dueño</h3>
+    <p class="sub" id="mSub">Publicá como Releases de GitHub: aparecen solos en la página.</p>
+
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-t="publish">🚀 Publicar</button>
+      <button class="tab" data-t="links">🔗 Por enlace</button>
+      <button class="tab" data-t="settings">⚙️ Ajustes</button>
+    </div>
+
+    <!-- PUBLISH -->
+    <div data-p="publish">
+      <div class="hint">
+        <b>App permanente</b> (tiene repo propio o va al repo de archivos):
+        <ol>
+          <li>Abrí <b>Crear un Release ↗</b> en el repo que corresponda (abajo).</li>
+          <li>Tag de versión (ej: <code>v1.0.0</code>), nombre, descripción.</li>
+          <li>Arrastrá el archivo (<code>.exe</code>, <code>.zip</code>, <code>.apk</code>…) y publicá.</li>
+          <li>Aparece acá en segundos con su botón <b>Descargar</b>. ✅</li>
+        </ol>
+        Terminal: <code>gh release create v1.0.0 app.zip --repo DUEÑO/REPO --title "Mi App 1.0" --notes "..."</code>
+      </div>
+      <div class="hint">
+        <b>Archivo temporal</b> (pasar algo rápido entre dispositivos): pedile a la IA
+        <code>"subime X como temporal"</code> y ella crea el release <code>temp-...</code> y lo borra a los 7 días.
+      </div>
+      <div id="pubLinks"></div>
+      <div class="hint" id="pubWarn" hidden>
+        ⚠️ No hay repos configurados. Andá a <b>⚙️ Ajustes</b> y agregá al menos uno (<code>usuario/repo</code> por línea).
+      </div>
+    </div>
+
+    <!-- LINK -->
+    <div data-p="links" hidden>
+      <p class="sub">Apps que viven en otro lado: pegá el enlace directo y se agregan al catálogo local.</p>
+      <div class="field"><label>Enlace directo de descarga</label>
+        <input id="lnkUrl" placeholder="https://.../mi-app.zip"></div>
+      <div class="field"><label>Nombre visible</label><input id="lnkName" placeholder="Mi Aplicación"></div>
+      <div class="field"><label>Versión</label><input id="lnkVer" placeholder="1.0"></div>
+      <div class="field"><label>Descripción</label><textarea id="lnkDesc" rows="2"></textarea></div>
+      <button class="btn btn-acc" id="btnAddLink" style="width:100%;justify-content:center">➕ Agregar al catálogo</button>
+    </div>
+
+    <!-- SETTINGS -->
+    <div data-p="settings" hidden>
+      <div class="field"><label>Repos fuente (uno por línea: usuario/repo)</label>
+        <textarea id="cfgRepos" rows="3" placeholder="Owning01/mis-apps&#10;Owning01/Openher"></textarea></div>
+      <div class="field"><label>Nombre del sitio</label>
+        <input id="cfgName" placeholder="MisApps"></div>
+      <div class="field"><label>Token de GitHub (opcional, solo este navegador)</label>
+        <input id="cfgToken" type="password" placeholder="ghp_... (sube el límite de 60 a 5000 consultas/hora)"></div>
+      <div class="hint">
+        <b>Producción:</b> estos mismos valores viven en <code>config.json</code> junto a la página,
+        así todos los visitantes ven lo mismo. Lo que cambies acá solo afecta a tu navegador
+        (vista previa local).
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-acc" id="btnSaveCfg" style="flex:1;justify-content:center">💾 Guardar</button>
+        <button class="btn btn-ghost" id="btnExport" style="flex:1;justify-content:center">⬇️ Exportar apps.json</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<script>
+/* ================= CONFIG =================
+   Orden: ?repos=a/b,c/d (o ?owner=&repo=) > localStorage > config.json.
+   Releases con tag que empieza en "temp-" van a la sección Temporales. */
+const LS_CFG='misapps_cfg', LS_CAT='misapps_cat';
+const qs = new URLSearchParams(location.search);
+const site = { repos: [], siteName:'MisApps', token:'' };
+try{ Object.assign(site, JSON.parse(localStorage.getItem(LS_CFG)||'{}')) }catch{}
+if(!Array.isArray(site.repos)) site.repos = [];
+const saveSite = ()=>localStorage.setItem(LS_CFG, JSON.stringify(
+  {repos:site.repos, siteName:site.siteName, token:site.token}));
+
+let catalog = { apps: [] };   // releases de GitHub (todos los repos) + curadas (apps.json)
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const md5 = s => { let h=0; for(let i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i);h|=0} return Math.abs(h).toString(36) };
+const fmtDate = d => { try{ return new Date(d).toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'}) }catch{ return '—' } };
+const fmtBytes = n => n>1073741824 ? (n/1073741824).toFixed(2)+' GB' : n>1048576 ? (n/1048576).toFixed(1)+' MB' : Math.max(1,Math.round(n/1024))+' KB';
+const isFresh = d => { try{ return (Date.now()-new Date(d).getTime()) < 14*864e5 }catch{ return false } };
+const guessIcon = n => /\.apk$/i.test(n)?'🤖' : /\.(exe|msi)$/i.test(n)?'🪟'
+  : /\.(zip|rar|7z|tar|gz)$/i.test(n)?'🗜️' : /\.(dmg|pkg)$/i.test(n)?'🍎'
+  : /\.iso$/i.test(n)?'💿' : '📦';
+
+function toast(msg, type='ok'){
+  const t=document.createElement('div'); t.className='toast '+type; t.innerHTML=msg;
+  $('#toasts').append(t); setTimeout(()=>{t.style.opacity=0;t.style.transition='.4s';setTimeout(()=>t.remove(),400)},4200);
+}
+
+/* ================= CATALOG ================= */
+async function loadSiteConfig(){
+  // config.json de producción (define los repos para todos los visitantes)
+  try{
+    const r = await fetch('./config.json?t='+Date.now());
+    if(r.ok){
+      const j = await r.json();
+      const local = JSON.parse(localStorage.getItem(LS_CFG)||'{}');
+      if(j.repos && Array.isArray(j.repos) && !local.repos) site.repos = j.repos;
+      else if(j.owner && j.repo && !local.repos && !(local.owner||local.repo)) site.repos = [`${j.owner}/${j.repo}`];
+      if(j.siteName && !local.siteName) site.siteName = j.siteName;
+    }
+  }catch{}
+  // overrides por URL (para probar sin configurar nada)
+  if(qs.get('repos')) site.repos = qs.get('repos').split(',').map(s=>s.trim()).filter(Boolean);
+  else if(qs.get('owner') && qs.get('repo')) site.repos = [`${qs.get('owner')}/${qs.get('repo')}`];
+  document.title = site.siteName + ' — Tienda personal';
+  $('#brandName').textContent = site.siteName;
+}
+
+async function loadCatalog(){
+  const curated = await loadCurated();
+  let ghApps = [], okRepos = [], failRepos = [];
+  const results = await Promise.allSettled(site.repos.map(rr => loadReleases(rr)));
+  results.forEach((res, i) => {
+    if(res.status==='fulfilled'){ ghApps.push(...res.value); okRepos.push(site.repos[i]); }
+    else failRepos.push(site.repos[i]);
+  });
+  ghApps.sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+  failRepos.forEach(rr => toast(`GitHub (${rr}): no se pudo leer`, 'err'));
+  const src = [];
+  if(okRepos.length) src.push(okRepos.join(' + '));
+  if(!site.repos.length) src.push('sin repos configurados');
+  if(curated.length) src.push(curated.length+' curada(s)');
+  catalog = { updated: new Date().toISOString().slice(0,10), apps: [...ghApps, ...curated] };
+  localStorage.setItem(LS_CAT, JSON.stringify(catalog));
+  $('#srcBadge').textContent = 'fuente: ' + src.join(' + ');
+  render();
+}
+
+async function loadCurated(){
+  try{
+    const r = await fetch('./apps.json?t='+Date.now());
+    if(r.ok){ const j = await r.json(); if(Array.isArray(j.apps)) return j.apps.map(a=>({...a, local:true})) }
+  }catch{}
+  try{
+    const c = JSON.parse(localStorage.getItem(LS_CAT)||'{}');
+    if(Array.isArray(c.apps)) return c.apps.filter(a=>a.local);
+  }catch{}
+  return [];
+}
+
+async function loadReleases(rr){
+  const [owner, repo] = rr.split('/');
+  if(!owner || !repo) throw new Error('repo inválido: '+rr);
+  const headers = { 'Accept':'application/vnd.github+json' };
+  if(site.token) headers['Authorization'] = 'Bearer '+site.token;
+  const r = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases?per_page=50`, {headers});
+  if(r.status===404) throw new Error('repo no encontrado o privado');
+  if(r.status===403) throw new Error('límite de consultas (esperá 1 h o poné un token en Ajustes)');
+  if(!r.ok) throw new Error('GitHub respondió '+r.status);
+  const rels = await r.json();
+  return rels
+    .filter(x => !x.draft && (x.assets||[]).length>0)
+    .map(x => ({
+      id: 'gh-'+rr+'-'+x.id, gh: true, repo: rr,
+      isTemp: /^temp-/i.test(x.tag_name||''),
+      name: x.name || x.tag_name,
+      ver: (x.tag_name||'').replace(/^v/i,''),
+      desc: (x.body||'').slice(0,500),
+      date: x.published_at,
+      htmlUrl: x.html_url,
+      isNew: isFresh(x.published_at),
+      beta: !!x.prerelease,
+      icon: guessIcon(((x.assets||[])[0]||{}).name||''),
+      assets: (x.assets||[]).map(a=>({name:a.name, size:fmtBytes(a.size||0), url:a.browser_download_url, count:a.download_count||0}))
+    }));
+}
+
+function matches(a, q){
+  return !q || (a.name+' '+(a.ver||'')+' '+(a.desc||'')+' '+(a.repo||'')+' '+(a.assets||[]).map(x=>x.name).join(' ')).toLowerCase().includes(q);
+}
+
+function cardHTML(a){
+  const assets = a.assets||[];
+  const single = assets.length===1 ? assets[0] : null;
+  const assetRows = assets.length>1
+    ? `<div class="assets">${assets.map(x=>`
+        <div class="asset"><span class="nm" title="${esc(x.name)}">📄 ${esc(x.name)}</span>
+        <span class="sz">${esc(x.size)}</span>${x.count?`<span class="cnt">⬇ ${x.count}</span>`:''}
+        <a class="btn btn-dl btn-sm" href="${esc(x.url)}">⬇️</a></div>`).join('')}</div>`
+    : '';
+  const multi = assets.length>1;
+  const href = single ? single.url : (multi ? (a.htmlUrl||'#') : (a.url||'#'));
+  const canDl = href && href !== '#';
+  const mainBtn = !canDl
+    ? `<span class="btn btn-ghost" style="flex:1;justify-content:center;opacity:.55;cursor:default">Sin archivo adjunto</span>`
+    : multi
+      ? `<a class="btn btn-dl" href="${esc(href)}" target="_blank" rel="noopener">📦 Ver archivos</a>`
+      : `<a class="btn btn-dl" href="${esc(href)}" data-dl="${esc(a.id)}">⬇️ Descargar</a>`;
+  return `<article class="card${a.isTemp?' temp':''}">
+    <div class="ico">${a.icon && String(a.icon).startsWith('http')?`<img src="${esc(a.icon)}" alt="">`:esc(a.icon||'📦')}</div>
+    <div>
+      <h3>${esc(a.name)}</h3>
+      <div class="meta" style="margin-top:8px">
+        ${a.ver?`<span class="chip">v${esc(a.ver)}</span>`:''}
+        ${single?`<span class="chip">${esc(single.size)}</span>`:''}
+        ${assets.length>1?`<span class="chip">${assets.length} archivos</span>`:''}
+        ${a.date?`<span class="chip">${esc(fmtDate(a.date))}</span>`:''}
+        ${(a.tags||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join('')}
+        ${a.repo?`<span class="chip repo">${esc(a.repo)}</span>`:''}
+        ${a.isTemp?'<span class="chip temp">TEMPORAL</span>':''}
+        ${a.beta && !a.isTemp?'<span class="chip beta">BETA</span>':''}
+        ${a.isNew?'<span class="chip new">NUEVA</span>':''}
+      </div>
+    </div>
+    <p class="desc">${esc(a.desc||'')}</p>
+    ${assetRows}
+    <div class="row">
+      ${mainBtn}
+      ${!multi && a.gh && a.htmlUrl ? `<a class="gh-link" href="${esc(a.htmlUrl)}" target="_blank" rel="noopener" title="Ver release en GitHub">GitHub ↗</a>` : ''}
+      ${a.local ? `<button class="del" data-del="${esc(a.id)}" title="Quitar del catálogo">🗑️</button>` : ''}
+    </div>
+  </article>`;
+}
+
+function render(){
+  const q = $('#q').value.trim().toLowerCase();
+  const list = catalog.apps.filter(a => matches(a, q));
+  const apps = list.filter(a => !a.isTemp);
+  const temps = list.filter(a => a.isTemp);
+
+  $('#stApps').textContent = catalog.apps.filter(a=>!a.isTemp).length;
+  $('#stNew').textContent = catalog.apps.filter(a=>a.isNew).length;
+  const dates = catalog.apps.map(a=>a.date).filter(Boolean).sort().reverse();
+  $('#stUpd').textContent = dates.length ? fmtDate(dates[0]) : '—';
+  $('#countBadge').textContent = apps.length + (apps.length===1?' resultado':' resultados');
+  $('#grid').innerHTML = apps.length ? apps.map(cardHTML).join('')
+    : `<div class="empty"><b>${!site.repos.length?'Falta configurar los repos':'Sin resultados'}</b>
+       ${!site.repos.length
+         ? 'El dueño todavía no conectó ningún repositorio. Abrí ⚙️ Ajustes y agregá usuario/repo por línea.'
+         : (catalog.apps.length ? 'Probá con otro término.' : 'Todavía no hay Releases con archivos en los repos.') }</div>`;
+
+  $('#tempSect').hidden = !temps.length && !q;
+  $('#tempBadge').textContent = temps.length + (temps.length===1?' archivo':' archivos');
+  $('#gridTemp').innerHTML = temps.length ? temps.map(cardHTML).join('')
+    : `<div class="empty"><b>Sin archivos temporales</b>Pedile a la IA "subime X como temporal".</div>`;
+}
+
+document.addEventListener('click', e=>{
+  const del = e.target.closest('[data-del]');
+  if(del){
+    if(!confirm('¿Quitar esta app del catálogo? (el archivo no se borra)')) return;
+    catalog.apps = catalog.apps.filter(a=>a.id!==del.dataset.del);
+    localStorage.setItem(LS_CAT, JSON.stringify(catalog));
+    render(); toast('Quitada del catálogo');
+    return;
+  }
+  const dl = e.target.closest('[data-dl]');
+  if(dl){
+    const a = catalog.apps.find(x=>x.id===dl.dataset.dl);
+    if(a){ a.isNew=false; localStorage.setItem(LS_CAT, JSON.stringify(catalog)); }
+  }
+});
+$('#q').addEventListener('input', render);
+
+/* ================= LINK FLOW (curadas) ================= */
+function addFromLink(){
+  const url = $('#lnkUrl').value.trim();
+  if(!/^https?:\/\/.+\..+/.test(url)){ toast('Pegá un enlace válido (http…)','err'); return }
+  const name = $('#lnkName').value.trim() || 'Aplicación';
+  catalog.apps.push({
+    id:'local-'+md5(url+Date.now()), local:true, url,
+    name, ver:$('#lnkVer').value.trim(), desc:$('#lnkDesc').value.trim(),
+    icon:guessIcon(url), tags:['LINK'], isNew:true, date:new Date().toISOString(),
+    assets:[{name:url.split('/').pop()||'archivo', size:'—', url, count:0}]
+  });
+  catalog.updated = new Date().toISOString().slice(0,10);
+  localStorage.setItem(LS_CAT, JSON.stringify(catalog));
+  $('#lnkUrl').value=$('#lnkName').value=$('#lnkVer').value=$('#lnkDesc').value='';
+  render();
+  toast('Agregada al catálogo ✅ (guardada en este navegador; exportá apps.json para publicarla)');
+}
+
+/* ================= MODAL / UI ================= */
+function openModal(tab){
+  $('#ov').classList.add('on');
+  refreshPublishLinks();
+  if(tab) switchTab(tab);
+}
+function closeModal(){ $('#ov').classList.remove('on') }
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on', b.dataset.t===t));
+  document.querySelectorAll('[data-p]').forEach(p=>p.hidden = p.dataset.p!==t);
+  $('#mTitle').textContent = {publish:'🚀 Publicar aplicación',links:'🔗 Agregar por enlace',settings:'⚙️ Ajustes'}[t];
+}
+function refreshPublishLinks(){
+  const box = $('#pubLinks');
+  $('#pubWarn').hidden = !!site.repos.length;
+  box.innerHTML = site.repos.map(rr =>
+    `<div class="pub-repo"><code>${esc(rr)}</code><span class="grow"></span>
+     <a class="btn btn-acc btn-sm" href="https://github.com/${esc(rr)}/releases/new" target="_blank" rel="noopener">Crear un Release ↗</a></div>`
+  ).join('');
+}
+$('#btnOwner').onclick = ()=>openModal('publish');
+$('#btnCfg').onclick = ()=>{ fillCfg(); openModal('settings') };
+$('#ovX').onclick = closeModal;
+$('#ov').addEventListener('click', e=>{ if(e.target.id==='ov') closeModal() });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal() });
+$('#tabs').addEventListener('click', e=>{ if(e.target.dataset.t) switchTab(e.target.dataset.t) });
+$('#btnAddLink').onclick = addFromLink;
+
+function fillCfg(){
+  $('#cfgRepos').value = site.repos.join('\n');
+  $('#cfgName').value = site.siteName; $('#cfgToken').value = site.token;
+}
+$('#btnSaveCfg').onclick = ()=>{
+  site.repos = $('#cfgRepos').value.split('\n').map(s=>s.trim()).filter(s=>/^[^\/\s]+\/[^\/\s]+$/.test(s));
+  site.siteName = $('#cfgName').value.trim()||'MisApps'; site.token = $('#cfgToken').value.trim();
+  saveSite(); closeModal(); toast('Ajustes guardados ✅'); loadCatalog();
+};
+$('#btnExport').onclick = ()=>{
+  const curated = { updated: catalog.updated, apps: catalog.apps.filter(a=>a.local).map(({local,...r})=>r) };
+  const blob = new Blob([JSON.stringify(curated,null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='apps.json'; a.click();
+  toast('Subí ese apps.json al repo y hacé deploy para publicarlo');
+};
+
+(async function init(){
+  await loadSiteConfig();
+  $('#footTxt').textContent = `${site.siteName} · Archivos en GitHub Releases · Descargas directas sin iniciar sesión`;
+  await loadCatalog();
+})();
+</script>
+</body>
+</html>

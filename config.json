@@ -1,0 +1,8 @@
+{
+  "_comment": "Repos que alimentan la página (Releases con archivos). Tags temp-* van a Temporales. Cambiar y redeployar.",
+  "repos": [
+    "Owning01/mis-apps",
+    "Owning01/Openher"
+  ],
+  "siteName": "MisApps"
+}
