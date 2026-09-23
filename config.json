@@ -8,7 +8,7 @@
   "categories": {
     "OpenHer": ["openher/*"],
     "VistaMD": ["mis-apps/vistamd-*"],
-    "Bloqueador": ["mis-apps/bloqueador-*"],
+    "Cine Gbro": ["mis-apps/cinegbro-*"],
     "Móviles": ["*.apk"],
     "Escritorio": ["*.exe", "*.msi", "*.dmg", "*.pkg"]
   }

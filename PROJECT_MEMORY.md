@@ -148,3 +148,16 @@
 - Corrección: la skill no tenía frontmatter YAML (name/description), formato obligatorio en .agents/skills. Reescrita según skill-creator: description pushy con frases de disparo.
 - Tests siguiendo SOLO la skill: temporal (temp-skilltest, OK antes) + permanente (skilltest-v0.0.1: aparece en vivo con link directo, categoría Otras como anticipa la skill). Limpieza OK.
 - La skill quedó registrada en el sistema (visible para agentes).
+
+## 2026-09-23 — Bloqueador App → Cine Gbro (marca + ícono) y release nueva
+- La app Flutter `bloqueador-app` pasó a llamarse **Cine Gbro**: label Android,
+  título de la app y barra principal; ícono nuevo generado con
+  `flutter_launcher_icons` desde `Gemini_Generated_Image_*.jpg` (adaptativo = emblema
+  del pulpo recortado sin texto, fondo `#70010A`; legacy = logo completo con texto).
+- Release permanente nueva: `cinegbro-v1.0.0` (asset `cine-gbro-v1.0.0.apk`, 47.5 MB,
+  build release ofuscado). Se borró la anterior `bloqueador-v1.0.0` + su tag.
+- `config.json`: categoría "Bloqueador" → "Cine Gbro" con patrón `mis-apps/cinegbro-*`
+  (antes de "Móviles" para que no caiga en `*.apk`).
+- Trampa: el asset anterior se llamaba `app-release.apk` (nombre genérico); ahora se
+  copia a un nombre versionado antes de subir para que el link de descarga sea claro.
+- Evidencia: `gh release view cinegbro-v1.0.0`, `flutter analyze` limpio, test OK.

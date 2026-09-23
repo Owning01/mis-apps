@@ -7,7 +7,7 @@ App web estática (sin build, sin backend) que arma sola su catálogo desde los
 
 ## Repos (modelo corregido 2026-09-23)
 - **`Owning01/mis-apps`** (nuevo, creado por el agente): código de la página + releases
-  de apps SIN repo propio (vistamd, bloqueador, temporales `temp-*`).
+  de apps SIN repo propio (vistamd, cinegbro, temporales `temp-*`).
 - **`Owning01/Openher`** (existente, solo lectura): sus releases también salen en la página.
 - Regla: app con repo propio → release en SU repo (+ agregarlo a `config.json`);
   app suelta → release en `mis-apps`.
