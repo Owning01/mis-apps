@@ -1,25 +1,21 @@
-# MisApps — tienda personal de aplicaciones
+# MisApps — tienda personal de aplicaciones y archivos
 
-Código en **un solo repo de GitHub** · página servida por **Firebase Hosting** ·
-archivos descargables en **GitHub Releases** (descarga directa, sin login).
+Código en **`Owning01/mis-apps`** · página servida por **Firebase Hosting** ·
+archivos en **GitHub Releases** (descarga directa, sin login).
 
 ## Arquitectura
 
 ```
-┌──────────────┐   push a main    ┌──────────────────┐
-│  GitHub repo │ ───────────────▶ │ Firebase Hosting │ ◀── visitantes (página)
-│  (este código)│  (deploy auto   │  tu-sitio.web.app │
-└──────┬───────┘   vía Action)    └──────────────────┘
-       │ Releases con .exe/.zip/.apk
-       ▼
-┌──────────────┐   click Descargar (directo, sin login)
-│ gh release   │ ────────────────────────────────────▶ visitantes (archivos)
-└──────────────┘
+Repos fuente (la página lee los Releases de todos):
+├── Owning01/mis-apps   ← código de ESTA página + releases de apps sin repo propio
+└── Owning01/Openher    ← releases de OpenHer (solo lectura, no se toca)
+
+Publicar = crear un Release con el archivo adjunto → aparece solo en la página.
+Tags temp-* → sección 📁 Temporales (se borran a los 7 días).
 ```
 
-La página **no tiene backend**: al abrirse lee los Releases del repo vía API pública
-de GitHub y arma el catálogo sola. Publicar una app = crear un Release con el archivo
-adjunto. Sin tocar código, sin redeploy.
+La página **no tiene backend**: al abrirse lee los Releases vía API pública
+de GitHub y arma el catálogo sola. Sin tocar código, sin redeploy.
 
 ## Puesta en marcha local
 
@@ -30,31 +26,33 @@ python -m http.server 8010
 # (el puerto 8000 está ocupado en esta máquina por otro servidor)
 ```
 
-Vista previa con cualquier repo público (útil para probar sin configurar nada):
+Vista previa con otros repos (útil para probar sin configurar nada):
 
 ```
-http://localhost:8010/?owner=cli&repo=cli
+http://localhost:8010/?repos=cli/cli,octocat/Hello-World
 ```
 
-## Conectar tu repo (2 lugares)
+## Conectar repos (2 lugares)
 
-1. **`config.json`** → `owner`, `repo`, `siteName`. Es lo que ven todos los visitantes
-   (producción). Cambiar + deploy.
-2. **⚙️ Ajustes en la página** → vista previa solo en tu navegador (no afecta a otros).
+1. **`config.json`** → lista `repos` + `siteName`. Es lo que ven todos los visitantes
+   (producción). Cambiar + commit + push (deploy a Firebase automático).
+2. **⚙️ Ajustes en la página** → vista previa solo en tu navegador.
 
-## Cómo publicar una app
+## Cómo publicar
 
-1. En GitHub: repo → **Releases → Draft a new release**.
-2. Tag (ej `v1.0.0`), título, descripción y **adjuntar el archivo** (.exe, .zip, .apk…).
-3. Publicar. La página lo muestra en segundos con botón **Descargar** directo:
-   `https://github.com/<owner>/<repo>/releases/download/<tag>/<archivo>`
+**No hacerlo a mano**: pedirle a cualquier IA *"subime X a la página"* — el skill
+`subir-a-misapps` (`~/.agents/skills/`) le enseña el procedimiento:
+- App permanente sin repo → release en `Owning01/mis-apps`, tag `<app>-vX.Y.Z`.
+- App con repo propio → release en su repo (agregarlo a `config.json` si es nuevo).
+- Temporal → release `temp-<slug>-AAAAMMDD` con `--prerelease` (sale en Temporales).
+- Limpieza: borrar `temp-*` de +7 días (release + tag).
 
-Alternativa por terminal: `gh release create v1.0.0 app.zip --title "Mi App 1.0" --notes "..."`
+Manual (si hace falta): `gh release create v1.0.0 app.zip --repo DUEÑO/REPO --title "..." --notes "..."`
 
 ## Deploy a Firebase Hosting
 
 Requisitos: proyecto en [console.firebase.google.com](https://console.firebase.google.com)
-(crear uno es gratis) y estar logueado:
+y estar logueado. **Falta el ID del proyecto** (bloquea el deploy).
 
 ```powershell
 cd G:\proyectos\mi-tienda-apps
@@ -64,16 +62,15 @@ firebase deploy --only hosting
 ```
 
 Deploy automático en cada push a `main` (opcional, recomendado):
-1. Repo → Settings → Secrets → agregar `FIREBASE_SERVICE_ACCOUNT`
-   (contenido: `firebase init hosting:github` te da el JSON, o generarlo en
-   IAM de Google Cloud con rol *Firebase Hosting Admin*).
-2. Repo → Settings → Variables → agregar `FIREBASE_PROJECT_ID`.
-3. Listo: el workflow `.github/workflows/firebase-hosting.yml` despliega solo.
+1. Repo → Settings → Secrets → `FIREBASE_SERVICE_ACCOUNT` (rol *Firebase Hosting Admin*).
+2. Repo → Settings → Variables → `FIREBASE_PROJECT_ID`.
+3. El workflow `.github/workflows/firebase-hosting.yml` despliega solo.
 
 ## Notas y límites
 
-- API de GitHub sin autenticar: **60 consultas/hora por IP** (alcanza para un catálogo;
-  si se agota, la página muestra error y usa el caché). Con token en ⚙️ Ajustes: 5000/h.
-- Releases tipo **draft** o sin archivos adjuntos no aparecen.
-- El badge "NUEVA" = publicado en los últimos 14 días; "BETA" = prerelease.
-- Los links `releases/download/...` descargan directo, **sin cuenta Google ni GitHub**.
+- API de GitHub sin autenticar: **60 consultas/hora por IP** (la página usa `no-store`;
+  si se agota, muestra error y usa el caché). Con token en ⚙️ Ajustes: 5000/h.
+- Releases **draft** o sin archivos adjuntos no aparecen.
+- "NUEVA" = publicado en los últimos 14 días; "BETA" = prerelease no-temporal.
+- Los links `releases/download/...` descargan directo, **sin cuenta**.
+- Máximo 2 GB por archivo en Releases.
