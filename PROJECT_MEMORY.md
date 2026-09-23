@@ -137,3 +137,9 @@
 - Pedido: ver páginas en listado, no en columnas.
 - Hecho: filas de ancho completo (logo 44px + nombre + dominio + flecha), toda la fila es el enlace (elemento <a>, sin stretched-link).
 - Evidencia: commit 82c40a0, preview-pages-list.png, 0 errores, 14 filas verificadas en local; deploy hecho, falta verificación en vivo.
+
+## 2026-09-23 — Instrucciones de subida en el repo + 2 cuentas
+- Duda del usuario: cómo sabe el agente dónde/cómo subir con 2 cuentas GitHub.
+- Hecho: SUBIR-APPS.md en Owning01/mis-apps (cualquier agente lo lee abriendo el repo, aunque no tenga la skill global); skill con paso 1 de CUENTA (verificar acceso con gh repo view, switch con gh auth switch, frenar sin acceso).
+- Verificado: solo Owning01 autenticado aquí (GH_TOKEN); repo accesible. La 2da cuenta aún no tiene login en esta PC.
+- Evidencia: commit pendiente.
