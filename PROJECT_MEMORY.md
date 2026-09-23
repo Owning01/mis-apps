@@ -143,3 +143,8 @@
 - Hecho: SUBIR-APPS.md en Owning01/mis-apps (cualquier agente lo lee abriendo el repo, aunque no tenga la skill global); skill con paso 1 de CUENTA (verificar acceso con gh repo view, switch con gh auth switch, frenar sin acceso).
 - Verificado: solo Owning01 autenticado aquí (GH_TOKEN); repo accesible. La 2da cuenta aún no tiene login en esta PC.
 - Evidencia: commit pendiente.
+
+## 2026-09-23 — Skill con frontmatter (skill-creator) + tests
+- Corrección: la skill no tenía frontmatter YAML (name/description), formato obligatorio en .agents/skills. Reescrita según skill-creator: description pushy con frases de disparo.
+- Tests siguiendo SOLO la skill: temporal (temp-skilltest, OK antes) + permanente (skilltest-v0.0.1: aparece en vivo con link directo, categoría Otras como anticipa la skill). Limpieza OK.
+- La skill quedó registrada en el sistema (visible para agentes).
