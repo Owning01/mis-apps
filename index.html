@@ -5,8 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apps de Octa - Tienda personal</title>
 <meta name="description" content="Tus aplicaciones y archivos, listos para descargar. Directo desde GitHub Releases, sin cuentas.">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <link rel="icon" href="./logo.jpg" type="image/jpeg">
-<link rel="apple-touch-icon" href="./logo.jpg">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<meta name="theme-color" content="#0B1411">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Apps de Octa">
+<link rel="manifest" href="./manifest.json">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -624,6 +631,13 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && $('#ov').clas
   await Promise.all([loadCatalog(), loadPages()]);
   render();
 })();
+
+/* PWA: registra el service worker (app instalable + shell offline). */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
