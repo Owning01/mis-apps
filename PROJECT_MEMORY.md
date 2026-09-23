@@ -97,3 +97,10 @@
 - Trampa: justo tras el deploy el vivo dio 0 páginas (CDN aún propagando `pages.json`);
   relectura posterior: 22/22. `pages.json` agregado al no-cache de firebase.json.
 - Evidencia: commit `175aab8`, `preview-pages.png`, 0 errores de consola.
+
+## 2026-09-23 — Páginas: cards clicables, 8 sitios quitados
+- Cards sin botón: toda la card es el enlace (stretched-link con aria-label, foco
+  visible, abre en pestaña nueva). Verificado 14/14.
+- Quitados de `pages.json`: FamilySafety, ADCC Privacidad, ADCC Biometría, Botvent,
+  Ventasym, Smart Caja, ADCC Cobranzas, DB Fácil. Quedan 14 sitios.
+- Evidencia: commit `ee55d8f`, `preview-pages2.png`, 0 errores, verificado en vivo.
