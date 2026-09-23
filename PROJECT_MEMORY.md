@@ -86,3 +86,14 @@
   Referrer-Policy, Permissions-Policy, HSTS), fix XSS reflejado en toast vía `?repos=`,
   repo limpio de secretos, prueba de ataque con payload inerte. Commit `de2644c`.
 - Resta: secrets del workflow para deploy automático.
+
+## 2026-09-23 — Sección Páginas (sitios Firebase)
+- Pedido: juntar todas las apps con URL de Firebase en una parte "Páginas" con logo.
+- Búsqueda: 26 `.firebaserc` en la PC → 22 sitios vivos verificados (200 + título +
+  favicon extraídos). Excluidos: biblia1960valera, instrumenfull, vallesito (no
+  responden), appsdeocta (la propia tienda), SDKs/caches/node_modules.
+- Hecho: `pages.json` (nombre, url, icon absoluto) + tab Páginas con cards (favicon
+  a la izquierda, fallback a avatar-letra si falla, botón Abrir en pestaña nueva).
+- Trampa: justo tras el deploy el vivo dio 0 páginas (CDN aún propagando `pages.json`);
+  relectura posterior: 22/22. `pages.json` agregado al no-cache de firebase.json.
+- Evidencia: commit `175aab8`, `preview-pages.png`, 0 errores de consola.
