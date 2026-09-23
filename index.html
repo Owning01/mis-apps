@@ -43,8 +43,6 @@
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
   .logo img.mark{width:42px;height:42px;border-radius:12px;object-fit:cover;
     border:1px solid var(--line);flex-shrink:0}
-  .hero-logo{width:120px;height:120px;border-radius:30px;object-fit:cover;
-    border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.45);margin-bottom:20px}
   .grow{flex:1}
   .search{position:relative;min-width:220px;max-width:380px;flex:1}
   .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--mut)}
@@ -68,23 +66,10 @@
   .btn-acc:hover{filter:brightness(1.07)}
   .btn-sm{padding:10px 14px;font-size:13px;border-radius:10px}
 
-  /* ---------- Hero ---------- */
-  .hero{padding:56px 0 8px}
-  .hero .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;
-    color:var(--acc);border:1px solid var(--line);background:var(--bg2);
-    padding:6px 14px;border-radius:999px;margin-bottom:18px}
-  .hero .kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--acc)}
-  .hero h1{font-size:clamp(30px,5vw,48px);line-height:1.08}
-  .hero h1 em{font-style:normal;color:var(--warm)}
-  .hero p{color:var(--mut);margin-top:14px;font-size:16px;max-width:600px;line-height:1.6}
-  .stats{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 22px;min-width:140px}
-  .stat b{display:block;font-size:24px;color:var(--txt)}
-  .stat small{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
-
-  /* ---------- Tabs ---------- */
+  /* ---------- Tabs (en header) ---------- */
   .tabsbar{display:flex;gap:6px;background:var(--bg2);border:1px solid var(--line);
-    border-radius:14px;padding:5px;margin:30px 0 6px;max-width:720px}
+    border-radius:14px;padding:5px;margin:0 0 12px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+  .tabsbar::-webkit-scrollbar{display:none}
   .tabbtn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
     padding:11px;border-radius:10px;font-size:14px;font-weight:600;min-height:44px;
     color:var(--mut);cursor:pointer;border:0;background:transparent;font-family:inherit;
@@ -95,7 +80,8 @@
   .tabbtn[aria-selected="true"] .n{background:rgba(6,40,28,.18)}
 
   /* ---------- Filtros categoría ---------- */
-  .catchips{display:flex;gap:8px;margin:16px 0 20px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+  .catchips{display:flex;gap:8px;margin:16px 0 20px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;-ms-overflow-style:none}
+  .catchips::-webkit-scrollbar{display:none}
   .catchip{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
     background:var(--bg2);color:var(--mut);border-radius:999px;padding:9px 15px;min-height:44px;
     font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .18s,color .18s}
@@ -110,7 +96,7 @@
   .sect-hd h2{font-size:20px}
   .badge{font-size:12px;color:var(--mut);background:var(--bg2);border:1px solid var(--line);
     padding:4px 10px;border-radius:999px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr));gap:16px}
   .card{background:var(--card);border:1px solid var(--line);
     border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:14px;
     transition:transform .2s var(--ease),border-color .2s,box-shadow .2s;position:relative}
@@ -173,10 +159,20 @@
 
   footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:13px;text-align:center}
   @media(max-width:640px){
-    .hd{flex-wrap:wrap}
-    .search{order:3;max-width:none;min-width:100%}
-    .hero{padding:38px 0 4px}
+    .hd{flex-wrap:wrap;gap:10px;padding:12px 0 10px}
+    .logo{font-size:17px}
+    .logo img.mark{width:36px;height:36px;border-radius:10px}
+    .search{order:3;min-width:100%}
+    .tabsbar{margin-bottom:10px}
+    .tabbtn{flex:1 0 auto;white-space:nowrap;font-size:13px;padding:11px 14px}
+    .sect{padding:6px 0 56px}
+    .sect-hd h2{font-size:18px}
+    .card{padding:16px}
     .card .row{flex-wrap:wrap}
+    .asset .cnt{display:none}
+    .ov{padding:10px;place-items:end center}
+    .modal{padding:20px;border-radius:18px 18px 0 0;max-height:92vh;max-width:100%}
+    .catchips{margin:12px 0 14px}
   }
   @media (prefers-reduced-motion: reduce){
     *,::before,::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
@@ -194,27 +190,17 @@
       <input id="q" type="search" placeholder="Buscar aplicación o archivo..." autocomplete="off" aria-label="Buscar aplicación o archivo">
     </div>
   </div>
+  <div class="wrap">
+    <nav class="tabsbar" role="tablist" aria-label="Secciones">
+      <button class="tabbtn" role="tab" id="tabApps" aria-selected="true" aria-controls="paneApps" data-view="apps"><span data-ico="box"></span>Aplicaciones <span class="n" id="nApps">0</span></button>
+      <button class="tabbtn" role="tab" id="tabTemp" aria-selected="false" aria-controls="paneTemp" data-view="temp" tabindex="-1"><span data-ico="folder"></span>Temporales <span class="n" id="nTemp">0</span></button>
+      <button class="tabbtn" role="tab" id="tabPages" aria-selected="false" aria-controls="panePages" data-view="pages" tabindex="-1"><span data-ico="globe"></span>Páginas <span class="n" id="nPages">0</span></button>
+    </nav>
+  </div>
 </header>
 
-<main>
-<section class="hero wrap">
-  <img class="hero-logo" src="./logo.jpg" alt="Logo Apps de Octa" width="120" height="120" fetchpriority="high">
-  <br><span class="kicker"><span class="dot"></span><span id="kickTxt">Catálogo en vivo</span></span>
-  <h1>Tus apps y tus archivos,<br><em>listos para descargar.</em></h1>
-  <p>Tocá una aplicación para ver su historial de versiones, o descargá la última con un clic. Sin cuentas, sin esperas.</p>
-  <div class="stats">
-    <div class="stat"><b id="stApps">0</b><small>Aplicaciones</small></div>
-    <div class="stat"><b id="stTemp">0</b><small>Temporales</small></div>
-    <div class="stat"><b id="stUpd">—</b><small>Actualizado</small></div>
-  </div>
-</section>
-
+<main style="padding-top:20px">
 <div class="wrap">
-  <div class="tabsbar" role="tablist" aria-label="Secciones">
-    <button class="tabbtn" role="tab" id="tabApps" aria-selected="true" aria-controls="paneApps" data-view="apps"><span data-ico="box"></span>Aplicaciones <span class="n" id="nApps">0</span></button>
-    <button class="tabbtn" role="tab" id="tabTemp" aria-selected="false" aria-controls="paneTemp" data-view="temp" tabindex="-1"><span data-ico="folder"></span>Temporales <span class="n" id="nTemp">0</span></button>
-    <button class="tabbtn" role="tab" id="tabPages" aria-selected="false" aria-controls="panePages" data-view="pages" tabindex="-1"><span data-ico="globe"></span>Páginas <span class="n" id="nPages">0</span></button>
-  </div>
   <div class="catchips" id="catChips" role="group" aria-label="Filtrar por categoría"></div>
 </div>
 
@@ -339,7 +325,6 @@ async function loadSiteConfig(){
   else if(qs.get('owner') && qs.get('repo')) site.repos = [`${qs.get('owner')}/${qs.get('repo')}`];
   document.title = site.siteName + ' — Tienda personal';
   $('#brandName').textContent = site.siteName;
-  $('#kickTxt').textContent = site.repos.length ? `En vivo · ${site.repos.length} repo${site.repos.length>1?'s':''}` : 'Catálogo en vivo';
   $('#footTxt').textContent = `${site.siteName} · Archivos en GitHub Releases · Descargas directas sin iniciar sesión`;
 }
 
@@ -503,10 +488,6 @@ function render(){
   const apps = groups.filter(g => !g.isTemp && matches(g,q));
   const temps = groups.filter(g => g.isTemp && matches(g,q));
   const pgs = pages.filter(p => !q || (p.name+' '+p.url).toLowerCase().includes(q));
-  $('#stApps').textContent = groups.filter(g=>!g.isTemp).length;
-  $('#stTemp').textContent = groups.filter(g=>g.isTemp).length;
-  const dates = groups.map(g=>g.date).filter(Boolean).sort().reverse();
-  $('#stUpd').textContent = dates.length ? fmtDate(dates[0]) : '—';
   $('#nApps').textContent = groups.filter(g=>!g.isTemp).length;
   $('#nTemp').textContent = groups.filter(g=>g.isTemp).length;
   $('#nPages').textContent = pages.length;
