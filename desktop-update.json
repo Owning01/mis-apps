@@ -2,7 +2,7 @@
   "name": "LeonSys POS (escritorio)",
   "version": "1.1.3",
   "versionCode": 10103,
-  "publishedAt": "2026-09-27T16:49:10.879Z",
+  "publishedAt": "2026-09-27T17:12:22.694Z",
   "notes": "Offline real: Firestore con caché local, nada se pierde sin wifi.",
   "files": {
     "embedded-assets.js": {
