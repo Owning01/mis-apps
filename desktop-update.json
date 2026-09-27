@@ -1,22 +1,22 @@
 {
   "name": "LeonSys POS (escritorio)",
-  "version": "1.1.8",
-  "versionCode": 10108,
-  "publishedAt": "2026-09-27T21:15:27.896Z",
-  "notes": "La busqueda del POS ya no recalcula los 3.623 productos en cada tecla: en una PC lenta tardaba mas de un segundo por letra.",
+  "version": "1.1.9",
+  "versionCode": 10109,
+  "publishedAt": "2026-09-27T21:51:21.420Z",
+  "notes": "Todo producto se puede vender aunque tenga stock 0 (el local no carga stock). Antes la venta se rechazaba entera y caia en la bandeja; ahora no se toca el stock cuando no hay control de stock. Corrige simbolos rotos en la grilla.",
   "files": {
     "embedded-assets.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.8/embedded-assets.js",
-      "sha256": "b97a55515fcf22321d8c743088f3a413279e1dd42f8446341344d0e172694a9f",
-      "size": 5008369
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.9/embedded-assets.js",
+      "sha256": "427fdac87efd616449873b99aa70c35892cbe77d96daf4d37147f73560fb9a6f",
+      "size": 5008176
     },
     "LeonSysCore.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.8/LeonSysCore.js",
-      "sha256": "a751f71dbb65fb68453802cf7217ef3a352075050b9af79d16504bf726a70929",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.9/LeonSysCore.js",
+      "sha256": "af90305378fde32942f84d23002c6615df6a7165bbd0cd465b2ff3d46b244d7e",
       "size": 185706
     },
     "LeonSys.exe": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.8/LeonSys.exe",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.9/LeonSys.exe",
       "sha256": "31d4a218cb746baeef9785391e9a24421337d22c12a3419987f59203a0e0ae04",
       "size": 130560
     }
