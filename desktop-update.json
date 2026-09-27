@@ -1,0 +1,24 @@
+{
+  "name": "LeonSys POS (escritorio)",
+  "version": "1.1.2",
+  "versionCode": 10102,
+  "publishedAt": "2026-09-27T02:32:39.221Z",
+  "notes": "Autoupdate: el POS revisa solo cada 6 h, descarga la version nueva con verificacion sha256 y avisa con un banner para instalar. Sin internet no cambia nada.",
+  "files": {
+    "embedded-assets.js": {
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.2/embedded-assets.js",
+      "sha256": "80a3000e0a86f72ddac273ba9426eccebb812428fb156e066a938e0b5c7b6878",
+      "size": 4598436
+    },
+    "LeonSysCore.js": {
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.2/LeonSysCore.js",
+      "sha256": "e59e1025d6cb5c4e13c63a1ebf0a1a78835081a6fd8b204c14088c73ebf38b7b",
+      "size": 185706
+    },
+    "LeonSys.exe": {
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.2/LeonSys.exe",
+      "sha256": "31d4a218cb746baeef9785391e9a24421337d22c12a3419987f59203a0e0ae04",
+      "size": 130560
+    }
+  }
+}
