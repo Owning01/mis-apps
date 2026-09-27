@@ -1,22 +1,22 @@
 {
   "name": "LeonSys POS (escritorio)",
-  "version": "1.1.6",
-  "versionCode": 10106,
-  "publishedAt": "2026-09-27T19:35:38.522Z",
-  "notes": "Avisos dentro de la app (en el celu un alert del sistema tapaba la pantalla), estetica mobile completa y POS mas liviano: ya no relee los 3.623 productos en cada venta.",
+  "version": "1.1.7",
+  "versionCode": 10107,
+  "publishedAt": "2026-09-27T19:56:01.597Z",
+  "notes": "Estetica mobile (barra de pestanas, carrito en hoja, total al alcance del dedo), avisos dentro de la app, sidebar sin rectangulos, y POS mas liviano: ya no relee los 3.623 productos en cada venta. Corrige textos con acentos.",
   "files": {
     "embedded-assets.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.6/embedded-assets.js",
-      "sha256": "8103e480156ee97528d5a0272f217678fff77f2b4e0a286dcc172044e78da301",
-      "size": 5008178
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.7/embedded-assets.js",
+      "sha256": "072126ac4a76da5619e3d6241497f181026e963747364dd3668f129f58053fcf",
+      "size": 5008054
     },
     "LeonSysCore.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.6/LeonSysCore.js",
-      "sha256": "4e2175f6b07fa307c0c355d371330510ae1d717dc1e3deb62b3e6cb87ef55ea2",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.7/LeonSysCore.js",
+      "sha256": "e531a46f019d146277e5fefbab1acc44a28fbf0aa30be4acccebeb68ea495427",
       "size": 185706
     },
     "LeonSys.exe": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.6/LeonSys.exe",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.7/LeonSys.exe",
       "sha256": "31d4a218cb746baeef9785391e9a24421337d22c12a3419987f59203a0e0ae04",
       "size": 130560
     }
