@@ -3,7 +3,7 @@
   "version": "1.1.11",
   "versionCode": 10111,
   "publishedAt": "2026-09-28T04:59:52.322Z",
-  "notes": "Un corte de internet ya no borra la venta en curso ni el catalogo (se|ISBN) el chequeo de licencia con respuesta de error). El auto-updatedor ya no se cuelga si se corta la conexion a media descarga. Pagar a un proveedor funciona (la ruta no existia). La pantalla de Auditoria muestra los registros y el boton de integridad ya no dice ALTERADA cuando la cadena esta bien. Restaurar un respaldo va troceado y dice cuantos registros entraron de verdad. Anular una venta ya no pierde mercaderia del inventario. El carrito se guarda en el equipo: un F5 o un cuelgue ya no tira la venta armada. Las lineas, el total y lo que se guarda coinciden siempre.",
+  "notes": "Un corte de internet ya no borra la venta en curso ni el catalogo (el chequeo de licencia con respuesta de error ya no se confunde con desactivado). El auto-updatedor ya no se cuelga si se corta la conexion a media descarga. Pagar a un proveedor funciona (la ruta no existia). La pantalla de Auditoria muestra los registros y el boton de integridad ya no dice ALTERADA cuando la cadena esta bien. Restaurar un respaldo va troceado y dice cuantos registros entraron de verdad. Anular una venta ya no pierde mercaderia del inventario. El carrito se guarda en el equipo: un F5 o un cuelgue ya no tira la venta armada. Las lineas, el total y lo que se guarda coinciden siempre.",
   "files": {
     "embedded-assets.js": {
       "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.11/embedded-assets.js",
