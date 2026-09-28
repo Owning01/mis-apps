@@ -1,22 +1,22 @@
 {
   "name": "LeonSys POS (escritorio)",
-  "version": "1.1.11",
-  "versionCode": 10111,
-  "publishedAt": "2026-09-28T04:59:52.322Z",
-  "notes": "Un corte de internet ya no borra la venta en curso ni el catalogo (el chequeo de licencia con respuesta de error ya no se confunde con desactivado). El auto-updatedor ya no se cuelga si se corta la conexion a media descarga. Pagar a un proveedor funciona (la ruta no existia). La pantalla de Auditoria muestra los registros y el boton de integridad ya no dice ALTERADA cuando la cadena esta bien. Restaurar un respaldo va troceado y dice cuantos registros entraron de verdad. Anular una venta ya no pierde mercaderia del inventario. El carrito se guarda en el equipo: un F5 o un cuelgue ya no tira la venta armada. Las lineas, el total y lo que se guarda coinciden siempre.",
+  "version": "1.1.12",
+  "versionCode": 10112,
+  "publishedAt": "2026-09-28T22:03:53.687Z",
+  "notes": "Se arreglan los simbolos rotos del catalogo (los iconitos de los productos se veian como caracteres raros: era texto mal codificado en el codigo). La APK ya no intenta conectarse a la IP de ninguna PC: siempre usa su propio POS y se comunica solo con la nube, asi que no hace falta estar en la misma red. El puerto interno paso a fijo, con lo que la copia del catalogo, el carrito y los pendientes ya no se pierden al reiniciar. Si la pagina no carga, aparece una pantalla con boton Reintentar en vez de quedar en blanco. Los errores que ve el cliente ya no dicen Firebase ni codigos raros: son mensajes en castellano que dicen si se puede seguir vendiendo. Agregada una tecla de division (÷) en la calculadora.",
   "files": {
     "embedded-assets.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.11/embedded-assets.js",
-      "sha256": "6d3327fff3b79408627f8aefbbb36378534169610c309e0df2432a0a8bc7eec6",
-      "size": 5013726
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.12/embedded-assets.js",
+      "sha256": "f22856d9bdf5c9495ccf8b7ace47b756229cb7fff0bdf00e8c4245fe6b3ababb",
+      "size": 5015016
     },
     "LeonSysCore.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.11/LeonSysCore.js",
-      "sha256": "4d8e7500cd572166f047efc7a281ad5a9d84a99bd972e25c4db794db474b01c3",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.12/LeonSysCore.js",
+      "sha256": "903ae47317ed09274809b949354ad687e5922c4df293c05ab17b8190d7cf6a70",
       "size": 186777
     },
     "LeonSys.exe": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.11/LeonSys.exe",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.12/LeonSys.exe",
       "sha256": "31d4a218cb746baeef9785391e9a24421337d22c12a3419987f59203a0e0ae04",
       "size": 130560
     }
