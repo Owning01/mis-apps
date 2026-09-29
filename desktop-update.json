@@ -1,22 +1,22 @@
 {
   "name": "LeonSys POS (escritorio)",
-  "version": "1.1.12",
-  "versionCode": 10112,
-  "publishedAt": "2026-09-28T22:03:53.687Z",
-  "notes": "Se arreglan los simbolos rotos del catalogo (los iconitos de los productos se veian como caracteres raros: era texto mal codificado en el codigo). La APK ya no intenta conectarse a la IP de ninguna PC: siempre usa su propio POS y se comunica solo con la nube, asi que no hace falta estar en la misma red. El puerto interno paso a fijo, con lo que la copia del catalogo, el carrito y los pendientes ya no se pierden al reiniciar. Si la pagina no carga, aparece una pantalla con boton Reintentar en vez de quedar en blanco. Los errores que ve el cliente ya no dicen Firebase ni codigos raros: son mensajes en castellano que dicen si se puede seguir vendiendo. Agregada una tecla de division (÷) en la calculadora.",
+  "version": "1.1.13",
+  "versionCode": 10113,
+  "publishedAt": "2026-09-29T01:18:20.166Z",
+  "notes": "Al buscar productos en el celular el teclado ya no se arrastra: las tarjetas que no se ven no se repintan. El buscador no le mete autocorrector ni mayusculas. Arreglado un mensaje interno que decia 'Firebase'.",
   "files": {
     "embedded-assets.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.12/embedded-assets.js",
-      "sha256": "f22856d9bdf5c9495ccf8b7ace47b756229cb7fff0bdf00e8c4245fe6b3ababb",
-      "size": 5015016
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.13/embedded-assets.js",
+      "sha256": "d41eae57cbc30410d7836f02e4dba8a491927bf0c657d76dafa8ce7b30a269aa",
+      "size": 5015307
     },
     "LeonSysCore.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.12/LeonSysCore.js",
-      "sha256": "903ae47317ed09274809b949354ad687e5922c4df293c05ab17b8190d7cf6a70",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.13/LeonSysCore.js",
+      "sha256": "379fe57771aba3312f09867eaf7eaeeb5cc6850946f8ea22b5ffe1411bbe4ebc",
       "size": 186777
     },
     "LeonSys.exe": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.12/LeonSys.exe",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.13/LeonSys.exe",
       "sha256": "31d4a218cb746baeef9785391e9a24421337d22c12a3419987f59203a0e0ae04",
       "size": 130560
     }
