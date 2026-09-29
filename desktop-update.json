@@ -1,22 +1,22 @@
 {
   "name": "LeonSys POS (escritorio)",
-  "version": "1.1.14",
-  "versionCode": 10114,
-  "publishedAt": "2026-09-29T02:04:07.467Z",
-  "notes": "Los nombres de los productos ya no se cortan a la mitad: la tarjeta crece para mostrar el nombre entero (hasta el mas largo del catalogo, 78 caracteres). Al buscar en el celular el teclado no se arrastra y el buscador no le mete autocorrector. Arreglado un mensaje interno que decia 'Firebase'.",
+  "version": "1.1.15",
+  "versionCode": 10115,
+  "publishedAt": "2026-09-29T15:09:49.329Z",
+  "notes": "Tutorial del celular: el recorrido ya no queda tapado por el menu lateral. Ahora abre o cierra solo segun donde este cada cosa que senala. Los nombres de los productos ya no se cortan a la mitad. El teclado al buscar no se arrastra y el buscador no le mete autocorrector.",
   "files": {
     "embedded-assets.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.14/embedded-assets.js",
-      "sha256": "9dd1a351a3fdba4040cc5c067c4da905658980ca7f6a16b57164bfb54a2eb04a",
-      "size": 5015324
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.15/embedded-assets.js",
+      "sha256": "704f857393775277ea01ced9430b258e6d3f3ea2659ba0a0bbb5a1da76dc27e5",
+      "size": 5015616
     },
     "LeonSysCore.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.14/LeonSysCore.js",
-      "sha256": "4018bee309a8773733f88c8a84ff8364986468e547c1643eb7651a783a2450ea",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.15/LeonSysCore.js",
+      "sha256": "ec2a4ae78835e1681d1cf3533f69c1ebfadbd03283d67142b03f3a8272266cce",
       "size": 186777
     },
     "LeonSys.exe": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.14/LeonSys.exe",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.15/LeonSys.exe",
       "sha256": "31d4a218cb746baeef9785391e9a24421337d22c12a3419987f59203a0e0ae04",
       "size": 130560
     }
