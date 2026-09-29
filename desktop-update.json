@@ -1,22 +1,22 @@
 {
   "name": "LeonSys POS (escritorio)",
-  "version": "1.1.13",
-  "versionCode": 10113,
-  "publishedAt": "2026-09-29T01:18:20.166Z",
-  "notes": "Al buscar productos en el celular el teclado ya no se arrastra: las tarjetas que no se ven no se repintan. El buscador no le mete autocorrector ni mayusculas. Arreglado un mensaje interno que decia 'Firebase'.",
+  "version": "1.1.14",
+  "versionCode": 10114,
+  "publishedAt": "2026-09-29T02:04:07.467Z",
+  "notes": "Los nombres de los productos ya no se cortan a la mitad: la tarjeta crece para mostrar el nombre entero (hasta el mas largo del catalogo, 78 caracteres). Al buscar en el celular el teclado no se arrastra y el buscador no le mete autocorrector. Arreglado un mensaje interno que decia 'Firebase'.",
   "files": {
     "embedded-assets.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.13/embedded-assets.js",
-      "sha256": "d41eae57cbc30410d7836f02e4dba8a491927bf0c657d76dafa8ce7b30a269aa",
-      "size": 5015307
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.14/embedded-assets.js",
+      "sha256": "9dd1a351a3fdba4040cc5c067c4da905658980ca7f6a16b57164bfb54a2eb04a",
+      "size": 5015324
     },
     "LeonSysCore.js": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.13/LeonSysCore.js",
-      "sha256": "379fe57771aba3312f09867eaf7eaeeb5cc6850946f8ea22b5ffe1411bbe4ebc",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.14/LeonSysCore.js",
+      "sha256": "4018bee309a8773733f88c8a84ff8364986468e547c1643eb7651a783a2450ea",
       "size": 186777
     },
     "LeonSys.exe": {
-      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.13/LeonSys.exe",
+      "url": "https://github.com/Owning01/mis-apps/releases/download/leonsys-desktop-v1.1.14/LeonSys.exe",
       "sha256": "31d4a218cb746baeef9785391e9a24421337d22c12a3419987f59203a0e0ae04",
       "size": 130560
     }
