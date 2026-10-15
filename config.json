@@ -9,6 +9,7 @@
     "OpenHer": ["openher/*"],
     "VistaMD": ["mis-apps/vistamd-*"],
     "Cine Gbro": ["mis-apps/cinegbro-*"],
+    "Derecho Informático": ["mis-apps/derecho-informatico-*"],
     "Móviles": ["*.apk"],
     "Escritorio": ["*.exe", "*.msi", "*.dmg", "*.pkg"]
   }
