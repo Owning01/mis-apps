@@ -6,7 +6,6 @@
 <title>Apps de Octa - Tienda personal</title>
 <meta name="description" content="Tus aplicaciones y archivos, listos para descargar. Directo desde GitHub Releases, sin cuentas.">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
-<link rel="icon" href="./logo.jpg" type="image/jpeg">
 <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1411">
 <meta name="mobile-web-app-capable" content="yes">
@@ -20,215 +19,242 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Marca: verde #34D399 como accion, naranja #F97316 solo para descargar y temporal.
-     Fondos verdes oscuros para contraste AA con texto claro. */
   :root{
-    --bg:#0B1411; --bg2:#101D17; --card:#132019; --card2:#17271F;
-    --line:#233D31; --txt:#EFF6F0; --mut:#A3B8AB;
-    --acc:#34D399; --acc-ink:#06281C;
-    --warm:#F97316; --warm-ink:#2A1503;
-    --ok:#34D399; --warn:#FB923C; --err:#F87171;
-    --r:16px; --ease:cubic-bezier(0.16,1,0.3,1);
+    --bg:#0B1411; --surface:#101D17; --surface-2:#132019;
+    --ink:#EFF6F0; --muted:#A3B8AB;
+    --accent:#F97316; --accent-ink:#2A1503;
+    --brand:#34D399; --brand-ink:#06281C;
+    --step-small:clamp(0.8125rem,0.79rem+0.1vw,0.875rem);
+    --step-body:clamp(1.0625rem,1rem+0.25vw,1.1875rem);
+    --step-lead:clamp(1.25rem,1.1rem+0.7vw,1.625rem);
+    --step-head:clamp(2.5rem,1.2rem+5vw,5.5rem);
+    --ease:cubic-bezier(0.16,1,0.3,1);
+    --r:0px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
+  html.js .reveal{opacity:0;transform:translateY(24px)}
+  html.js .reveal.in{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
   body{
     font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    background:var(--bg); color:var(--txt); min-height:100vh;
-    font-variant-numeric:tabular-nums;
+    background:var(--bg); color:var(--ink); min-height:100svh;
+    font-variant-numeric:tabular-nums; font-size:var(--step-body); line-height:1.5;
   }
-  /* Fondo: abismo generado con Qwen (bg-abisal.jpg, 28KB), motivo de marca (pulpo abisal).
-     Overlay en gradiente para mantener AA: el texto nunca pisa la imagen directa.
-     El halo verde del 9% se suma como foco sobre el header. */
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-    background:
-      radial-gradient(900px 420px at 50% -8%, rgba(52,211,153,.09), transparent 65%),
-      linear-gradient(180deg, rgba(11,20,17,.62), rgba(11,20,17,.88)),
-      url('./bg-abisal.jpg') center/cover no-repeat}
-  main,.wrap{position:relative;z-index:1}
-  a{color:inherit}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-  :focus-visible{outline:2px solid var(--warm);outline-offset:2px;border-radius:6px}
-  /* Tipo: Space Grotesk en titulos por caracter geometrico que acompana al logo;
-     Inter en cuerpo por legibilidad en listas densas. */
-  h1,h2,h3,.disp{font-family:"Space Grotesk","Inter",system-ui,sans-serif;letter-spacing:-.02em}
+  p{max-width:60ch}
+  h1,h2,h3,.disp{font-family:"Space Grotesk","Inter",system-ui,sans-serif; letter-spacing:-.04em; line-height:0.95}
+  a{color:inherit; text-decoration:none}
+  img,video{display:block; max-width:100%; height:auto}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
 
   /* ---------- Header ---------- */
-  /* Header y modal con blur: maximo 2 superficies, para separar fijo vs contenido al hacer scroll. */
-  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
-    background:rgba(11,20,17,.85);border-bottom:1px solid var(--line)}
-  .hd{display:flex;align-items:center;gap:14px;padding:14px 0}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
-  .logo img.mark{width:42px;height:42px;border-radius:12px;object-fit:cover;
-    border:1px solid var(--line);flex-shrink:0}
+  header{position:static;background:var(--bg)}
+  .hd{display:flex;align-items:center;gap:16px;padding:16px 0}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;font-family:"Space Grotesk",sans-serif}
+  .logo img.mark{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0}
   .grow{flex:1}
-  .search{position:relative;min-width:220px;max-width:380px;flex:1}
-  .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--mut)}
-  .search input{width:100%;padding:10px 14px 10px 38px;border-radius:12px;border:1px solid var(--line);
-    background:var(--bg2);color:var(--txt);outline:none;font-size:14px;transition:border-color .2s;min-height:38px}
-  .search input:focus{border-color:var(--acc)}
-  .search input::placeholder{color:var(--mut)}
+  .search{position:relative;min-width:200px;max-width:360px;flex:1}
+  .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+  .search input{width:100%;padding:10px 14px 10px 38px;border-radius:0;background:var(--surface);color:var(--ink);font-size:14px;min-height:40px;transition:background .2s var(--ease)}
+  .search input:focus{background:var(--surface-2)}
+  .search input::placeholder{color:var(--muted)}
 
-  /* ---------- Botones ---------- */
-  /* Escritorio: 36px (compacto). El target de 44px se restaure en el media mobile. */
-  .btn{border:0;cursor:pointer;font-weight:600;font-size:13.5px;border-radius:10px;padding:9px 16px;
-    min-height:36px;transition:transform .18s var(--ease),filter .18s,background .18s;
-    display:inline-flex;align-items:center;justify-content:center;gap:7px;color:var(--txt);
-    text-decoration:none;font-family:inherit}
+  /* ---------- Buttons ---------- */
+  .btn{border:0;cursor:pointer;font-weight:600;font-size:14px;border-radius:0;padding:10px 20px;
+    min-height:40px;transition:transform .18s var(--ease),filter .18s,background .18s;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;color:var(--ink);
+    text-decoration:none;font-family:inherit;background:var(--surface)}
   .btn:active{transform:scale(.97)}
   .btn svg{width:16px;height:16px;flex-shrink:0}
-  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--mut)}
-  .btn-ghost:hover{color:var(--txt);border-color:var(--acc)}
-  .btn-dl{background:var(--warm);color:var(--warm-ink)}
+  .btn-dl{background:var(--accent);color:var(--accent-ink)}
   .btn-dl:hover{filter:brightness(1.07)}
-  .btn-acc{background:var(--acc);color:var(--acc-ink)}
-  .btn-acc:hover{filter:brightness(1.07)}
-  .btn-sm{padding:7px 12px;font-size:13px;border-radius:9px;min-height:32px}
+  .btn-brand{background:var(--brand);color:var(--brand-ink)}
+  .btn-brand:hover{filter:brightness(1.07)}
+  .btn-sm{padding:8px 14px;font-size:16px;min-height:36px}
+  .btn-ghost{background:transparent;color:var(--muted)}
+  .btn-ghost:hover{color:var(--ink)}
 
-  /* ---------- Tabs (en header) ---------- */
-  .tabsbar{display:flex;gap:6px;background:var(--bg2);border:1px solid var(--line);
-    border-radius:14px;padding:5px;margin:0 0 12px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+  /* ---------- Tabs ---------- */
+  .tabsbar{display:flex;gap:4px;background:var(--surface);border-radius:0;padding:4px;margin:0 0 12px;flex-wrap:wrap}
   .tabsbar::-webkit-scrollbar{display:none}
   .tabbtn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    padding:8px 12px;border-radius:9px;font-size:13.5px;font-weight:600;min-height:38px;
-    color:var(--mut);cursor:pointer;border:0;background:transparent;font-family:inherit;
+    padding:8px 12px;border-radius:0;font-size:16px;font-weight:600;min-height:38px;
+    color:var(--muted);cursor:pointer;border:0;background:transparent;font-family:inherit;
     transition:background .2s var(--ease),color .2s}
   .tabbtn svg{width:16px;height:16px}
-  .tabbtn .n{font-size:12px;background:rgba(163,184,171,.15);padding:1px 8px;border-radius:999px}
-  .tabbtn[aria-selected="true"]{background:var(--acc);color:var(--acc-ink)}
-  .tabbtn[aria-selected="true"] .n{background:rgba(6,40,28,.18)}
+  .tabbtn .n{font-size:16px;background:var(--surface-2);padding:1px 8px;border-radius:0}
+  .tabbtn[aria-selected="true"]{background:var(--brand);color:var(--brand-ink)}
+  .tabbtn[aria-selected="true"] .n{background:rgba(6,40,28,.25)}
 
-  /* ---------- Filtros categoría ---------- */
-  .catchips{display:flex;gap:8px;margin:16px 0 20px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;-ms-overflow-style:none}
+  /* ---------- Category chips ---------- */
+  .catchips{display:flex;gap:8px;margin:16px 0 20px;flex-wrap:wrap;padding-bottom:6px}
   .catchips::-webkit-scrollbar{display:none}
-  .catchip{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
-    background:var(--bg2);color:var(--mut);border-radius:999px;padding:7px 14px;min-height:34px;
-    font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .18s,color .18s}
-  .catchip .cdot{width:8px;height:8px;border-radius:50%;background:var(--mut)}
-  .catchip[aria-pressed="true"]{border-color:var(--acc);color:var(--txt)}
-  .catchip[aria-pressed="true"] .cdot{background:var(--acc)}
-  .catchip .n{font-size:11.5px;opacity:.75}
+  .catchip{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;background:var(--surface);
+    color:var(--muted);border-radius:0;padding:7px 14px;min-height:34px;font-size:16px;font-weight:600;
+    cursor:pointer;font-family:inherit;transition:background .18s,color .18s}
+  .catchip .cdot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+  .catchip[aria-pressed="true"]{background:var(--surface-2);color:var(--ink)}
+  .catchip[aria-pressed="true"] .cdot{background:var(--brand)}
+  .catchip .n{font-size:16px;opacity:.75}
 
-  /* ---------- Grid / Cards ---------- */
-  .sect{padding:10px 0 70px}
-  .sect-hd{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
-  .sect-hd h2{font-size:20px}
-  .badge{font-size:12px;color:var(--mut);background:var(--bg2);border:1px solid var(--line);
-    padding:4px 10px;border-radius:999px}
-  /* Cards uniformes a proposito: catalogo de igual peso, la jerarquia va en chips y version.
-     Paginas rompe el ritmo como listado porque son enlaces externos, no descargas. */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr));gap:16px}
+  /* ---------- Hero ---------- */
+  .hero{padding:48px 0 96px; position:relative; overflow:hidden;scroll-margin-top:80px}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;max-width:720px}
+  .hero h1{font-size:clamp(40px,5.5vw,72px);line-height:0.92;letter-spacing:-.05em;max-width:100%}
+  .hero h1 .line{display:block;overflow:hidden}
+  .hero h1 .line span{display:inline-block}
+  @media (prefers-reduced-motion: no-preference){
+    .hero h1 .line span{transform:translateY(110%);animation:rise .9s var(--ease) forwards}
+    .hero h1 .line:nth-of-type(2) span{animation-delay:.11s}
+  }
+  @keyframes rise{to{transform:translateY(0)}}
+  @media (prefers-reduced-motion: no-preference){
+    .hero-media img{animation:drift 18s ease-in-out infinite}
+  }
+  @keyframes drift{0%{transform:scale(1.05) translate(0,0)}50%{transform:scale(1.12) translate(-2%,-1%)}100%{transform:scale(1.05) translate(0,0)}}
+  .hero .lead{font-size:var(--step-lead);color:var(--muted);max-width:60ch;margin-top:24px}
+  .hero .actions{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+  .hero-media{position:relative;aspect-ratio:1/1;width:100%;max-width:520px;margin-left:auto;
+    border-radius:50%;overflow:hidden;background:var(--surface)}
+  .hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);
+    transition:transform 1.2s var(--ease)}
+  .hero-media.in img{transform:scale(1)}
+  .hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;mix-blend-mode:screen}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);margin-right:8px}
+
+  /* ---------- Sections ---------- */
+  .sect{padding:64px 0 96px;scroll-margin-top:80px}
+  .sect-hd{display:flex;align-items:baseline;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+  .sect-hd h2{font-size:clamp(28px,4vw,44px)}
+  .badge{font-size:16px;color:var(--muted);background:var(--surface);padding:4px 10px;border-radius:0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:16px}
+  .applist{display:flex;flex-direction:column;gap:12px}
   .plist{display:flex;flex-direction:column;gap:10px}
-  .prow{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);
-    border-radius:14px;padding:12px 16px;text-decoration:none;min-height:68px;
-    transition:transform .18s var(--ease),border-color .18s,box-shadow .18s}
-  .prow:hover{transform:translateX(4px);border-color:#2F5240;box-shadow:0 10px 28px rgba(0,0,0,.35)}
-  .prow .plogo{width:44px;height:44px;border-radius:12px;flex-shrink:0;position:relative;overflow:hidden;
+
+  /* ---------- App rows (list, not cards) ---------- */
+  .arow{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;
+    background:var(--surface);border-radius:0 16px 16px 999px;padding:12px 16px 12px 12px;
+    transition:background .2s var(--ease),transform .2s var(--ease)}
+  .arow:hover{background:var(--surface-2);transform:translateX(4px)}
+  .arow .avatar{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;
+    font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:20px}
+  .arow .info{min-width:0}
+  .arow .info h3{font-size:17px;overflow-wrap:anywhere}
+  .arow .info .desc{color:var(--muted);font-size:16px;line-height:1.5;margin-top:4px;max-width:60ch;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .arow .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:16px;color:var(--muted);
+    background:var(--surface-2);padding:3px 9px;border-radius:0}
+  .chip .cdot{width:7px;height:7px;border-radius:50%}
+  .chip.new{background:var(--brand);color:var(--brand-ink);font-weight:700}
+  .chip.temp{background:var(--accent);color:var(--accent-ink);font-weight:700}
+  .chip.beta{color:var(--accent)}
+  .chip.repo{color:var(--brand)}
+  .arow .actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+  /* keep .card for pages compatibility? pages use .prow */
+  .card{background:var(--surface);border-radius:0;padding:20px;display:flex;flex-direction:column;gap:14px;
+    transition:background .2s var(--ease),transform .2s var(--ease)}
+  .card:hover{background:var(--surface-2);transform:translateY(-2px)}
+
+  /* ---------- Pages rows ---------- */
+  .prow{display:flex;align-items:center;gap:14px;background:var(--surface);border-radius:0;
+    padding:12px 16px;text-decoration:none;min-height:68px;transition:background .2s var(--ease),transform .2s var(--ease)}
+  .prow:hover{background:var(--surface-2);transform:translateX(4px)}
+  .prow .plogo{width:44px;height:44px;border-radius:50%;flex-shrink:0;position:relative;overflow:hidden;
     display:grid;place-items:center;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:19px}
   .prow .plogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .prow .ptxt{flex:1;min-width:0}
-  .prow .ptxt b{display:block;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .prow .ptxt small{color:var(--mut);font-size:12px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .prow>svg{width:18px;height:18px;color:var(--mut);flex-shrink:0}
-  .prow:hover>svg{color:var(--acc)}
-  .card{background:var(--card);border:1px solid var(--line);
-    border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:14px;
-    transition:transform .2s var(--ease),border-color .2s,box-shadow .2s;position:relative}
-  .card:hover{transform:translateY(-4px);border-color:#2F5240;box-shadow:0 16px 40px rgba(0,0,0,.4)}
-  .card:focus-within{border-color:var(--acc)}
-  .stretch{position:absolute;inset:0;border-radius:var(--r)}
-  .stretch:focus-visible{outline:2px solid var(--warm);outline-offset:2px}
-  .card .top{display:flex;gap:14px;align-items:flex-start}
-  .avatar{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;flex-shrink:0;
-    font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:22px}
-  .card h3{font-size:17px;overflow-wrap:anywhere}
-  .card .desc{color:var(--mut);font-size:13.5px;line-height:1.6;flex:1;white-space:pre-line;
-    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-  .meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
-  .chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:#C7D4CB;
-    background:var(--bg2);border:1px solid var(--line);padding:3px 9px;border-radius:999px}
-  .chip .cdot{width:7px;height:7px;border-radius:50%}
-  .chip.new{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:700}
-  .chip.temp{background:var(--warm);border-color:var(--warm);color:var(--warm-ink);font-weight:700}
-  .chip.beta{border-color:var(--warm);color:var(--warm)}
-  .chip.repo{color:var(--acc)}
-  .card .row{display:flex;gap:10px;align-items:center;margin-top:2px}
-  .card .row .btn{flex:1}
-  .card .row .btn-ghost{flex:0 1 auto}
-  .hist-n{font-size:12px}
+  .prow .ptxt b{display:block;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .prow .ptxt small{color:var(--muted);font-size:16px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .prow>svg{width:18px;height:18px;color:var(--muted);flex-shrink:0}
 
-  .empty{text-align:center;color:var(--mut);padding:56px 20px;border:1px dashed var(--line);
-    border-radius:var(--r);grid-column:1/-1;display:flex;flex-direction:column;gap:8px;align-items:center}
-  .empty svg{width:40px;height:40px;color:var(--acc);opacity:.7}
-  .empty b{color:var(--txt);font-size:17px}
-  /* Carga: esqueletos pulsantes con el mismo ancho de card para no mover el layout.
-     Error: caja con mensaje concreto (que repos fallaron) y boton Reintentar. */
+  /* ---------- States ---------- */
+  .empty{text-align:center;color:var(--muted);padding:56px 20px;background:var(--surface);
+    border-radius:0;grid-column:1/-1;display:flex;flex-direction:column;gap:8px;align-items:center}
+  .empty b{color:var(--ink);font-size:17px}
   .loading{display:grid;gap:16px;grid-column:1/-1}
-  .skel{height:150px;border-radius:var(--r);border:1px solid var(--line);
-    background:linear-gradient(100deg,var(--card) 40%,var(--card2) 50%,var(--card) 60%);
-    background-size:200% 100%;animation:shim 1.4s linear infinite}
-  @keyframes shim{to{background-position:-200% 0}}
-  .errbox{text-align:center;color:var(--mut);padding:56px 20px;border:1px solid var(--warm);
-    border-radius:var(--r);grid-column:1/-1;display:flex;flex-direction:column;gap:10px;align-items:center}
-  .errbox b{color:var(--txt);font-size:17px}
-  .errbox code{font-size:12px;color:var(--warm);overflow-wrap:anywhere}
+  .skel{height:120px;border-radius:0;background:var(--surface);animation:shim 1.4s linear infinite}
+  @keyframes shim{0%{opacity:.6}50%{opacity:1}100%{opacity:.6}}
+  .errbox{text-align:center;color:var(--muted);padding:56px 20px;background:var(--surface);
+    border-radius:0;grid-column:1/-1;display:flex;flex-direction:column;gap:10px;align-items:center}
+  .errbox b{color:var(--ink);font-size:17px}
+  .errbox code{font-size:16px;color:var(--accent);overflow-wrap:anywhere}
 
-  /* ---------- Modal versiones ---------- */
-  .ov{position:fixed;inset:0;background:rgba(4,10,7,.72);backdrop-filter:blur(6px);
-    display:none;place-items:center;z-index:100;padding:18px}
+  /* ---------- Modal ---------- */
+  .ov{position:fixed;inset:0;background:rgba(4,10,7,.82);display:none;place-items:center;z-index:100;padding:18px}
   .ov.on{display:grid}
-  .modal{background:var(--bg2);border:1px solid var(--line);border-radius:20px;width:100%;
-    max-width:600px;max-height:88vh;overflow:auto;padding:26px;animation:pop .22s var(--ease)}
-  @keyframes pop{from{opacity:0;transform:scale(.98) translateY(8px)}to{opacity:1;transform:none}}
+  .modal{background:var(--surface);border-radius:0;width:100%;max-width:600px;max-height:88vh;overflow:auto;padding:26px}
   .modal .mhead{display:flex;gap:14px;align-items:flex-start;margin-bottom:6px}
   .modal h3{font-size:22px}
-  .close{margin-left:auto;background:transparent;border:1px solid var(--line);color:var(--mut);
-    width:38px;height:38px;border-radius:11px;cursor:pointer;font-size:18px;line-height:1;flex-shrink:0;
-    display:grid;place-items:center}
-  .close:hover{color:var(--txt);border-color:var(--acc)}
+  .close{margin-left:auto;background:var(--surface-2);color:var(--muted);width:38px;height:38px;border-radius:50%;
+    cursor:pointer;font-size:18px;line-height:1;flex-shrink:0;display:grid;place-items:center;border:0}
+  .close:hover{color:var(--ink)}
   .close svg{width:18px;height:18px}
-  .ver{border-top:1px solid var(--line);padding:16px 0}
+  .ver{padding:16px 0}
   .ver:first-of-type{margin-top:14px}
   .ver .vhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
   .ver .vhead b{font-size:15px}
-  .ver .notes{color:var(--mut);font-size:13px;line-height:1.6;white-space:pre-line;
+  .ver .notes{color:var(--muted);font-size:16px;line-height:1.6;white-space:pre-line;
     display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px}
   .assets{display:flex;flex-direction:column;gap:8px}
-  .asset{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);
-    border-radius:11px;padding:8px 8px 8px 12px;font-size:13px;min-height:44px}
-  .asset svg{width:15px;height:15px;color:var(--mut);flex-shrink:0}
-  .asset .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#D8E4DC;min-width:0}
-  .asset .sz{color:var(--mut);font-size:11.5px;white-space:nowrap}
-  .asset .cnt{color:var(--mut);font-size:11.5px;white-space:nowrap}
+  .asset{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:0;padding:8px 8px 8px 12px;font-size:16px;min-height:44px}
+  .asset svg{width:15px;height:15px;color:var(--muted);flex-shrink:0}
+  .asset .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink);min-width:0}
+  .asset .sz{color:var(--muted);font-size:16px;white-space:nowrap}
+  .asset .cnt{color:var(--muted);font-size:16px;white-space:nowrap}
   .asset .btn{flex-shrink:0}
 
-  footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:13px;text-align:center}
-  @media(max-width:640px){
-    /* Targets de 44px solo donde hay dedo de por medio. */
-    .btn{min-height:44px;padding:11px 16px;font-size:14px}
-    .tabbtn{min-height:44px;padding:11px 14px}
-    .catchip{min-height:44px;padding:9px 15px}
-    .search input{min-height:44px;padding:12px 14px 12px 38px}
-    .btn-sm{min-height:40px}
-    .close{width:44px;height:44px}
-    .hd{flex-wrap:wrap;gap:10px;padding:12px 0 10px}
-    .logo{font-size:17px}
-    .logo img.mark{width:36px;height:36px;border-radius:10px}
-    .search{order:3;min-width:100%}
-    .tabsbar{margin-bottom:10px}
-    .tabbtn{flex:1 0 auto;white-space:nowrap}
-    .sect{padding:6px 0 56px}
-    .sect-hd h2{font-size:18px}
-    .card{padding:16px}
-    .card .row{flex-wrap:wrap}
-    .asset .cnt{display:none}
-    .ov{padding:10px;place-items:end center}
-    .modal{padding:20px;border-radius:18px 18px 0 0;max-height:92vh;max-width:100%}
-    .catchips{margin:12px 0 14px}
-  }
+  /* ---------- Imagery bands ---------- */
+  .band{padding:64px 0}
+  .band-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+  @media(min-width:900px){.band-grid{grid-template-columns:1fr 1fr;gap:48px}}
+  .band-img{border-radius:50%;overflow:hidden;aspect-ratio:1/1;background:var(--surface)}
+  .band-img img{width:100%;height:100%;object-fit:cover}
+  .band-img video{width:100%;height:100%;object-fit:cover}
+  .band h2{font-size:clamp(28px,4vw,44px);margin-bottom:12px}
+  .band p{color:var(--muted);font-size:var(--step-body);max-width:60ch}
+
+  /* ---------- Footer ---------- */
+  footer{padding:64px 0 48px;background:var(--surface)}
+  .foot-mark{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(32px,6vw,72px);
+    letter-spacing:-.05em;line-height:0.9;margin-bottom:32px}
+  .foot-cols{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:32px}
+  @media(min-width:900px){.foot-cols{grid-template-columns:repeat(4,1fr)}}
+  .foot-cols a{display:block;color:var(--muted);font-size:14px;padding:4px 0;transition:color .2s}
+  .foot-cols a:hover{color:var(--ink)}
+  .foot-cols b{display:block;font-size:16px;color:var(--ink);margin-bottom:8px}
+  .credits{color:var(--muted);font-size:16px;line-height:1.6;margin-top:24px}
+  .credits a{color:var(--muted);text-decoration:underline}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+    padding-top:24px;color:var(--muted);font-size:16px}
+
+  /* ---------- Motion ---------- */
   @media (prefers-reduced-motion: reduce){
     *,::before,::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
       transition-duration:.01ms!important;scroll-behavior:auto!important}
+    video{display:none}
+  }
+  @media(max-width:640px){
+    .hero h1{font-size:clamp(40px,12vw,64px)}
+    .hero-media{max-width:320px;margin:0 auto}
+    .arow{grid-template-columns:auto 1fr;gap:12px}
+    .arow .actions{grid-column:1/-1;justify-content:flex-start}
+    .wrap{padding:0 16px}
+    .sect{padding:48px 0 72px}
+    .tabbtn{min-height:44px;padding:10px 14px}
+    .btn{min-height:44px;padding:11px 16px;font-size:14px}
+    .search input{min-height:44px;padding:12px 14px 12px 38px}
+    .close{width:44px;height:44px}
+    .hd{flex-wrap:wrap;gap:10px;padding:12px 0}
+    .logo{font-size:16px}
+    .logo img.mark{width:36px;height:36px}
+    .search{order:3;min-width:100%}
+    .tabsbar{margin-bottom:10px}
+    .ov{padding:10px;place-items:end center}
+    .modal{padding:20px;border-radius:0 18px 0 0;max-height:92vh;max-width:100%}
+    .catchips{margin:12px 0 14px}
   }
 </style>
 </head>
@@ -236,7 +262,8 @@
 
 <header>
   <div class="wrap hd">
-    <div class="logo"><img class="mark" src="./logo.jpg" alt="Logo Apps de Octa" width="42" height="42" fetchpriority="high"> <span id="brandName">Apps de Octa</span></div>
+    <div class="logo"><img class="mark" src="./icons/icon-192.png" alt="Logo Apps de Octa" width="40" height="40" fetchpriority="high"> <span id="brandName">Apps de Octa</span></div>
+    <div class="grow"></div>
     <div class="search">
       <span id="searchIco"></span>
       <input id="q" type="search" placeholder="Buscar aplicación o archivo..." autocomplete="off" aria-label="Buscar aplicación o archivo">
@@ -251,48 +278,120 @@
   </div>
 </header>
 
-<main style="padding-top:20px">
-<div class="wrap">
-  <div class="catchips" id="catChips" role="group" aria-label="Filtrar por categoría"></div>
-</div>
+<main>
+  <section class="hero wrap reveal">
+    <div class="hero-grid">
+      <div>
+        <h1 id="heroTitle"><span class="line"><span>Apps de</span></span><br><span class="line"><span>Octa.</span></span></h1>
+        <p class="lead">Aplicaciones y archivos listos para descargar. Directo desde GitHub Releases, sin iniciar sesión, sin intermediarios.</p>
+      </div>
 
-<section class="sect wrap" id="paneApps" role="tabpanel" aria-labelledby="tabApps" tabindex="0">
-  <div class="sect-hd">
-    <h2 id="appsTitle">Aplicaciones</h2>
-    <span class="badge" id="srcBadge">cargando…</span>
-    <span class="badge" id="countBadge"></span>
-  </div>
-  <div class="grid" id="grid"><div class="loading" role="status" aria-label="Cargando aplicaciones"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></div>
-</section>
+    </div>
+  </section>
 
-<section class="sect wrap" id="paneTemp" role="tabpanel" aria-labelledby="tabTemp" tabindex="0" hidden>
-  <div class="sect-hd">
-    <h2>Archivos temporales</h2>
-    <span class="badge" id="tempBadge"></span>
-    <span class="badge">se borran a los 7 días</span>
+  <div class="wrap" id="catalogo">
+    <div class="catchips" id="catChips" role="group" aria-label="Filtrar por categoría"></div>
   </div>
-  <div class="grid" id="gridTemp"><div class="loading" role="status" aria-label="Cargando temporales"><div class="skel"></div></div></div>
-</section>
 
-<section class="sect wrap" id="panePages" role="tabpanel" aria-labelledby="tabPages" tabindex="0" hidden>
-  <div class="sect-hd">
-    <h2>Sitios publicados</h2>
-    <span class="badge" id="pagesBadge"></span>
-    <span class="badge">Firebase Hosting</span>
-  </div>
-  <div class="plist" id="gridPages"><div class="loading" role="status" aria-label="Cargando paginas"><div class="skel" style="height:68px"></div><div class="skel" style="height:68px"></div></div></div>
-</section>
+  <section class="sect wrap reveal" id="paneApps" role="tabpanel" aria-labelledby="tabApps" tabindex="0">
+    <div class="sect-hd reveal">
+      <h2 id="appsTitle">Aplicaciones</h2>
+      <span class="badge" id="srcBadge">cargando…</span>
+      <span class="badge" id="countBadge"></span>
+    </div>
+    <div class="applist" id="grid"><div class="loading" role="status" aria-label="Cargando aplicaciones"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></div>
+  </section>
+
+  <section class="sect wrap reveal" id="paneTemp" role="tabpanel" aria-labelledby="tabTemp" tabindex="0" hidden>
+    <div class="sect-hd reveal">
+      <h2>Archivos temporales</h2>
+      <span class="badge" id="tempBadge"></span>
+      <span class="badge">se borran a los 7 días</span>
+    </div>
+    <div class="applist" id="gridTemp"><div class="loading" role="status" aria-label="Cargando temporales"><div class="skel"></div></div></div>
+  </section>
+
+  <section class="sect wrap reveal" id="panePages" role="tabpanel" aria-labelledby="tabPages" tabindex="0" hidden>
+    <div class="sect-hd reveal">
+      <h2>Sitios publicados</h2>
+      <span class="badge" id="pagesBadge"></span>
+      <span class="badge">Firebase Hosting</span>
+    </div>
+    <div class="plist" id="gridPages"><div class="loading" role="status" aria-label="Cargando paginas"><div class="skel" style="height:68px"></div><div class="skel" style="height:68px"></div></div></div>
+  </section>
+
+  <section class="band wrap reveal">
+    <div class="band-grid">
+      <div class="band-img reveal">
+        <img src="assets/animal-life-in-the-sea-and-on.jpg" alt="Ilustración de vida marina de 1887" width="1624" height="2584" loading="lazy" decoding="async">
+      </div>
+      <div class="reveal">
+        <h2>Un abismo de archivos.</h2>
+        <p>La tienda no tiene backend. Lee los Releases de GitHub y arma el catálogo sola. Cada archivo que compartís aparece acá, directo, sin cuentas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band wrap reveal">
+    <div class="band-grid">
+      <div class="reveal">
+        <h2>Descarga directa.</h2>
+        <p>Los links apuntan a GitHub Releases. Sin login, sin pasos intermedios. El naranja marca el momento de descargar.</p>
+      </div>
+      <div class="band-img reveal">
+        <img src="assets/velodona-octopus-illustration-deutschen-tiefsee-expedition.webp" alt="Ilustración de pulpo Velodona, expedición alemana de aguas profundas" width="1024" height="791" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <section class="band wrap reveal">
+    <div class="band-grid">
+      <div class="band-img reveal">
+        <img src="./bg-abisal.jpg" alt="Fondo abisal generado, motivo de marca" width="1920" height="1080" loading="lazy" decoding="async">
+      </div>
+      <div class="reveal">
+        <h2>Abismo.</h2>
+        <p>Un fondo generado con Qwen para la marca: tentaculos sutiles, particulas bioluminiscentes, centro limpio para la UI.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band wrap reveal">
+    <div class="band-grid">
+      <div class="reveal">
+        <h2>Archivos.</h2>
+        <p>La tienda no tiene backend. Lee los Releases de GitHub y arma el catalogo sola.</p>
+      </div>
+      <div class="band-img reveal">
+        <img src="https://picsum.photos/id/1081/1200/800" alt="Edificio de departamentos con balcones repetidos" width="1200" height="800" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer>
-  <div class="wrap" id="footTxt">Apps de Octa · Archivos en GitHub Releases · Descargas directas sin iniciar sesión</div>
+<footer id="creditos">
+  <div class="wrap">
+    <div class="foot-mark">Apps de Octa</div>
+    <div class="foot-links" style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:24px">
+      <a href="#catalogo">Aplicaciones</a>
+      <a href="#catalogo">Temporales</a>
+      <a href="#catalogo">Páginas</a>
+      <a href="https://github.com/Owning01/mis-apps" target="_blank" rel="noopener">Owning01/mis-apps</a>
+      <a href="https://appsdeocta.web.app" target="_blank" rel="noopener">appsdeocta.web.app</a>
+    </div>
+    <div class="foot-bottom">
+      <span>Apps de Octa · Archivos en GitHub Releases · Descargas directas sin iniciar sesión</span>
+      <span id="footTxt">Apps de Octa · Archivos en GitHub Releases · Descargas directas sin iniciar sesión</span>
+    </div>
+    <p class="credits">Pictures and footage: <a href="https://commons.wikimedia.org/w/index.php?curid=84834637">Dumbo Octopus (49203817176)</a> by NOAA Ocean Exploration &amp; Research from USA, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>, via Wikimedia Commons; <a href="https://commons.wikimedia.org/wiki/File:Animal_life_in_the_sea_and_on_the_land_(1887)_(14593926557).jpg">Animal life in the sea and on the land (1887)</a> by Internet Archive Book Images, no known copyright restrictions, via Wikimedia Commons; <a href="https://www.rawpixel.com/image/547444/velodona-octopus-vintage-poster">Velodona octopus illustration</a> by bhl, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, via rawpixel; <a href="https://commons.wikimedia.org/wiki/File:Graneledone_boreopacifica_seafloor.webm">Graneledone boreopacifica seafloor</a> by NOAA, public domain, via Wikimedia Commons.</p>
+  </div>
 </footer>
 
 <!-- ============ MODAL HISTORIAL ============ -->
 <div class="ov" id="ov">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mName">
     <div class="mhead">
-      <div class="avatar" id="mAvatar">M</div>
+      <div class="avatar" id="mAvatar" style="border-radius:50%">M</div>
       <div>
         <h3 id="mName">App</h3>
         <div class="meta" id="mMeta"></div>
@@ -305,8 +404,6 @@
 
 <script>
 /* ================= ICONOS SVG ================= */
-/* Iconos: trazo fino 2px elegido por legibilidad en 16px; cada glifo mapea su seccion
-   (caja=apps, carpeta=temporales, globo=paginas, dl=descarga, reloj=historial, ext=salir, archivo=fila, inbox=vacio). */
 const ICO = {
   box:'<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
   folder:'<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
@@ -324,16 +421,12 @@ const $ = s => document.querySelector(s);
 document.querySelectorAll('[data-ico]').forEach(el=>{ el.innerHTML = ico(el.dataset.ico, el.closest('.tabbtn')?16:18) });
 $('#searchIco').innerHTML = ico('search',16);
 
-/* ================= CONFIG =================
-   config.json: { repos:[...], siteName, categories:{Nombre:[patrones]} }.
-   Tags temp-* van a Temporales. Query ?repos= solo para pruebas. */
 const LS_CAT='misapps_cat';
 const qs = new URLSearchParams(location.search);
 const site = { repos: [], siteName:'MisApps', categories:{} };
-let groups = [];   // apps agrupadas: {key,name,repo,category,isTemp,versions:[...]}
-let catalogError = ''; // repos que GitHub no devolvio (para el estado de error)
+let groups = [];
+let catalogError = '';
 
-/* ================= HELPERS ================= */
 const esc = s => String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmtDate = d => { try{ return new Date(d).toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'}) }catch{ return '-' } };
 const fmtBytes = n => n>1073741824 ? (n/1073741824).toFixed(2)+' GB' : n>1048576 ? (n/1048576).toFixed(1)+' MB' : Math.max(1,Math.round(n/1024))+' KB';
@@ -344,12 +437,9 @@ const safeUrl = u => {
   catch{ return '#' }
 };
 const safeImg = u => (typeof u==='string' && (/^https:\/\//.test(u)||/^data:image\//.test(u))) ? u : '';
-/* Colores de avatar deterministas por nombre (paleta verde/naranja). */
-/* Avatares: 3 pares dentro del sistema verde/naranja (R-29: sin cian, lima ni lavanda). */
 const AVC = [['#123B2C','#5EEAB0'],['#3A2A10','#FBBF24'],['#3B1D0E','#FB923C']];
 const avc = n => { let h=0; const s=String(n||'?'); for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0} return AVC[Math.abs(h)%AVC.length] };
 const aLetter = n => (String(n||'M').trim().match(/[A-Za-z0-9]/)||['M'])[0].toUpperCase();
-/* Normaliza "OpenHer v1.0.45" -> "openher" para agrupar versiones. */
 const normName = n => String(n||'').toLowerCase()
   .replace(/\bv\d[\w.\-]*|\b\d+\.\d+[\w.\-]*/g,'').replace(/[-_]+/g,' ')
   .replace(/\s+/g,' ').trim();
@@ -365,7 +455,6 @@ function categoryOf(a){
   return 'Otras';
 }
 
-/* ================= CATALOG ================= */
 async function loadSiteConfig(){
   try{
     const r = await fetch('./config.json?t='+Date.now(), {cache:'no-store'});
@@ -382,6 +471,7 @@ async function loadSiteConfig(){
   document.title = site.siteName + ' - Tienda personal';
   $('#brandName').textContent = site.siteName;
   $('#footTxt').textContent = `${site.siteName} · Archivos en GitHub Releases · Descargas directas sin iniciar sesión`;
+  $('#heroTitle').innerHTML = `Tus apps,<br>sin cuentas.`;
 }
 
 async function loadCatalog(){
@@ -400,7 +490,6 @@ async function loadCatalog(){
     desc:a.desc||'', date:a.date||'', htmlUrl:'', isNew:!!a.isNew, beta:false, isTemp:false,
     icon:a.icon||'', assets:(a.assets&&a.assets.length?a.assets:(a.url?[{name:(a.url.split('/').pop()||'archivo'),size:a.size||'',url:a.url,count:0}]:[]))
   })));
-  // Agrupar por app (última versión primero)
   const map = new Map();
   for(const a of items){
     const key = a.gh ? `${a.repo}|${normName(a.name)||a.tag}` : 'local|'+a.id;
@@ -422,7 +511,7 @@ async function loadCatalog(){
   const src = [];
   if(okRepos.length) src.push(okRepos.join(' + '));
   if(!site.repos.length) src.push('sin repos configurados');
-  if(failed.length) src.push('⚠ '+failed.join(', '));
+  if(failed.length) src.push('Aviso: '+failed.join(', '));
   $('#srcBadge').textContent = 'fuente: ' + src.join(' · ');
   buildCatChips();
   render();
@@ -451,9 +540,9 @@ async function loadReleases(rr){
     });
 }
 
-/* ================= UI: tabs + filtros ================= */
 let view = 'apps', fcat = 'Todas';
 let pages = [];
+let revealObserver = null;
 const PANES = {apps:'paneApps', temp:'paneTemp', pages:'panePages'};
 function setView(v){
   view = v;
@@ -500,7 +589,6 @@ function matches(g, q){
   return hay.includes(q);
 }
 
-/* ================= UI: cards ================= */
 function assetRow(x){
   const href = safeUrl(x.url);
   return `<div class="asset">${ico('file',15)}<span class="nm" title="${esc(x.name)}">${esc(x.name)}</span>
@@ -512,44 +600,39 @@ function groupCard(g){
   const v0 = g.latest, assets = v0.assets||[];
   const single = assets.length===1 ? assets[0] : null;
   const [bg, fg] = avc(g.name);
-  const catColor = g.isTemp ? 'var(--warm)' : 'var(--acc)';
+  const catColor = g.isTemp ? 'var(--accent)' : 'var(--brand)';
   const mainBtn = single && safeUrl(single.url)!=='#'
-    ? `<a class="btn btn-dl" href="${esc(safeUrl(single.url))}" aria-label="Descargar ${esc(g.name)} versión ${esc(v0.ver||v0.tag)}">${ico('dl')}<span>Descargar${v0.ver?` v${esc(v0.ver)}`:''}</span></a>`
-    : `<button class="btn btn-dl" data-open="${esc(g.key)}">${ico('box')}<span>Elegir archivo</span></button>`;
-  return `<article class="card" data-group="${esc(g.key)}">
-    <div class="top">
-      ${safeImg(v0.icon)?`<img class="avatar" src="${esc(safeImg(v0.icon))}" alt="" width="52" height="52" style="object-fit:cover">`
-        :`<div class="avatar" style="background:${bg};color:${fg}" aria-hidden="true">${esc(aLetter(g.name))}</div>`}
-      <div style="min-width:0">
-        <h3>${esc(g.name)}</h3>
-        <div class="meta">
-          ${!g.isTemp?`<span class="chip"><span class="cdot" style="background:${catColor}"></span>${esc(g.category)}</span>`:''}
-          ${v0.ver||v0.tag?`<span class="chip">v${esc(v0.ver||v0.tag)}</span>`:''}
-          ${g.repo?`<span class="chip repo">${esc(g.repo)}</span>`:''}
-          ${g.isTemp?'<span class="chip temp">TEMPORAL</span>':''}
-          ${v0.beta&&!g.isTemp?'<span class="chip beta">BETA</span>':''}
-          ${g.isNew?'<span class="chip new">NUEVA</span>':''}
-        </div>
+    ? `<a class="btn btn-dl" href="${esc(safeUrl(single.url))}" aria-label="Descargar ${esc(g.name)} versión ${esc(v0.ver||v0.tag)}"><span>Descargar${v0.ver?` v${esc(v0.ver)}`:''}</span></a>`
+    : `<button class="btn btn-dl" data-open="${esc(g.key)}"><span>Elegir archivo</span></button>`;
+  return `<article class="arow" data-group="${esc(g.key)}">
+    <div class="info">
+      <h3>${esc(g.name)}</h3>
+      <p class="desc">${esc(v0.desc||'')}</p>
+      <div class="meta">
+        ${!g.isTemp?`<span class="chip">${esc(g.category)}</span>`:''}
+        ${v0.ver||v0.tag?`<span class="chip">v${esc(v0.ver||v0.tag)}</span>`:''}
+        ${g.repo?`<span class="chip repo">${esc(g.repo)}</span>`:''}
+        ${g.isTemp?'<span class="chip temp">Temporal</span>':''}
+        ${v0.beta&&!g.isTemp?'<span class="chip beta">Beta</span>':''}
+        ${g.isNew?'<span class="chip new">Nueva</span>':''}
       </div>
     </div>
-    <p class="desc">${esc(v0.desc||'')}</p>
-    <div class="row">
+    <div class="actions">
       ${mainBtn}
-      ${g.versions.length>1?`<button class="btn btn-ghost" data-open="${esc(g.key)}" aria-label="Ver historial de ${esc(g.name)}">${ico('clock')}<span class="hist-n">Historial · ${g.versions.length}</span></button>`:''}
+      ${g.versions.length>1?`<button class="btn btn-ghost btn-sm" data-open="${esc(g.key)}" aria-label="Ver historial de ${esc(g.name)}"><span class="hist-n">Historial · ${g.versions.length}</span></button>`:''}
     </div>
   </article>`;
 }
 
-/* Estado de error: nombra los repos que fallaron y ofrece reintento con reload. */
 function errBox(){
   return `<div class="errbox" role="alert">${ico('inbox',40)}<b>No se pudo cargar el catálogo</b>
-    <span>GitHub no respondió para:</span><code>${esc(catalogError)}</code>
-    <button class="btn btn-acc" data-retry="1" type="button">Reintentar</button></div>`;
+    <span>GitHub no respondió para:</span><span>${esc(catalogError)}</span>
+    <button class="btn btn-brand" data-retry="1" type="button">Reintentar</button></div>`;
 }
 
 function render(){
   const q = $('#q').value.trim().toLowerCase();
-  const dead = catalogError && !groups.length && !q; // error real: sin datos y con repos fallidos
+  const dead = catalogError && !groups.length && !q;
   const apps = groups.filter(g => !g.isTemp && matches(g,q));
   const temps = groups.filter(g => g.isTemp && matches(g,q));
   const pgs = pages.filter(p => !q || (p.name+' '+p.url).toLowerCase().includes(q));
@@ -572,6 +655,11 @@ function render(){
     : `<div class="empty">${ico('globe',40)}<b>Sin páginas</b>
        <span>Todavía no hay sitios publicados en esta lista.</span></div>`;
   buildCatChips();
+  if (revealObserver){
+    document.querySelectorAll('.arow, .prow').forEach(el => {
+      if (!el.classList.contains('reveal')) { el.classList.add('reveal'); revealObserver.observe(el); }
+    });
+  }
 }
 
 function pageCard(p){
@@ -601,7 +689,6 @@ document.addEventListener('click', e => {
   if(o){ openHist(o.dataset.open, o); }
 });
 
-/* ================= UI: modal historial ================= */
 let lastFocus = null;
 function openHist(key, fromEl){
   const g = groups.find(x => x.key===key);
@@ -612,7 +699,7 @@ function openHist(key, fromEl){
   $('#mAvatar').style.background = bg; $('#mAvatar').style.color = fg;
   $('#mName').textContent = g.name;
   $('#mMeta').innerHTML = `
-    ${!g.isTemp?`<span class="chip"><span class="cdot" style="background:${g.isTemp?'var(--warm)':'var(--acc)'}"></span>${esc(g.category)}</span>`:''}
+    ${!g.isTemp?`<span class="chip"><span class="cdot" style="background:${g.isTemp?'var(--accent)':'var(--brand)'}"></span>${esc(g.category)}</span>`:''}
     ${g.repo?`<span class="chip repo">${esc(g.repo)}</span>`:''}
     <span class="chip">${g.versions.length} ${g.versions.length===1?'versión':'versiones'}</span>`;
   $('#mVers').innerHTML = g.versions.map((v,i) => `
@@ -620,8 +707,8 @@ function openHist(key, fromEl){
       <div class="vhead">
         <b>v${esc(v.ver||v.tag||'?')}</b>
         ${v.date?`<span class="chip">${esc(fmtDate(v.date))}</span>`:''}
-        ${i===0?'<span class="chip new">ÚLTIMA</span>':''}
-        ${v.beta?'<span class="chip beta">BETA</span>':''}
+        ${i===0?'<span class="chip new">Última</span>':''}
+        ${v.beta?'<span class="chip beta">Beta</span>':''}
       </div>
       ${v.desc?`<p class="notes">${esc(v.desc.slice(0,300))}</p>`:''}
       <div class="assets">${(v.assets||[]).map(assetRow).join('') || '<span class="chip">Sin archivos</span>'}</div>
@@ -640,12 +727,22 @@ $('#ov').addEventListener('click', e => { if(e.target.id==='ov') closeHist() });
 document.addEventListener('keydown', e => { if(e.key==='Escape' && $('#ov').classList.contains('on')) closeHist() });
 
 (async function init(){
+  document.documentElement.classList.add('js');
   await loadSiteConfig();
   await Promise.all([loadCatalog(), loadPages()]);
   render();
+  // reveal hero
+  requestAnimationFrame(()=> {
+    document.querySelectorAll('.hero, .hero-media').forEach(el=>el.classList.add('in'));
+  });
+  // scroll reveals
+  revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target) } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 })();
 
-/* PWA: registra el service worker (app instalable + shell offline). */
+/* PWA */
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(() => {});

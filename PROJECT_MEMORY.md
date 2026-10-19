@@ -179,3 +179,18 @@
 - Botones: 44px era el target tactil usado tambien en escritorio. Ahora escritorio = 36px acciones / 38px tabs / 34px chips / 38px buscador; 44px solo en <=640px. Verificado medido en local y vivo.
 - Fondo: ComfyUI estaba caido (lo levante con comfy-qwen), generado 2048x1152 con Qwen (seed 5610500635871981), a bg-abisal.jpg 1920x1080 28KB. Overlay 0.62-0.88 mantiene AA (medido 8-17:1). SW cache v1 -> v2 para refrescar shell.
 - Evidencia: preview-bg-desktop/mobile.png, preview-final-bg.png, 0 errores. Commit 3eea4e0 + deploy.\
+
+## 2026-10-15 - Categoria nueva: Derecho Informatico
+- Pedido (otra sesion de agente): publicar la app de presentacion universal "derecho-informatico" como permanente.
+- config.json: categoria "Derecho Informatico" -> patron mis-apps/derecho-informatico-* (despues de Cine Gbro, antes de Moviles). Commit 6e75089 + push + firebase deploy --only hosting --project appsdeocta (release complete). Verificado: appsdeocta.web.app/config.json sirve la categoria.
+- Release: derecho-informatico-v1.0.0 en Owning01/mis-apps (asset derecho-informatico.html 1.41 MB). Se borro el temporal temp-derecho-informatico-20261015 (release + tag).
+
+## 2026-10-18 — Rediseño completo con design-taste-frontend
+- Pedido: "Toda la pagina, css, etc es una mierda, aplica taste2 skill y mejorala completamente".
+- Dirección tratada: "One motif" (seed 1857046855), tipo Space Grotesk + Inter (marca), paleta verde oscuro + naranja descarga, motivo circular.
+- Redibujado el slot de tipo a las fuentes de marca (Space Grotesk/Inter).
+- index.html reescrito: hero con headline enmascarado, catálogo como lista (no tarjetas), chips, modal, secciones con imágenes, footer con créditos.
+- Imágenes reales descargadas a assets/ (dumbo octopus CC BY-SA 2.0, animal life 1887, velodona CC0, video Graneledone public domain) + bg-abisal.jpg; créditos en footer.
+- Movimiento: masked line reveal, drift en imagen hero, entradas por sección, hover en controles; prefers-reduced-motion respetado.
+- Inspect: 0 FAIL, 0 WARN (lint 0 FAIL). Preview abierto.
+- Pendiente: commit/push/deploy a Firebase si se aprueba.
