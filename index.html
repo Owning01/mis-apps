@@ -51,7 +51,7 @@
   /* ---------- Header ---------- */
   header{position:static;background:var(--bg)}
   .hd{display:flex;align-items:center;gap:16px;padding:16px 0}
-  .logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;font-family:"Space Grotesk",sans-serif}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;font-family:"Space Grotesk",sans-serif;margin:0}
   .logo img.mark{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0}
   .grow{flex:1}
   .search{position:relative;min-width:200px;max-width:360px;flex:1}
@@ -98,17 +98,7 @@
   .catchip[aria-pressed="true"] .cdot{background:var(--brand)}
   .catchip .n{font-size:16px;opacity:.75}
 
-  /* ---------- Hero ---------- */
-  .hero{padding:48px 0 96px; position:relative; overflow:hidden;scroll-margin-top:80px}
-  .hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;max-width:720px}
-  .hero h1{font-size:clamp(40px,5.5vw,72px);line-height:0.92;letter-spacing:-.05em;max-width:100%}
-  .hero h1 .line{display:block;overflow:hidden}
-  .hero h1 .line span{display:inline-block}
-  @media (prefers-reduced-motion: no-preference){
-    .hero h1 .line span{transform:translateY(110%);animation:rise .9s var(--ease) forwards}
-    .hero h1 .line:nth-of-type(2) span{animation-delay:.11s}
-  }
-  @keyframes rise{to{transform:translateY(0)}}
+  /* ---------- Catalog ---------- */
 
   /* ---------- Sections ---------- */
   .sect{padding:64px 0 96px;scroll-margin-top:80px}
@@ -223,7 +213,6 @@
     video{display:none}
   }
   @media(max-width:640px){
-    .hero h1{font-size:clamp(40px,12vw,64px)}
     .arow{grid-template-columns:auto 1fr;gap:12px}
     .arow .actions{grid-column:1/-1;justify-content:flex-start}
     .wrap{padding:0 16px}
@@ -250,7 +239,7 @@
 
 <header>
   <div class="wrap hd reveal">
-    <div class="logo"><img class="mark" src="./icons/icon-192.png" alt="Logo Apps de Octa" width="40" height="40" fetchpriority="high"> <span id="brandName">Apps de Octa</span></div>
+    <h1 class="logo"><img class="mark" src="./icons/icon-192.png" alt="Logo Apps de Octa" width="40" height="40" fetchpriority="high"> <span id="brandName">Apps de Octa</span></h1>
     <div class="grow"></div>
     <div class="search">
       <span id="searchIco"></span>
@@ -268,15 +257,6 @@
 </header>
 
 <main>
-  <section class="hero wrap reveal">
-    <div class="hero-grid">
-      <div>
-        <h1 id="heroTitle"><span class="line"><span>Apps de</span></span><br><span class="line"><span>Octa.</span></span></h1>
-      </div>
-
-    </div>
-  </section>
-
   <div class="wrap" id="catalogo">
     <div class="catchips reveal" id="catChips" role="group" aria-label="Filtrar por categoría"></div>
   </div>
@@ -751,11 +731,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && $('#ov').clas
   await loadSiteConfig();
   await Promise.all([loadCatalog(), loadPages(), loadSkills()]);
   render();
-  // reveal hero
-  requestAnimationFrame(()=> {
-    document.querySelectorAll('.hero, .hero-media').forEach(el=>el.classList.add('in'));
-  });
-  // scroll reveals
+  // (hero eliminado: no hay reveal manual en carga)
   revealObserver = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target) } });
   }, {threshold:0.15});
