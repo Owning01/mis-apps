@@ -261,7 +261,7 @@
 <body>
 
 <header>
-  <div class="wrap hd">
+  <div class="wrap hd reveal">
     <div class="logo"><img class="mark" src="./icons/icon-192.png" alt="Logo Apps de Octa" width="40" height="40" fetchpriority="high"> <span id="brandName">Apps de Octa</span></div>
     <div class="grow"></div>
     <div class="search">
@@ -270,7 +270,7 @@
     </div>
   </div>
   <div class="wrap">
-    <nav class="tabsbar" role="tablist" aria-label="Secciones">
+    <nav class="tabsbar reveal" role="tablist" aria-label="Secciones">
       <button class="tabbtn" role="tab" id="tabApps" aria-selected="true" aria-controls="paneApps" data-view="apps"><span data-ico="box"></span>Aplicaciones <span class="n" id="nApps">0</span></button>
       <button class="tabbtn" role="tab" id="tabTemp" aria-selected="false" aria-controls="paneTemp" data-view="temp" tabindex="-1"><span data-ico="folder"></span>Temporales <span class="n" id="nTemp">0</span></button>
       <button class="tabbtn" role="tab" id="tabPages" aria-selected="false" aria-controls="panePages" data-view="pages" tabindex="-1"><span data-ico="globe"></span>Páginas <span class="n" id="nPages">0</span></button>
@@ -283,14 +283,14 @@
     <div class="hero-grid">
       <div>
         <h1 id="heroTitle"><span class="line"><span>Apps de</span></span><br><span class="line"><span>Octa.</span></span></h1>
-        <p class="lead">Aplicaciones y archivos listos para descargar. Directo desde GitHub Releases, sin iniciar sesión, sin intermediarios.</p>
+        <p class="lead reveal">Aplicaciones y archivos listos para descargar. Directo desde GitHub Releases, sin iniciar sesión, sin intermediarios.</p>
       </div>
 
     </div>
   </section>
 
   <div class="wrap" id="catalogo">
-    <div class="catchips" id="catChips" role="group" aria-label="Filtrar por categoría"></div>
+    <div class="catchips reveal" id="catChips" role="group" aria-label="Filtrar por categoría"></div>
   </div>
 
   <section class="sect wrap reveal" id="paneApps" role="tabpanel" aria-labelledby="tabApps" tabindex="0">
@@ -320,70 +320,17 @@
     <div class="plist" id="gridPages"><div class="loading" role="status" aria-label="Cargando paginas"><div class="skel" style="height:68px"></div><div class="skel" style="height:68px"></div></div></div>
   </section>
 
-  <section class="band wrap reveal">
-    <div class="band-grid">
-      <div class="band-img reveal">
-        <img src="assets/animal-life-in-the-sea-and-on.jpg" alt="Ilustración de vida marina de 1887" width="1624" height="2584" loading="lazy" decoding="async">
-      </div>
-      <div class="reveal">
-        <h2>Un abismo de archivos.</h2>
-        <p>La tienda no tiene backend. Lee los Releases de GitHub y arma el catálogo sola. Cada archivo que compartís aparece acá, directo, sin cuentas.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="band wrap reveal">
-    <div class="band-grid">
-      <div class="reveal">
-        <h2>Descarga directa.</h2>
-        <p>Los links apuntan a GitHub Releases. Sin login, sin pasos intermedios. El naranja marca el momento de descargar.</p>
-      </div>
-      <div class="band-img reveal">
-        <img src="assets/velodona-octopus-illustration-deutschen-tiefsee-expedition.webp" alt="Ilustración de pulpo Velodona, expedición alemana de aguas profundas" width="1024" height="791" loading="lazy" decoding="async">
-      </div>
-    </div>
-  </section>
-
-  <section class="band wrap reveal">
-    <div class="band-grid">
-      <div class="band-img reveal">
-        <img src="./bg-abisal.jpg" alt="Fondo abisal generado, motivo de marca" width="1920" height="1080" loading="lazy" decoding="async">
-      </div>
-      <div class="reveal">
-        <h2>Abismo.</h2>
-        <p>Un fondo generado con Qwen para la marca: tentaculos sutiles, particulas bioluminiscentes, centro limpio para la UI.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="band wrap reveal">
-    <div class="band-grid">
-      <div class="reveal">
-        <h2>Archivos.</h2>
-        <p>La tienda no tiene backend. Lee los Releases de GitHub y arma el catalogo sola.</p>
-      </div>
-      <div class="band-img reveal">
-        <img src="https://picsum.photos/id/1081/1200/800" alt="Edificio de departamentos con balcones repetidos" width="1200" height="800" loading="lazy" decoding="async">
-      </div>
-    </div>
-  </section>
 </main>
 
-<footer id="creditos">
-  <div class="wrap">
-    <div class="foot-mark">Apps de Octa</div>
-    <div class="foot-links" style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:24px">
+<footer id="creditos" class="reveal">
+  <div class="wrap" style="display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700">Apps de Octa</span>
+    <span style="display:flex;gap:20px;flex-wrap:wrap">
       <a href="#catalogo">Aplicaciones</a>
       <a href="#catalogo">Temporales</a>
       <a href="#catalogo">Páginas</a>
-      <a href="https://github.com/Owning01/mis-apps" target="_blank" rel="noopener">Owning01/mis-apps</a>
-      <a href="https://appsdeocta.web.app" target="_blank" rel="noopener">appsdeocta.web.app</a>
-    </div>
-    <div class="foot-bottom">
-      <span>Apps de Octa · Archivos en GitHub Releases · Descargas directas sin iniciar sesión</span>
-      <span id="footTxt">Apps de Octa · Archivos en GitHub Releases · Descargas directas sin iniciar sesión</span>
-    </div>
-    <p class="credits">Pictures and footage: <a href="https://commons.wikimedia.org/w/index.php?curid=84834637">Dumbo Octopus (49203817176)</a> by NOAA Ocean Exploration &amp; Research from USA, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>, via Wikimedia Commons; <a href="https://commons.wikimedia.org/wiki/File:Animal_life_in_the_sea_and_on_the_land_(1887)_(14593926557).jpg">Animal life in the sea and on the land (1887)</a> by Internet Archive Book Images, no known copyright restrictions, via Wikimedia Commons; <a href="https://www.rawpixel.com/image/547444/velodona-octopus-vintage-poster">Velodona octopus illustration</a> by bhl, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, via rawpixel; <a href="https://commons.wikimedia.org/wiki/File:Graneledone_boreopacifica_seafloor.webm">Graneledone boreopacifica seafloor</a> by NOAA, public domain, via Wikimedia Commons.</p>
+      <a href="https://github.com/Owning01/mis-apps" target="_blank" rel="noopener">GitHub</a>
+    </span>
   </div>
 </footer>
 
@@ -470,7 +417,8 @@ async function loadSiteConfig(){
   else if(qs.get('owner') && qs.get('repo')) site.repos = [`${qs.get('owner')}/${qs.get('repo')}`];
   document.title = site.siteName + ' - Tienda personal';
   $('#brandName').textContent = site.siteName;
-  $('#footTxt').textContent = `${site.siteName} · Archivos en GitHub Releases · Descargas directas sin iniciar sesión`;
+  const foot = $('#footTxt');
+  if (foot) foot.textContent = `${site.siteName} · Archivos en GitHub Releases · Descargas directas sin iniciar sesión`;
   $('#heroTitle').innerHTML = `Tus apps,<br>sin cuentas.`;
 }
 
