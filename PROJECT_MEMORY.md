@@ -194,3 +194,13 @@
 - Movimiento: masked line reveal, drift en imagen hero, entradas por sección, hover en controles; prefers-reduced-motion respetado.
 - Inspect: 0 FAIL, 0 WARN (lint 0 FAIL). Preview abierto.
 - Pendiente: commit/push/deploy a Firebase si se aprueba.
+
+## 2026-10-19 - Seccion Skills con descarga por skill
+- Pedido: pestana nueva con todas las skills de la maquina, agrupadas por categoria, con explicacion, diagrama de uso por skill y descarga individual.
+- Alcance acordado: 36 activas (34 de .agents/skills, incluidas las 3 anidadas de animate; + flow-images y generador-fotos de .config/opencode/skills). Fuera: backups de .agents/backupo y gemini-api (carpeta vacia).
+- Generador tools/build-skills.py: lee las carpetas reales, arma skills/<id>.zip (excluye .git, __pycache__, node_modules) y skills.json con el copy de cada skill. 36 zips, 4.8 MB. Se ignora en deploy (tools/**).
+- UI: cuarta pestana Skills con conteo; 7 grupos de categoria; chips; busqueda integrada; diagrama de 3 nodos por skill (Cuando usarla -> Que hace -> Que entrega); boton Descargar .zip; link en footer.
+- Bug arreglado: los paneles con .reveal y threshold 0.15 nunca disparaban si superan ~6.7x el viewport (panel Skills ~19.000px quedaba invisible con opacity 0). Los 4 paneles perdieron .reveal; setView re-observa los .reveal internos.
+- Arreglos varios: .arow con border-radius:0 16px 16px 999px (resto del pase antislop) -> cuadrado; .modal movil idem; CSS muerto borrado (.lead, .hero-media, drift, .band-*, .foot-*, .grid, .dot); el h1 del hero ya no se pisa por JS.
+- Verificado: lint 0 FAIL / 7 WARN; inspect 1 FAIL (few-pictures, intencional: sin fotos) y 2 WARN; 0 errores de consola y 0 overflow en 1440/768/390; zip responde 200; busqueda apuntes -> 1 y chip Animacion -> 6; link del footer cambia de vista.
+- Pendiente: deploy a Firebase (firebase deploy --only hosting --project appsdeocta).

@@ -109,32 +109,18 @@
     .hero h1 .line:nth-of-type(2) span{animation-delay:.11s}
   }
   @keyframes rise{to{transform:translateY(0)}}
-  @media (prefers-reduced-motion: no-preference){
-    .hero-media img{animation:drift 18s ease-in-out infinite}
-  }
-  @keyframes drift{0%{transform:scale(1.05) translate(0,0)}50%{transform:scale(1.12) translate(-2%,-1%)}100%{transform:scale(1.05) translate(0,0)}}
-  .hero .lead{font-size:var(--step-lead);color:var(--muted);max-width:60ch;margin-top:24px}
-  .hero .actions{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
-  .hero-media{position:relative;aspect-ratio:1/1;width:100%;max-width:520px;margin-left:auto;
-    border-radius:50%;overflow:hidden;background:var(--surface)}
-  .hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);
-    transition:transform 1.2s var(--ease)}
-  .hero-media.in img{transform:scale(1)}
-  .hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;mix-blend-mode:screen}
-  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);margin-right:8px}
 
   /* ---------- Sections ---------- */
   .sect{padding:64px 0 96px;scroll-margin-top:80px}
   .sect-hd{display:flex;align-items:baseline;gap:16px;margin-bottom:24px;flex-wrap:wrap}
   .sect-hd h2{font-size:clamp(28px,4vw,44px)}
   .badge{font-size:16px;color:var(--muted);background:var(--surface);padding:4px 10px;border-radius:0}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:16px}
   .applist{display:flex;flex-direction:column;gap:12px}
   .plist{display:flex;flex-direction:column;gap:10px}
 
   /* ---------- App rows (list, not cards) ---------- */
   .arow{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;
-    background:var(--surface);border-radius:0 16px 16px 999px;padding:12px 16px 12px 12px;
+    background:var(--surface);padding:12px 16px 12px 12px;
     transition:background .2s var(--ease),transform .2s var(--ease)}
   .arow:hover{background:var(--surface-2);transform:translateX(4px)}
   .arow .avatar{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;
@@ -169,6 +155,27 @@
   .prow .ptxt b{display:block;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .prow .ptxt small{color:var(--muted);font-size:16px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .prow>svg{width:18px;height:18px;color:var(--muted);flex-shrink:0}
+
+  /* ---------- Skills ---------- */
+  .sect-lead{color:var(--muted);font-size:var(--step-body);max-width:70ch;margin:-8px 0 24px}
+  .skgroup{margin-bottom:44px}
+  .skghd{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+  .skghd h3{font-size:clamp(20px,2.6vw,30px)}
+  .sklist{display:flex;flex-direction:column;gap:12px}
+  .skill{background:var(--surface);padding:16px;transition:background .2s var(--ease)}
+  .skill:hover{background:var(--surface-2)}
+  .sk-hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .sk-hd h3{font-size:17px;overflow-wrap:anywhere}
+  .sk-hd .btn{margin-left:auto}
+  .sk-sum{color:var(--muted);font-size:16px;line-height:1.55;margin-top:8px;max-width:75ch}
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;margin-top:14px;align-items:stretch}
+  .fnode{background:var(--bg);padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0}
+  .fnode b{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+  .flow .fnode:nth-child(3) b{color:var(--brand)}
+  .flow .fnode:nth-child(5) b{color:var(--accent)}
+  .fnode span{font-size:14px;line-height:1.45}
+  .farr{align-self:center;color:var(--muted);display:grid;place-items:center}
+  .sk-meta{color:var(--muted);font-size:13px;margin-top:10px}
 
   /* ---------- States ---------- */
   .empty{text-align:center;color:var(--muted);padding:56px 20px;background:var(--surface);
@@ -206,29 +213,8 @@
   .asset .cnt{color:var(--muted);font-size:16px;white-space:nowrap}
   .asset .btn{flex-shrink:0}
 
-  /* ---------- Imagery bands ---------- */
-  .band{padding:64px 0}
-  .band-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
-  @media(min-width:900px){.band-grid{grid-template-columns:1fr 1fr;gap:48px}}
-  .band-img{border-radius:50%;overflow:hidden;aspect-ratio:1/1;background:var(--surface)}
-  .band-img img{width:100%;height:100%;object-fit:cover}
-  .band-img video{width:100%;height:100%;object-fit:cover}
-  .band h2{font-size:clamp(28px,4vw,44px);margin-bottom:12px}
-  .band p{color:var(--muted);font-size:var(--step-body);max-width:60ch}
-
   /* ---------- Footer ---------- */
   footer{padding:64px 0 48px;background:var(--surface)}
-  .foot-mark{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(32px,6vw,72px);
-    letter-spacing:-.05em;line-height:0.9;margin-bottom:32px}
-  .foot-cols{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:32px}
-  @media(min-width:900px){.foot-cols{grid-template-columns:repeat(4,1fr)}}
-  .foot-cols a{display:block;color:var(--muted);font-size:14px;padding:4px 0;transition:color .2s}
-  .foot-cols a:hover{color:var(--ink)}
-  .foot-cols b{display:block;font-size:16px;color:var(--ink);margin-bottom:8px}
-  .credits{color:var(--muted);font-size:16px;line-height:1.6;margin-top:24px}
-  .credits a{color:var(--muted);text-decoration:underline}
-  .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
-    padding-top:24px;color:var(--muted);font-size:16px}
 
   /* ---------- Motion ---------- */
   @media (prefers-reduced-motion: reduce){
@@ -238,7 +224,6 @@
   }
   @media(max-width:640px){
     .hero h1{font-size:clamp(40px,12vw,64px)}
-    .hero-media{max-width:320px;margin:0 auto}
     .arow{grid-template-columns:auto 1fr;gap:12px}
     .arow .actions{grid-column:1/-1;justify-content:flex-start}
     .wrap{padding:0 16px}
@@ -253,8 +238,11 @@
     .search{order:3;min-width:100%}
     .tabsbar{margin-bottom:10px}
     .ov{padding:10px;place-items:end center}
-    .modal{padding:20px;border-radius:0 18px 0 0;max-height:92vh;max-width:100%}
+    .modal{padding:20px;max-height:92vh;max-width:100%}
     .catchips{margin:12px 0 14px}
+    .flow{grid-template-columns:1fr}
+    .farr{transform:rotate(90deg);justify-self:center}
+    .sk-hd .btn{margin-left:0;width:100%}
   }
 </style>
 </head>
@@ -266,7 +254,7 @@
     <div class="grow"></div>
     <div class="search">
       <span id="searchIco"></span>
-      <input id="q" type="search" placeholder="Buscar aplicación o archivo..." autocomplete="off" aria-label="Buscar aplicación o archivo">
+      <input id="q" type="search" placeholder="Buscar app, archivo o skill..." autocomplete="off" aria-label="Buscar aplicación, archivo o skill">
     </div>
   </div>
   <div class="wrap">
@@ -274,6 +262,7 @@
       <button class="tabbtn" role="tab" id="tabApps" aria-selected="true" aria-controls="paneApps" data-view="apps"><span data-ico="box"></span>Aplicaciones <span class="n" id="nApps">0</span></button>
       <button class="tabbtn" role="tab" id="tabTemp" aria-selected="false" aria-controls="paneTemp" data-view="temp" tabindex="-1"><span data-ico="folder"></span>Temporales <span class="n" id="nTemp">0</span></button>
       <button class="tabbtn" role="tab" id="tabPages" aria-selected="false" aria-controls="panePages" data-view="pages" tabindex="-1"><span data-ico="globe"></span>Páginas <span class="n" id="nPages">0</span></button>
+      <button class="tabbtn" role="tab" id="tabSkills" aria-selected="false" aria-controls="paneSkills" data-view="skills" tabindex="-1"><span data-ico="spark"></span>Skills <span class="n" id="nSkills">0</span></button>
     </nav>
   </div>
 </header>
@@ -283,7 +272,6 @@
     <div class="hero-grid">
       <div>
         <h1 id="heroTitle"><span class="line"><span>Apps de</span></span><br><span class="line"><span>Octa.</span></span></h1>
-        <p class="lead reveal">Aplicaciones y archivos listos para descargar. Directo desde GitHub Releases, sin iniciar sesión, sin intermediarios.</p>
       </div>
 
     </div>
@@ -293,7 +281,7 @@
     <div class="catchips reveal" id="catChips" role="group" aria-label="Filtrar por categoría"></div>
   </div>
 
-  <section class="sect wrap reveal" id="paneApps" role="tabpanel" aria-labelledby="tabApps" tabindex="0">
+  <section class="sect wrap" id="paneApps" role="tabpanel" aria-labelledby="tabApps" tabindex="0">
     <div class="sect-hd reveal">
       <h2 id="appsTitle">Aplicaciones</h2>
       <span class="badge" id="srcBadge">cargando…</span>
@@ -302,7 +290,7 @@
     <div class="applist" id="grid"><div class="loading" role="status" aria-label="Cargando aplicaciones"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></div>
   </section>
 
-  <section class="sect wrap reveal" id="paneTemp" role="tabpanel" aria-labelledby="tabTemp" tabindex="0" hidden>
+  <section class="sect wrap" id="paneTemp" role="tabpanel" aria-labelledby="tabTemp" tabindex="0" hidden>
     <div class="sect-hd reveal">
       <h2>Archivos temporales</h2>
       <span class="badge" id="tempBadge"></span>
@@ -311,13 +299,24 @@
     <div class="applist" id="gridTemp"><div class="loading" role="status" aria-label="Cargando temporales"><div class="skel"></div></div></div>
   </section>
 
-  <section class="sect wrap reveal" id="panePages" role="tabpanel" aria-labelledby="tabPages" tabindex="0" hidden>
+  <section class="sect wrap" id="panePages" role="tabpanel" aria-labelledby="tabPages" tabindex="0" hidden>
     <div class="sect-hd reveal">
       <h2>Sitios publicados</h2>
       <span class="badge" id="pagesBadge"></span>
       <span class="badge">Firebase Hosting</span>
     </div>
     <div class="plist" id="gridPages"><div class="loading" role="status" aria-label="Cargando paginas"><div class="skel" style="height:68px"></div><div class="skel" style="height:68px"></div></div></div>
+  </section>
+
+  <section class="sect wrap" id="paneSkills" role="tabpanel" aria-labelledby="tabSkills" tabindex="0" hidden>
+    <div class="sect-hd reveal">
+      <h2>Skills.</h2>
+      <span class="badge" id="skillsBadge">cargando…</span>
+      <span class="badge">.zip por skill</span>
+    </div>
+    <p class="sect-lead">Instrucciones que mis agentes cargan según la tarea. Cada una con su explicación, su diagrama de uso y descarga directa.</p>
+    <div class="catchips" id="skillChips" role="group" aria-label="Filtrar skills por categoría"></div>
+    <div id="skillsWrap"><div class="loading" role="status" aria-label="Cargando skills"><div class="skel" style="height:120px"></div></div></div>
   </section>
 
 </main>
@@ -329,6 +328,7 @@
       <a href="#catalogo">Aplicaciones</a>
       <a href="#catalogo">Temporales</a>
       <a href="#catalogo">Páginas</a>
+      <a href="#catalogo" data-goto="skills">Skills</a>
       <a href="https://github.com/Owning01/mis-apps" target="_blank" rel="noopener">GitHub</a>
     </span>
   </div>
@@ -361,7 +361,9 @@ const ICO = {
   ext:'<path d="M7 17 17 7"/><path d="M7 7h10v10"/>',
   file:'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>',
   inbox:'<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
-  globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'
+  globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  spark:'<path d="M12 2 14.2 8.8 21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2Z"/>',
+  arrow:'<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>'
 };
 const ico = (n,s=16)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[n]||''}</svg>`;
 const $ = s => document.querySelector(s);
@@ -419,7 +421,6 @@ async function loadSiteConfig(){
   $('#brandName').textContent = site.siteName;
   const foot = $('#footTxt');
   if (foot) foot.textContent = `${site.siteName} · Archivos en GitHub Releases · Descargas directas sin iniciar sesión`;
-  $('#heroTitle').innerHTML = `Tus apps,<br>sin cuentas.`;
 }
 
 async function loadCatalog(){
@@ -488,10 +489,10 @@ async function loadReleases(rr){
     });
 }
 
-let view = 'apps', fcat = 'Todas';
-let pages = [];
+let view = 'apps', fcat = 'Todas', fscat = 'Todas';
+let pages = [], skills = [], skillsError = false;
 let revealObserver = null;
-const PANES = {apps:'paneApps', temp:'paneTemp', pages:'panePages'};
+const PANES = {apps:'paneApps', temp:'paneTemp', pages:'panePages', skills:'paneSkills'};
 function setView(v){
   view = v;
   for(const b of document.querySelectorAll('.tabbtn')){
@@ -501,6 +502,10 @@ function setView(v){
   }
   for(const [k,id] of Object.entries(PANES)) $('#'+id).hidden = v!==k;
   render();
+  if(revealObserver){
+    const pane = document.getElementById(PANES[v]);
+    if(pane) pane.querySelectorAll('.reveal').forEach(el => { revealObserver.unobserve(el); revealObserver.observe(el) });
+  }
 }
 document.querySelectorAll('.tabbtn').forEach(b => b.addEventListener('click', ()=>setView(b.dataset.view)));
 document.querySelector('.tabsbar').addEventListener('keydown', e => {
@@ -529,6 +534,70 @@ $('#catChips').addEventListener('click', e => {
   const b = e.target.closest('[data-cat]');
   if(b){ fcat = b.dataset.cat; buildCatChips(); render() }
 });
+
+/* ---------- Skills ---------- */
+function buildSkillChips(){
+  const box = $('#skillChips');
+  const cats = [];
+  for(const s of skills){ if(!cats.includes(s.cat)) cats.push(s.cat); }
+  const counts = c => skills.filter(s=>c==='Todas'||s.cat===c).length;
+  box.innerHTML = ['Todas', ...cats].map(c=>`<button class="catchip" aria-pressed="${c===fscat}" data-scat="${esc(c)}">
+    <span class="cdot"></span>${esc(c)} <span class="n">${counts(c)}</span></button>`).join('');
+  box.style.display = view==='skills' && cats.length ? '' : 'none';
+}
+$('#skillChips').addEventListener('click', e => {
+  const b = e.target.closest('[data-scat]');
+  if(b){ fscat = b.dataset.scat; render() }
+});
+
+const SKEL = `<div class="loading" role="status" aria-label="Cargando skills"><div class="skel" style="height:120px"></div><div class="skel" style="height:120px"></div></div>`;
+
+function skillCard(s){
+  const node = (t,v)=>`<div class="fnode"><b>${t}</b><span>${esc(v)}</span></div>`;
+  return `<article class="skill">
+    <div class="sk-hd">
+      <h3>${esc(s.name)}</h3>
+      <span class="chip">${esc(s.files)} archivos</span>
+      <a class="btn btn-dl btn-sm" href="./skills/${encodeURIComponent(s.id)}.zip" download="${esc(s.id)}.zip" aria-label="Descargar skill ${esc(s.name)} en .zip">${ico('dl',15)}<span>Descargar .zip</span></a>
+    </div>
+    <p class="sk-sum">${esc(s.summary)}</p>
+    <div class="flow" role="img" aria-label="Diagrama de uso de ${esc(s.name)}: cuándo usarla, qué hace y qué entrega">
+      ${node('Cuándo usarla', s.when)}
+      <span class="farr" aria-hidden="true">${ico('arrow',18)}</span>
+      ${node('Qué hace', s.does)}
+      <span class="farr" aria-hidden="true">${ico('arrow',18)}</span>
+      ${node('Qué entrega', s.out)}
+    </div>
+    <div class="sk-meta">${esc(s.kb)} KB en .zip · ${esc(s.src)}</div>
+  </article>`;
+}
+
+function renderSkills(){
+  const q = $('#q').value.trim().toLowerCase();
+  const list = skills.filter(s => (fscat==='Todas'||s.cat===fscat) &&
+    (!q || (s.name+' '+s.cat+' '+s.summary+' '+s.when+' '+s.does+' '+s.out).toLowerCase().includes(q)));
+  $('#nSkills').textContent = skills.length;
+  $('#skillsBadge').textContent = list.length + (list.length===1?' skill':' skills');
+  const cats = [];
+  for(const s of list){ if(!cats.includes(s.cat)) cats.push(s.cat); }
+  $('#skillsWrap').innerHTML = skillsError
+    ? `<div class="empty">${ico('inbox',40)}<b>No se pudieron cargar las skills</b><span>Revisá skills.json en el repo.</span></div>`
+    : !skills.length ? SKEL
+    : list.length ? cats.map(c=>`<section class="skgroup">
+        <div class="skghd"><h3>${esc(c)}</h3><span class="badge">${list.filter(x=>x.cat===c).length}</span></div>
+        <div class="sklist">${list.filter(x=>x.cat===c).map(skillCard).join('')}</div>
+      </section>`).join('')
+    : `<div class="empty">${ico('inbox',40)}<b>Nada por aquí</b><span>Probá con otro término o categoría.</span></div>`;
+  buildSkillChips();
+}
+
+async function loadSkills(){
+  try{
+    const r = await fetch('./skills.json?t='+Date.now(), {cache:'no-store'});
+    if(r.ok){ const j = await r.json(); if(Array.isArray(j.skills)) skills = j.skills; else skillsError = true; }
+    else skillsError = true;
+  }catch{ skillsError = true }
+}
 
 function matches(g, q){
   if(fcat!=='Todas' && g.category!==fcat) return false;
@@ -603,8 +672,9 @@ function render(){
     : `<div class="empty">${ico('globe',40)}<b>Sin páginas</b>
        <span>Todavía no hay sitios publicados en esta lista.</span></div>`;
   buildCatChips();
+  renderSkills();
   if (revealObserver){
-    document.querySelectorAll('.arow, .prow').forEach(el => {
+    document.querySelectorAll('.arow, .prow, .skill').forEach(el => {
       if (!el.classList.contains('reveal')) { el.classList.add('reveal'); revealObserver.observe(el); }
     });
   }
@@ -633,6 +703,8 @@ async function loadPages(){
 document.addEventListener('click', e => {
   const rt = e.target.closest('[data-retry]');
   if(rt){ location.reload(); return; }
+  const go = e.target.closest('[data-goto]');
+  if(go){ setView(go.dataset.goto); return; }
   const o = e.target.closest('[data-open]');
   if(o){ openHist(o.dataset.open, o); }
 });
@@ -677,7 +749,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && $('#ov').clas
 (async function init(){
   document.documentElement.classList.add('js');
   await loadSiteConfig();
-  await Promise.all([loadCatalog(), loadPages()]);
+  await Promise.all([loadCatalog(), loadPages(), loadSkills()]);
   render();
   // reveal hero
   requestAnimationFrame(()=> {
