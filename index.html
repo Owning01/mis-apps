@@ -24,6 +24,7 @@
     --ink:#EFF6F0; --muted:#A3B8AB;
     --accent:#F97316; --accent-ink:#2A1503;
     --brand:#34D399; --brand-ink:#06281C;
+    --pages:#22D3EE; --pages-ink:#082F36;
     --step-small:clamp(0.8125rem,0.79rem+0.1vw,0.875rem);
     --step-body:clamp(1.0625rem,1rem+0.25vw,1.1875rem);
     --step-lead:clamp(1.25rem,1.1rem+0.7vw,1.625rem);
@@ -86,6 +87,15 @@
   .tabbtn .n{font-size:16px;background:var(--surface-2);padding:1px 8px;border-radius:0}
   .tabbtn[aria-selected="true"]{background:var(--brand);color:var(--brand-ink)}
   .tabbtn[aria-selected="true"] .n{background:rgba(6,40,28,.25)}
+  /* Colores por pestaña (apps/verde, temporales/naranja, paginas/cyan, skills/verde) */
+  .tabbtn#tabApps:not([aria-selected="true"]) svg{color:var(--brand)}
+  .tabbtn#tabTemp:not([aria-selected="true"]) svg{color:var(--accent)}
+  .tabbtn#tabPages:not([aria-selected="true"]) svg{color:var(--pages)}
+  .tabbtn#tabSkills:not([aria-selected="true"]) svg{color:var(--brand)}
+  .tabbtn#tabTemp[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+  .tabbtn#tabPages[aria-selected="true"]{background:var(--pages);color:var(--pages-ink)}
+  .tabbtn#tabTemp[aria-selected="true"] .n{background:rgba(42,21,3,.25)}
+  .tabbtn#tabPages[aria-selected="true"] .n{background:rgba(8,47,54,.25)}
 
   /* ---------- Category chips ---------- */
   .catchips{display:flex;gap:8px;margin:16px 0 20px;flex-wrap:wrap;padding-bottom:6px}
