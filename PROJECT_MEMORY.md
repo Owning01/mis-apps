@@ -205,3 +205,4 @@
 - Verificado: lint 0 FAIL / 7 WARN; inspect 1 FAIL (few-pictures, intencional: sin fotos) y 2 WARN; 0 errores de consola y 0 overflow en 1440/768/390; zip responde 200; busqueda apuntes -> 1 y chip Animacion -> 6; link del footer cambia de vista.
 - Pendiente: deploy a Firebase (firebase deploy --only hosting --project appsdeocta).
 - Actualizado: deploy manual hecho y verificado en vivo (https://appsdeocta.web.app, commit 6ef8936): 36 skills, 7 grupos, zip 200 con content-type application/zip, busqueda scrape -> 1, hero ya sin el texto viejo, apps 7 filas.
+- Ajuste: se quito el hero "Apps de Octa." de la pagina (solo queda en el header); el logo del header ahora es h1 para mantener el h1 semantico. Gate: 2 FAIL intencionales (few-pictures y focal-point, consecuencia de quitar el headline dominante), 2 WARN, 0 errores de consola, 0 overflow. Deploy hecho.
