@@ -2,11 +2,13 @@
   "_comment": "Repos fuente. categories: primera coincidencia gana (orden importa). Cada patrón se prueba contra: repo-corto/tag, nombre del grupo y nombre de cada archivo (* = comodín).",
   "repos": [
     "Owning01/mis-apps",
-    "Owning01/Openher"
+    "Owning01/Openher",
+    "Owning01/whatfast-rs"
   ],
   "siteName": "Apps de Octa",
   "categories": {
     "OpenHer": ["openher/*"],
+    "Whatfast": ["whatfast-rs/*"],
     "VistaMD": ["mis-apps/vistamd-*"],
     "Cine Gbro": ["mis-apps/cinegbro-*"],
     "Derecho Informático": ["mis-apps/derecho-informatico-*"],
